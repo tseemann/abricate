@@ -1,0 +1,112 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+use File::Temp qw(tempdir);
+use File::Spec;
+use Data::Dumper;
+use Bio::SeqIO;
+use Bio::SearchIO;
+use FindBin;
+
+#..............................................................................
+# Globals
+
+my $OUTSEP = "\t";
+
+#..............................................................................
+# Command line options
+
+my(@Options, $verbose, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
+setOptions();
+
+#..............................................................................
+# Option parsing
+
+if ($list) {
+  my $total=0;
+  for my $fname (<$datadir/*.fsa>) {
+    my $num=0;
+    open FASTA, $fname;
+    while (<FASTA>) {
+      $num++ if m/>/;
+    }
+    my(undef,undef,$file) = File::Spec->splitpath($fname);
+    $file =~ s/.fsa$//;
+    print STDERR "$file\t$num\n";
+    $total+=$num;
+  }
+  print STDERR "TOTAL\t$total\n";
+}
+
+$OUTSEP = ',' if $csv;  # default is tab
+
+# check if 'blastn' installed
+my($blast)=qx(which blastn);
+$blast && $blast =~ m/blastn/ or die "Could not find 'blastn'. Please install it.";
+
+# header
+print line(qw(FILE SEQUENCE ABR_GENE LEN_BP IDENTITY START END)) unless $noheader;
+
+for my $fasta (@ARGV) {
+  print STDERR "Processing: $fasta\n" if $verbose;
+  my $cmd = "blastn -word_size 32 -query \Q$fasta\E -db $datadir/resfinder ".
+            " -evalue 1E-99 -dust no -outfmt 6 -culling_limit 1";
+  print STDERR "Running: $cmd\n" if $verbose;
+
+  open BLAST, "$cmd |";
+  while (<BLAST>) { 
+#    print "#$_";
+    my @x = split m/\t/; 
+    my $gene = $x[1];
+    $gene =~ s/_.*$//;
+    print line($fasta, $x[0], $gene, $x[3], $x[2], $x[6], $x[7]);
+  }
+  close BLAST;
+}
+
+#----------------------------------------------------------------------
+
+sub line {
+  return join($OUTSEP, @_)."\n";
+}
+
+#----------------------------------------------------------------------
+# Option setting routines
+
+sub setOptions {
+  use Getopt::Long;
+
+  @Options = (
+    {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
+    {OPT=>"verbose!",  VAR=>\$verbose, DEFAULT=>0, DESC=>"Verbose output"},
+    {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Downloaded ResFinder data"},
+    {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
+    {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
+    {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
+#    {OPT=>"cutoff=f",  VAR=>\$cutoff, DEFAULT=>80, DESC=>"Minimum DNA identity cutoff"},
+#    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
+  );
+
+  @ARGV or usage();
+
+  &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage();
+
+  # Now setup default values.
+  foreach (@Options) {
+    if (defined($_->{DEFAULT}) && !defined(${$_->{VAR}})) {
+      ${$_->{VAR}} = $_->{DEFAULT};
+    }
+  }
+}
+
+sub usage {
+  print "Usage: $0 [options] <contigs.fasta> ... \n";
+  foreach (@Options) {
+    printf "  --%-13s %s%s.\n",$_->{OPT},$_->{DESC},
+           defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
+  }
+  exit(1);
+}
+ 
+#----------------------------------------------------------------------

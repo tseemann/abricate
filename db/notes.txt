@@ -1,0 +1,2096 @@
+#Aminoglycoside:
+aac:Aminoglycoside resistance:
+aac(2')-Ia:Aminoglycoside resistance:
+aac(2')-Ib:Aminoglycoside resistance:
+aac(2')-Ic:Aminoglycoside resistance:
+aac(2')-Id:Aminoglycoside resistance:
+aac(2')-Ie:Aminoglycoside resistance:
+aac(3)-I:Aminoglycoside resistance:
+aac(3)-IIIa:Aminoglycoside resistance:
+aac(3)-IIIb:Aminoglycoside resistance:
+aac(3)-IIIc:Aminoglycoside resistance:
+aac(3)-IIa:Aminoglycoside resistance:
+aac(3)-IIb:Aminoglycoside resistance:
+aac(3)-IIc:Aminoglycoside resistance:
+aac(3)-IId:Aminoglycoside resistance:
+aac(3)-IIe:Aminoglycoside resistance:
+aac(3)-IVa:Aminoglycoside resistance:
+aac(3)-IXa:Aminoglycoside resistance:
+aac(3)-Ia:Aminoglycoside resistance:
+aac(3)-Ib:Aminoglycoside resistance:
+aac(3)-Ib-aac(6')-Ib:Aminoglycoside resistance:
+aac(3)-Ic:Aminoglycoside resistance:
+aac(3)-Id:Aminoglycoside resistance:
+aac(3)-If:Aminoglycoside resistance:
+aac(3)-Ig:Aminoglycoside resistance:
+aac(3)-Ih:Aminoglycoside resistance:
+aac(3)-Ii:Aminoglycoside resistance:
+aac(3)-Ij:Aminoglycoside resistance:
+aac(3)-Ik:Aminoglycoside resistance:
+aac(3)-VIIIa:Aminoglycoside resistance:
+aac(3)-VIIa:Aminoglycoside resistance:
+aac(3)-VIa:Aminoglycoside resistance:
+aac(3)-Va:Aminoglycoside resistance:
+aac(3)-Vb:Aminoglycoside resistance:
+aac(3)-Xa:Aminoglycoside resistance:
+aac(6'):Aminoglycoside resistance:
+aac(6')-31:Aminoglycoside resistance:
+aac(6')-32:Aminoglycoside resistance:
+aac(6')-33:Aminoglycoside resistance:
+aac(6')-I30:Aminoglycoside resistance:
+aac(6')-III:Aminoglycoside resistance:
+aac(6')-IIa:Aminoglycoside resistance:
+aac(6')-IIb:Aminoglycoside resistance:
+aac(6')-IIc:Aminoglycoside resistance:
+aac(6')-IId:Aminoglycoside resistance:
+aac(6')-Ia:Aminoglycoside resistance:
+aac(6')-Iaa:Aminoglycoside resistance:
+aac(6')-Iad:Aminoglycoside resistance:
+aac(6')-Iae:Aminoglycoside resistance:
+aac(6')-Iaf:Aminoglycoside resistance:
+aac(6')-Iai:Aminoglycoside resistance:
+aac(6')-Ib:Aminoglycoside resistance:
+aac(6')-Ic:Aminoglycoside resistance:
+aac(6')-Id:Aminoglycoside resistance:
+aac(6')-Ie:Aminoglycoside resistance:
+aac(6')-If:Aminoglycoside resistance:Alternate name; aac(6')-IV
+aac(6')-Ig:Aminoglycoside resistance:
+aac(6')-Ih:Aminoglycoside resistance:
+aac(6')-Ii:Aminoglycoside resistance:
+aac(6')-Ij:Aminoglycoside resistance:
+aac(6')-Ik:Aminoglycoside resistance:
+aac(6')-Il:Aminoglycoside resistance:
+aac(6')-Im:Aminoglycoside resistance:
+aac(6')-In:Aminoglycoside resistance:
+aac(6')-Iq:Aminoglycoside resistance:
+aac(6')-Ir:Aminoglycoside resistance:
+aac(6')-Is:Aminoglycoside resistance:
+aac(6')-It:Aminoglycoside resistance:
+aac(6')-Iu:Aminoglycoside resistance:
+aac(6')-Iv:Aminoglycoside resistance:
+aac(6')-Iw:Aminoglycoside resistance:Alternate name; aac(6')-Ix
+aac(6')-Iy:Aminoglycoside resistance:
+aac(6')-Iz:Aminoglycoside resistance:
+aac(6')-aph(2''):Aminoglycoside resistance:
+aacA29:Aminoglycoside resistance:
+aacA43:Aminoglycoside resistance:
+aadA1:Aminoglycoside resistance:
+aadA10:Aminoglycoside resistance:
+aadA11:Aminoglycoside resistance:
+aadA12:Aminoglycoside resistance:
+aadA13:Aminoglycoside resistance:
+aadA14:Aminoglycoside resistance:
+aadA15:Aminoglycoside resistance:
+aadA16:Aminoglycoside resistance:
+aadA17:Aminoglycoside resistance:
+aadA1b:Aminoglycoside resistance:
+aadA2:Aminoglycoside resistance:
+aadA21:Aminoglycoside resistance:
+aadA22:Aminoglycoside resistance:
+aadA23:Aminoglycoside resistance:
+aadA24:Aminoglycoside resistance:
+aadA3:Aminoglycoside resistance:
+aadA4:Aminoglycoside resistance:
+aadA5:Aminoglycoside resistance:
+aadA6:Aminoglycoside resistance:
+aadA7:Aminoglycoside resistance:
+aadA8:Aminoglycoside resistance:
+aadA8b:Aminoglycoside resistance:
+aadA9:Aminoglycoside resistance:
+aadB:Aminoglycoside resistance:Alternate name; ant(2'')-Ia
+aadC:Aminoglycoside resistance:
+aadD:Aminoglycoside resistance:
+ant(3'')-Ih-aac(6')-IId:Aminoglycoside resistance:
+ant(4')-IIa:Aminoglycoside resistance:
+ant(4')-IIb:Aminoglycoside resistance:
+ant(4')-Ib:Aminoglycoside resistance:
+ant(6)-Ia:Aminoglycoside resistance:
+ant(6)-Ib:Aminoglycoside resistance:
+ant(9)-Ib:Aminoglycoside resistance:
+aph(2'')-Ia:Aminoglycoside resistance:
+aph(2'')-Ib:Aminoglycoside resistance:
+aph(2'')-Ic:Aminoglycoside resistance:
+aph(2'')-Id:Aminoglycoside resistance:
+aph(2'')-Ie:Aminoglycoside resistance:
+aph(3'')-Ia:Aminoglycoside resistance:
+aph(3'')-Ic:Aminoglycoside resistance:
+aph(3')-III:Aminoglycoside resistance:
+aph(3')-IIa:Aminoglycoside resistance:
+aph(3')-IIb:Aminoglycoside resistance:
+aph(3')-IIc:Aminoglycoside resistance:
+aph(3')-IV:Aminoglycoside resistance:
+aph(3')-Ia:Aminoglycoside resistance:
+aph(3')-Ib:Aminoglycoside resistance:
+aph(3')-Ic:Aminoglycoside resistance:
+aph(3')-Id:Aminoglycoside resistance:
+aph(3')-VIII:Aminoglycoside resistance:
+aph(3')-VIIa:Aminoglycoside resistance:
+aph(3')-VIa:Aminoglycoside resistance:
+aph(3')-VIb:Aminoglycoside resistance:
+aph(3')-Va:Aminoglycoside resistance:
+aph(3')-Vb:Aminoglycoside resistance:
+aph(3')-Vc:Aminoglycoside resistance:
+aph(3')-XV:Aminoglycoside resistance:
+aph(4)-Ia:Aminoglycoside resistance:
+aph(4)-Ib:Aminoglycoside resistance:Alternate name; aph(7'')-Ia
+aph(6)-Ia:Aminoglycoside resistance:
+aph(6)-Ib:Aminoglycoside resistance:
+aph(6)-Ic:Aminoglycoside resistance:
+aph(9)-Ia:Aminoglycoside resistance:
+aph(9)-Ib:Aminoglycoside resistance:
+apmA:Aminoglycoside resistance:
+armA:Aminoglycoside resistance:
+npmA:Aminoglycoside resistance:
+rmtA:Aminoglycoside resistance:
+rmtB:Aminoglycoside resistance:
+rmtC:Aminoglycoside resistance:
+rmtD:Aminoglycoside resistance:
+rmtD2:Aminoglycoside resistance:
+rmtE:Aminoglycoside resistance:
+spc:Aminoglycoside resistance:Alternate name; aad9, ant(9)-Ia
+sph:Aminoglycoside resistance:
+str:Aminoglycoside resistance:
+strA:Aminoglycoside resistance:Alternate name; aph(3'')-Ib
+strB:Aminoglycoside resistance:Alternate name; aph(6)-Id
+aacA-aphD:Aminoglycoside resistance:Alternate name; aac(6')-Ie
+#Macrolide resistance:
+car(A):Macrolide, Lincosamide and Streptogramin B resistance:
+cfr:Phenicols, Lincosamides, Oxazolidinones, Pleuromutilins, and Streptogramin A resistance:
+ere(A):Macrolide resistance:
+ere(B):Macrolide resistance:
+erm(30):Macrolide resistance:
+erm(31):Macrolide resistance:
+erm(32):Macrolide resistance:
+erm(33):Macrolide resistance:
+erm(34):Macrolide resistance:
+erm(35):Macrolide resistance:
+erm(36):Macrolide resistance:
+erm(38):Macrolide resistance:
+erm(39):Macrolide resistance:
+erm(40):Macrolide resistance:
+erm(41):Macrolide resistance:
+erm(42):Macrolide resistance:
+erm(A):Macrolide resistance:
+erm(B):Macrolide resistance:
+erm(C):Macrolide resistance:
+erm(D):Macrolide resistance:
+erm(E):Macrolide resistance:
+erm(F):Macrolide resistance:
+erm(G):Macrolide resistance:
+erm(H):Macrolide resistance:
+erm(N):Macrolide resistance:
+erm(O):Macrolide resistance:
+erm(Q):Macrolide resistance:
+erm(R):Macrolide resistance:
+erm(S):Macrolide resistance:
+erm(T):Macrolide resistance:
+erm(V):Macrolide resistance:
+erm(X):Macrolide resistance:
+erm(Y):Macrolide resistance:
+erm(Z):Macrolide resistance:
+lmr(A):Lincosamide resistance:
+lmr(B):Lincosamide resistance:
+lnu(A):Lincosamide resistance:
+lnu(B):Lincosamide resistance:
+lnu(C):Lincosamide resistance:
+lnu(D):Lincosamide resistance:
+lnu(F):Lincosamide resistance:
+lsa(B):Macrolide resistance:
+lsa(C):Macrolide resistance:
+mef(A):Macrolide resistance:
+mef(B):Macrolide resistance:
+mph(A):Macrolide resistance:
+mph(B):Macrolide resistance:
+mph(C):Macrolide resistance:
+mph(D):Macrolide resistance:
+mph(E):Macrolide resistance:
+msr(A):Macrolide, Lincosamide and Streptogramin B resistance:
+msr(C):Macrolide, Lincosamide and Streptogramin B resistance:
+msr(D):Macrolide, Lincosamide and Streptogramin B resistance:
+msr(E):Macrolide, Lincosamide and Streptogramin B resistance:
+ole(B):Macrolide, Lincosamide and Streptogramin B resistance:
+ole(C):Macrolide, Lincosamide and Streptogramin B resistance:
+srm(B):Macrolide, Lincosamide and Streptogramin B resistance:
+tlr(C):Macrolide, Lincosamide and Streptogramin B resistance:
+vat(A):Streptogramin B resistance:
+vat(B):Streptogramin B resistance:
+vat(C):Streptogramin B resistance:
+vat(D):Streptogramin B resistance:
+vat(E):Streptogramin B resistance:
+vat(F):Streptogramin B resistance:
+vga(A):Streptogramin B resistance:
+vga(B):Streptogramin B resistance:
+vgb(A):Streptogramin B resistance:
+vgb(B):Streptogramin B resistance:
+erm(W):Macrolide resistance:Alternate name; myr(B)
+lsa(A):Macrolide resistance:Alternate name; abc-23
+vga(C):Streptogramin B resistance:Alternate name; vga(D)
+vga(E):Streptogramin B resistance:
+vga(A)LC:Streptogramin B resistance:
+#Phenicol resistance:
+catB:Phenicol resistance:
+catB1:Phenicol resistance:
+catB2:Phenicol resistance:
+catB3:Phenicol resistance:
+catB7:Phenicol resistance:
+catB8:Phenicol resistance:
+catB9:Phenicol resistance:
+catB10:Phenicol resistance:
+catA3:Phenicol resistance:
+cat:Phenicol resistance:
+cat86:Phenicol resistance:
+cat(pC221):Phenicol resistance:
+cat(pC233):Phenicol resistance:
+cat(pC194):Phenicol resistance:
+catS:Phenicol resistance:
+catP:Phenicol resistance:
+cmlA1:Phenicol resistance:
+cml:Phenicol resistance:
+cmlV:Phenicol resistance:
+floR:Phenicol resistance:
+fexA:Phenicol resistance:
+pexA:Phenicol resistance:
+catA1:Phenicol resistance:
+catA2:Phenicol resistance:
+cat:Phenicol resistance:
+catQ:Phenicol resistance:
+cmrA:Phenicol resistance:Alternate name; cmr
+cmx:Phenicol resistance:Alternate name; cmr
+#Quinolone:
+QnrA1:Quinolone resistance:
+QnrA2:Quinolone resistance:
+QnrA3:Quinolone resistance:
+QnrA4:Quinolone resistance:
+QnrA5:Quinolone resistance:
+QnrA6:Quinolone resistance:
+QnrA7:Quinolone resistance:
+QnrB1:Quinolone resistance:
+QnrAS:Quinolone resistance:
+QnrB10:Quinolone resistance:
+QnrB11:Quinolone resistance:
+QnrB12:Quinolone resistance:
+QnrB13:Quinolone resistance:
+QnrB14:Quinolone resistance:
+QnrB15:Quinolone resistance:
+QnrB17:Quinolone resistance:
+QnrB18:Quinolone resistance:
+QnrB19:Quinolone resistance:
+QnrB2:Quinolone resistance:
+QnrB20:Quinolone resistance:
+QnrB21:Quinolone resistance:
+QnrB22:Quinolone resistance:
+QnrB23:Quinolone resistance:
+QnrB24:Quinolone resistance:
+QnrB25:Quinolone resistance:
+QnrB26:Quinolone resistance:
+QnrB27:Quinolone resistance:
+QnrB28:Quinolone resistance:
+QnrB29:Quinolone resistance:
+QnrB3:Quinolone resistance:
+QnrB30:Quinolone resistance:
+QnrB31:Quinolone resistance:
+QnrB32:Quinolone resistance:
+QnrB33:Quinolone resistance:
+QnrB34:Quinolone resistance:
+QnrB35:Quinolone resistance:
+QnrB36:Quinolone resistance:
+QnrB37:Quinolone resistance:
+QnrB38:Quinolone resistance:
+QnrB4:Quinolone resistance:
+QnrB40:Quinolone resistance:
+QnrB41:Quinolone resistance:
+QnrB5:Quinolone resistance:
+QnrB6:Quinolone resistance:
+QnrB7:Quinolone resistance:
+QnrB8:Quinolone resistance:
+QnrB9:Quinolone resistance:
+QnrC:Quinolone resistance:
+QnrD:Quinolone resistance:
+QnrS1:Quinolone resistance:
+QnrS2:Quinolone resistance:
+QnrS3:Quinolone resistance:
+QnrS4:Quinolone resistance:
+QnrS5:Quinolone resistance:
+QnrB16:Quinolone resistance:
+QnrB42:Quinolone resistance:
+QnrB43:Quinolone resistance:
+QnrB44:Quinolone resistance:
+QnrB45:Quinolone resistance:
+QnrB46:Quinolone resistance:
+QnrB47:Quinolone resistance:
+QnrB48:Quinolone resistance:
+QnrB49:Quinolone resistance:
+QnrB50:Quinolone resistance:
+QnrB51:Quinolone resistance:
+QnrB52:Quinolone resistance:
+QnrB53:Quinolone resistance:
+QnrB54:Quinolone resistance:
+QnrB56:Quinolone resistance:
+QnrB57:Quinolone resistance:
+QnrB58:Quinolone resistance:
+QnrB59:Quinolone resistance:
+QnrB61:Quinolone resistance:
+QnrB62:Quinolone resistance:
+QnrB64:Quinolone resistance:
+QnrB65:Quinolone resistance:
+QnrB66:Quinolone resistance:
+QnrB67:Quinolone resistance:
+QnrB68:Quinolone resistance:
+QnrB69:Quinolone resistance:
+QnrB70:Quinolone resistance:
+QnrB71:Quinolone resistance:
+QnrB72:Quinolone resistance:
+QnrS6:Quinolone resistance:
+QnrVC1:Quinolone resistance:
+QnrVC3:Quinolone resistance:
+QnrVC4:Quinolone resistance:
+QnrVC5:Quinolone resistance:
+qepA:Quinolone resistance:
+qepA2:Quinolone resistance:
+aac(6')Ib-cr:Fluoroquinolone and aminoglycoside resistance:
+norA:Fluoroquinolone resistance:
+#sulphonamide resistance:
+sul1:Sulphonamide resistance:
+sul2:Sulphonamide resistance:
+sul3:Sulphonamide resistance:
+#Tetracycline:
+ort(B):Tetracycline resistance:
+otr(A):Tetracycline resistance:
+otr(C):Tetracycline resistance:
+tcr:Tetracycline resistance:
+tet(30):Tetracycline resistance:
+tet(31):Tetracycline resistance:
+tet(32):Tetracycline resistance:
+tet(33):Tetracycline resistance:
+tet(34):Tetracycline resistance:
+tet(35):Tetracycline resistance:
+tet(36):Tetracycline resistance:
+tet(37):Tetracycline resistance:
+tet(38):Tetracycline resistance:
+tet(39):Tetracycline resistance:
+tet(40):Tetracycline resistance:
+tet(41):Tetracycline resistance:
+tet(42):Tetracycline resistance:
+tet(43):Tetracycline resistance:
+tet(44):Tetracycline resistance:
+tet(A):Tetracycline resistance:
+tet(B):Tetracycline resistance:
+tet(C):Tetracycline resistance:
+tet(D):Tetracycline resistance:
+tet(E):Tetracycline resistance:
+tet(G):Tetracycline resistance:
+tet(H):Tetracycline resistance:
+tet(J):Tetracycline resistance:
+tet(K):Tetracycline resistance:
+tet(L):Tetracycline resistance:
+tet(M):Tetracycline resistance:
+tet(O):Tetracycline resistance:
+tet(Q):Tetracycline resistance:
+tet(S):Tetracycline resistance:
+tet(T):Tetracycline resistance:
+tet(U):Tetracycline resistance:
+tet(V):Tetracycline resistance:
+tet(W):Tetracycline resistance:
+tet(X):Tetracycline resistance:
+tet(Y):Tetracycline resistance:
+tet(Z):Tetracycline resistance:
+tetA(P):Tetracycline resistance:
+tetB(P):Tetracycline resistance:
+#Trimethoprim resistance
+dfrA1:Trimethoprim resistance:
+dfrA10:Trimethoprim resistance:
+dfrA12:Trimethoprim resistance:
+dfrA13:Trimethoprim resistance:
+dfrA14:Trimethoprim resistance:
+dfrA15:Trimethoprim resistance:
+dfrA15b:Trimethoprim resistance:
+dfrA16:Trimethoprim resistance:
+dfrA17:Trimethoprim resistance:
+dfrA18:Trimethoprim resistance:
+dfrA20:Trimethoprim resistance:
+dfrA21:Trimethoprim resistance:
+dfrA22:Trimethoprim resistance:
+dfrA23:Trimethoprim resistance:
+dfrA24:Trimethoprim resistance:
+dfrA25:Trimethoprim resistance:
+dfrA26:Trimethoprim resistance:
+dfrA27:Trimethoprim resistance:
+dfrA28:Trimethoprim resistance:
+dfrA29:Trimethoprim resistance:
+dfrA3:Trimethoprim resistance:
+dfrA30:Trimethoprim resistance:
+dfrA31:Trimethoprim resistance:
+dfrA32:Trimethoprim resistance:
+dfrA33:Trimethoprim resistance:
+dfrA3b:Trimethoprim resistance:
+dfrA5:Trimethoprim resistance:
+dfrA6:Trimethoprim resistance:
+dfrA7:Trimethoprim resistance:
+dfrA8:Trimethoprim resistance:
+dfrA9:Trimethoprim resistance:
+dfrB1:Trimethoprim resistance:
+dfrB2:Trimethoprim resistance:
+dfrB3:Trimethoprim resistance:
+dfrB4:Trimethoprim resistance:
+dfrB5:Trimethoprim resistance:
+dfrB6:Trimethoprim resistance:
+dfrB7:Trimethoprim resistance:
+dfrB8:Trimethoprim resistance:
+dfrC:Trimethoprim resistance:
+dfrD:Trimethoprim resistance:
+dfrG:Trimethoprim resistance:
+dfrK:Trimethoprim resistance:
+#Vancomycin:
+VanA-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanH-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanR-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanY-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanZ-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanS-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanX-A:VanA vancomycin resistance operon, (VanA-A, VanH-A, VanR-A, VanS-A, VanX-A, VanY-A and VanZ-A):Vancomycin resistance (Glycopeptid resistance)
+VanA-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanH-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanR-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanX-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanY-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanS-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanW-B:VanB vancomycin resistance operon, (VanA-B, VanH-B, VanR-B, VanS-B, VanW-B, VanX-B and VanY-B):Vancomycin resistance (Glycopeptid resistance)
+VanA-C:VanC vancomycin resistance operon, (VanA-C, VanR-C, VanS-C, VanT-C and VanXY-C):Vancomycin resistance (Glycopeptid resistance)
+VanR-C:VanC vancomycin resistance operon, (VanA-C, VanR-C, VanS-C, VanT-C and VanXY-C):Vancomycin resistance (Glycopeptid resistance)
+VanXY-C:VanC vancomycin resistance operon, (VanA-C, VanR-C, VanS-C, VanT-C and VanXY-C):Vancomycin resistance (Glycopeptid resistance)
+VanS-C:VanC vancomycin resistance operon, (VanA-C, VanR-C, VanS-C, VanT-C and VanXY-C):Vancomycin resistance (Glycopeptid resistance)
+VanT-C:VanC vancomycin resistance operon, (VanA-C, VanR-C, VanS-C, VanT-C and VanXY-C):Vancomycin resistance (Glycopeptid resistance)
+VanA-D:VanD vancomycin resistance operon, (VanA-D, VanH-D, VanR-D, VanS-D, VanX-D and VanY-D):Vancomycin resistance (Glycopeptid resistance)
+VanH-D:VanD vancomycin resistance operon, (VanA-D, VanH-D, VanR-D, VanS-D, VanX-D and VanY-D):Vancomycin resistance (Glycopeptid resistance)
+VanR-D:VanD vancomycin resistance operon, (VanA-D, VanH-D, VanR-D, VanS-D, VanX-D and VanY-D):Vancomycin resistance (Glycopeptid resistance)
+VanX-D:VanD vancomycin resistance operon, (VanA-D, VanH-D, VanR-D, VanS-D, VanX-D and VanY-D):Vancomycin resistance (Glycopeptid resistance)
+VanY-D:VanD vancomycin resistance operon, (VanA-D, VanH-D, VanR-D, VanS-D, VanX-D and VanY-D):Vancomycin resistance (Glycopeptid resistance)
+VanS-D:VanD vancomycin resistance operon, (VanA-D, VanH-D, VanR-D, VanS-D, VanX-D and VanY-D):Vancomycin resistance (Glycopeptid resistance)
+VanH-E:VanE vancomycin resistance operon, (VanA-E, VanH-E and VanX-E):Vancomycin resistance (Glycopeptid resistance)
+VanX-E:VanE vancomycin resistance operon, (VanA-E, VanH-E and VanX-E):Vancomycin resistance (Glycopeptid resistance)
+VanA-E:VanE vancomycin resistance operon, (VanA-E, VanH-E and VanX-E):Vancomycin resistance (Glycopeptid resistance)
+VanR-F:VanF vancomycin resistance operon, (VanR-F, VanS-F, VanY-F and VanZ-F):Vancomycin resistance (Glycopeptid resistance)
+VanY-F:VanF vancomycin resistance operon, (VanR-F, VanS-F, VanY-F and VanZ-F):Vancomycin resistance (Glycopeptid resistance)
+VanZ-F:VanF vancomycin resistance operon, (VanR-F, VanS-F, VanY-F and VanZ-F):Vancomycin resistance (Glycopeptid resistance)
+VanS-F:VanF vancomycin resistance operon, (VanR-F, VanS-F, VanY-F and VanZ-F):Vancomycin resistance (Glycopeptid resistance)
+VanR-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanXY-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanY-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanA-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanS-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanT-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanU-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanW-G:VanG vancomycin resistance operon, (VanA-G, VanR-G, VanS-F, VanT-G, VanU-G, VanW-G, VanXY-G and VanY-G):Vancomycin resistance (Glycopeptid resistance)
+VanR-L:VanL vancomycin resistance operon, (VanA-L, VanR-L, VanS-L, VanTm-L, VanTr-L and VanXY-L):Vancomycin resistance (Glycopeptid resistance)
+VanXY-L:VanL vancomycin resistance operon, (VanA-L, VanR-L, VanS-L, VanTm-L, VanTr-L and VanXY-L):Vancomycin resistance (Glycopeptid resistance)
+VanA-L:VanL vancomycin resistance operon, (VanA-L, VanR-L, VanS-L, VanTm-L, VanTr-L and VanXY-L):Vancomycin resistance (Glycopeptid resistance)
+VanS-L:VanL vancomycin resistance operon, (VanA-L, VanR-L, VanS-L, VanTm-L, VanTr-L and VanXY-L):Vancomycin resistance (Glycopeptid resistance)
+VanTm-L:VanL vancomycin resistance operon, (VanA-L, VanR-L, VanS-L, VanTm-L, VanTr-L and VanXY-L):Vancomycin resistance (Glycopeptid resistance)
+VanTr-L:VanL vancomycin resistance operon, (VanA-L, VanR-L, VanS-L, VanTm-L, VanTr-L and VanXY-L):Vancomycin resistance (Glycopeptid resistance)
+VanH-M:VanM vancomycin resistance operon, (VanA-M, VanH-M, VanR-M, VanS-M, VanX-M and VanY-M):Vancomycin resistance (Glycopeptid resistance)
+VanR-M:VanM vancomycin resistance operon, (VanA-M, VanH-M, VanR-M, VanS-M, VanX-M and VanY-M):Vancomycin resistance (Glycopeptid resistance)
+VanX-M:VanM vancomycin resistance operon, (VanA-M, VanH-M, VanR-M, VanS-M, VanX-M and VanY-M):Vancomycin resistance (Glycopeptid resistance)
+VanY-M:VanM vancomycin resistance operon, (VanA-M, VanH-M, VanR-M, VanS-M, VanX-M and VanY-M):Vancomycin resistance (Glycopeptid resistance)
+VanA-M:VanM vancomycin resistance operon, (VanA-M, VanH-M, VanR-M, VanS-M, VanX-M and VanY-M):Vancomycin resistance (Glycopeptid resistance)
+VanS-M:VanM vancomycin resistance operon, (VanA-M, VanH-M, VanR-M, VanS-M, VanX-M and VanY-M):Vancomycin resistance (Glycopeptid resistance)
+VanA-N:VanN vancomycin resistance operon, (VanA-N, VanR-N, VanS-N, VanT-N and VanXY-N):Vancomycin resistance (Glycopeptid resistance)
+VanR-N:VanN vancomycin resistance operon, (VanA-N, VanR-N, VanS-N, VanT-N and VanXY-N):Vancomycin resistance (Glycopeptid resistance)
+VanXY-N:VanN vancomycin resistance operon, (VanA-N, VanR-N, VanS-N, VanT-N and VanXY-N):Vancomycin resistance (Glycopeptid resistance)
+VanS-N:VanN vancomycin resistance operon, (VanA-N, VanR-N, VanS-N, VanT-N and VanXY-N):Vancomycin resistance (Glycopeptid resistance)
+VanT-N:VanN vancomycin resistance operon, (VanA-N, VanR-N, VanS-N, VanT-N and VanXY-N):Vancomycin resistance (Glycopeptid resistance)
+VanX-Sc:VanSc vancomycin resistance operon, (VanA-Sc, VanH-Sc and VanX-Sc):Vancomycin resistance (Glycopeptid resistance)
+VanA-Sc:VanSc vancomycin resistance operon, (VanA-Sc, VanH-Sc and VanX-Sc):Vancomycin resistance (Glycopeptid resistance)
+VanH-Sc:VanSc vancomycin resistance operon, (VanA-Sc, VanH-Sc and VanX-Sc):Vancomycin resistance (Glycopeptid resistance)
+VanA-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanH-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanX-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanY-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanZ-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanR-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanS-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanW-Pt:VanPt vancomycin resistance operon, (VanA-Pt, VanH-Pt, VanR-Pt, VanS-Pt, VanW-Pt, VanX-Pt, VanY-Pt and VanZ-Pt):Vancomycin resistance (Glycopeptid resistance)
+VanA-Pt2:VanPt2 vancomycin resistance operon, (VanA-Pt2, VanH-Pt2, VanR-Pt2, VanS-Pt2, VanX-Pt2 and VanY-Pt2):Vancomycin resistance (Glycopeptid resistance)
+VanH-Pt2:VanPt2 vancomycin resistance operon, (VanA-Pt2, VanH-Pt2, VanR-Pt2, VanS-Pt2, VanX-Pt2 and VanY-Pt2):Vancomycin resistance (Glycopeptid resistance)
+VanX-Pt2:VanPt2 vancomycin resistance operon, (VanA-Pt2, VanH-Pt2, VanR-Pt2, VanS-Pt2, VanX-Pt2 and VanY-Pt2):Vancomycin resistance (Glycopeptid resistance)
+VanY-Pt2:VanPt2 vancomycin resistance operon, (VanA-Pt2, VanH-Pt2, VanR-Pt2, VanS-Pt2, VanX-Pt2 and VanY-Pt2):Vancomycin resistance (Glycopeptid resistance)
+VanR-Pt2:VanPt2 vancomycin resistance operon, (VanA-Pt2, VanH-Pt2, VanR-Pt2, VanS-Pt2, VanX-Pt2 and VanY-Pt2):Vancomycin resistance (Glycopeptid resistance)
+VanS-Pt2:VanPt2 vancomycin resistance operon, (VanA-Pt2, VanH-Pt2, VanR-Pt2, VanS-Pt2, VanX-Pt2 and VanY-Pt2):Vancomycin resistance (Glycopeptid resistance)
+VanHE-Pp:VanPp vancomycin resistance operon, (VanAE-Pp, VanHE-Pp, VanXE-Pp, VanYF-Pp and VanZF-Pp):Vancomycin resistance (Glycopeptid resistance)
+VanXE-Pp:VanPp vancomycin resistance operon, (VanAE-Pp, VanHE-Pp, VanXE-Pp, VanYF-Pp and VanZF-Pp):Vancomycin resistance (Glycopeptid resistance)
+VanYF-Pp:VanPp vancomycin resistance operon, (VanAE-Pp, VanHE-Pp, VanXE-Pp, VanYF-Pp and VanZF-Pp):Vancomycin resistance (Glycopeptid resistance)
+VanZF-Pp:VanPp vancomycin resistance operon, (VanAE-Pp, VanHE-Pp, VanXE-Pp, VanYF-Pp and VanZF-Pp):Vancomycin resistance (Glycopeptid resistance)
+VanAE-Pp:VanPp vancomycin resistance operon, (VanAE-Pp, VanHE-Pp, VanXE-Pp, VanYF-Pp and VanZF-Pp):Vancomycin resistance (Glycopeptid resistance)
+VanH-Ac1:VanAc1 vancomycin resistance operon, (VanH-Ac1 and VanX-Ac1):Vancomycin resistance (Glycopeptid resistance)
+VanX-Ac1:VanAc1 vancomycin resistance operon, (VanH-Ac1 and VanX-Ac1):Vancomycin resistance (Glycopeptid resistance)
+VanH-Ac2:VanAc2 vancomycin resistance operon, (VanH-Ac2 and VanX-Ac2):Vancomycin resistance (Glycopeptid resistance)
+VanX-Ac2:VanAc2 vancomycin resistance operon, (VanH-Ac2 and VanX-Ac2):Vancomycin resistance (Glycopeptid resistance)
+VanH-Ao1:VanAo1 vancomycin resistance operon, (VanH-Ao1 and VanX-Ao1):Vancomycin resistance (Glycopeptid resistance)
+VanX-Ao1:VanAo1 vancomycin resistance operon, (VanH-Ao1 and VanX-Ao1):Vancomycin resistance (Glycopeptid resistance)
+VanA-Ao2:VanAo2 vancomycin resistance operon, (VanA-Ao2, VanH-Ao2 and VanX-Ao2):Vancomycin resistance (Glycopeptid resistance)
+VanH-Ao2:VanAo2 vancomycin resistance operon, (VanA-Ao2, VanH-Ao2 and VanX-Ao2):Vancomycin resistance (Glycopeptid resistance)
+VanX-Ao2:VanAo2 vancomycin resistance operon, (VanA-Ao2, VanH-Ao2 and VanX-Ao2):Vancomycin resistance (Glycopeptid resistance)
+VanA-A(Bc):VanA(Bc) vancomycin resistance operon, (VanA-A(Bc)):Vancomycin resistance (Glycopeptid resistance)
+#Beta-Lactamase:
+blaTMB-1:Beta-lactam resistance:
+blaTMB-2:Beta-lactam resistance:
+blaSMB-1:Beta-lactam resistance:
+POM-1:Beta-lactam resistance:
+mecA:Beta-lactam resistance:
+mecC:Beta-lactam resistance:
+blaACC-1:Beta-lactam resistance:AmpC-type
+blaACC-2:Beta-lactam resistance:AmpC-type
+blaACC-3:Beta-lactam resistance:AmpC-type
+blaACC-4:Beta-lactam resistance:AmpC-type
+blaCMY-1:Beta-lactam resistance:
+blaCMY-10:Beta-lactam resistance:
+blaCMY-11:Beta-lactam resistance:
+blaCMY-12:Beta-lactam resistance:
+blaCMY-13:Beta-lactam resistance:
+blaCMY-14:Beta-lactam resistance:
+blaCMY-15:Beta-lactam resistance:
+blaCMY-16:Beta-lactam resistance:
+blaCMY-17:Beta-lactam resistance:
+blaCMY-18:Beta-lactam resistance:
+blaCMY-19:Beta-lactam resistance:
+blaCMY-2:Beta-lactam resistance:
+blaCMY-20:Beta-lactam resistance:
+blaCMY-21:Beta-lactam resistance:
+blaCMY-22:Beta-lactam resistance:
+blaCMY-23:Beta-lactam resistance:
+blaCMY-24:Beta-lactam resistance:
+blaCMY-25:Beta-lactam resistance:
+blaCMY-26:Beta-lactam resistance:
+blaCMY-27:Beta-lactam resistance:
+blaCMY-28:Beta-lactam resistance:
+blaCMY-29:Beta-lactam resistance:
+blaCMY-3:Beta-lactam resistance:
+blaCMY-30:Beta-lactam resistance:
+blaCMY-31:Beta-lactam resistance:
+blaCMY-32:Beta-lactam resistance:
+blaCMY-33:Beta-lactam resistance:
+blaCMY-34:Beta-lactam resistance:
+blaCMY-35:Beta-lactam resistance:
+blaCMY-36:Beta-lactam resistance:
+blaCMY-37:Beta-lactam resistance:
+blaCMY-38:Beta-lactam resistance:
+blaCMY-39:Beta-lactam resistance:
+blaCMY-4:Beta-lactam resistance:
+blaCMY-40:Beta-lactam resistance:
+blaCMY-41:Beta-lactam resistance:
+blaCMY-42:Beta-lactam resistance:
+blaCMY-43:Beta-lactam resistance:
+blaCMY-44:Beta-lactam resistance:
+blaCMY-45:Beta-lactam resistance:
+blaCMY-46:Beta-lactam resistance:
+blaCMY-47:Beta-lactam resistance:
+blaCMY-48:Beta-lactam resistance:
+blaCMY-49:Beta-lactam resistance:
+blaCMY-5:Beta-lactam resistance:
+blaCMY-50:Beta-lactam resistance:
+blaCMY-51:Beta-lactam resistance:
+blaCMY-52:Beta-lactam resistance:
+blaCMY-53:Beta-lactam resistance:
+blaCMY-54:Beta-lactam resistance:
+blaCMY-55:Beta-lactam resistance:
+blaCMY-56:Beta-lactam resistance:
+blaCMY-57:Beta-lactam resistance:
+blaCMY-58:Beta-lactam resistance:
+blaCMY-59:Beta-lactam resistance:
+blaCMY-6:Beta-lactam resistance:
+blaCMY-60:Beta-lactam resistance:
+blaCMY-61:Beta-lactam resistance:
+blaCMY-62:Beta-lactam resistance:
+blaCMY-63:Beta-lactam resistance:
+blaCMY-64:Beta-lactam resistance:
+blaCMY-65:Beta-lactam resistance:
+blaCMY-66:Beta-lactam resistance:
+blaCMY-67:Beta-lactam resistance:
+blaCMY-68:Beta-lactam resistance:
+blaCMY-69:Beta-lactam resistance:
+blaCMY-7:Beta-lactam resistance:
+blaCMY-70:Beta-lactam resistance:
+blaCMY-71:Beta-lactam resistance:
+blaCMY-72:Beta-lactam resistance:
+blaCMY-73:Beta-lactam resistance:
+blaCMY-74:Beta-lactam resistance:
+blaCMY-75:Beta-lactam resistance:
+blaCMY-76:Beta-lactam resistance:
+blaCMY-77:Beta-lactam resistance:
+blaCMY-78:Beta-lactam resistance:
+blaCMY-79:Beta-lactam resistance:
+blaCMY-8:Beta-lactam resistance:
+blaCMY-81:Beta-lactam resistance:
+blaCMY-9:Beta-lactam resistance:
+blaCMY-74:Beta-lactam resistance:
+blaCMY-75:Beta-lactam resistance:
+blaCMY-76:Beta-lactam resistance:
+blaCMY-77:Beta-lactam resistance:
+blaCMY-78:Beta-lactam resistance:
+blaCMY-79:Beta-lactam resistance:
+blaCMY-80:Beta-lactam resistance:
+blaCMY-81:Beta-lactam resistance:
+blaCMY-82:Beta-lactam resistance:
+blaCMY-83:Beta-lactam resistance:
+blaCMY-84:Beta-lactam resistance:
+blaCMY-85:Beta-lactam resistance:
+blaCMY-86:Beta-lactam resistance:
+blaCMY-87:Beta-lactam resistance:
+blaCMY-88:Beta-lactam resistance:
+blaCMY-89:Beta-lactam resistance:
+blaCMY-90:Beta-lactam resistance:
+blaCMY-91:Beta-lactam resistance:
+blaCMY-92:Beta-lactam resistance:
+blaCMY-93:Beta-lactam resistance:
+blaCMY-94:Beta-lactam resistance:
+blaCMY-95:Beta-lactam resistance:
+blaCMY-96:Beta-lactam resistance:
+blaCMY-97:Beta-lactam resistance:
+blaCMY-98:Beta-lactam resistance:
+blaCMY-99:Beta-lactam resistance:
+blaCMY-100:Beta-lactam resistance:
+blaCMY-104:Beta-lactam resistance:
+blaCMY-110:Beta-lactam resistance:
+blaCTX-M-1:Beta-lactam resistance:
+blaCTX-M-10:Beta-lactam resistance:
+blaCTX-M-100:Beta-lactam resistance:
+blaCTX-M-101:Beta-lactam resistance:
+blaCTX-M-102:Beta-lactam resistance:
+blaCTX-M-103:Beta-lactam resistance:
+blaCTX-M-104:Beta-lactam resistance:
+blaCTX-M-105:Beta-lactam resistance:
+blaCTX-M-106:Beta-lactam resistance:
+blaCTX-M-107:Beta-lactam resistance:
+blaCTX-M-108:Beta-lactam resistance:
+blaCTX-M-109:Beta-lactam resistance:
+blaCTX-M-110:Beta-lactam resistance:
+blaCTX-M-11:Beta-lactam resistance:
+blaCTX-M-111:Beta-lactam resistance:
+blaCTX-M-112:Beta-lactam resistance:
+blaCTX-M-113:Beta-lactam resistance:
+blaCTX-M-114:Beta-lactam resistance:
+blaCTX-M-115:Beta-lactam resistance:
+blaCTX-M-116:Beta-lactam resistance:
+blaCTX-M-117:Beta-lactam resistance:
+blaCTX-M-118:Beta-lactam resistance:
+blaCTX-M-119:Beta-lactam resistance:
+blaCTX-M-120:Beta-lactam resistance:
+blaCTX-M-121:Beta-lactam resistance:
+blaCTX-M-122:Beta-lactam resistance:
+blaCTX-M-123:Beta-lactam resistance:
+blaCTX-M-124:Beta-lactam resistance:
+blaCTX-M-125:Beta-lactam resistance:
+blaCTX-M-126:Beta-lactam resistance:
+blaCTX-M-127:Beta-lactam resistance:
+blaCTX-M-128:Beta-lactam resistance:
+blaCTX-M-129:Beta-lactam resistance:
+blaCTX-M-130:Beta-lactam resistance:
+blaCTX-M-131:Beta-lactam resistance:
+blaCTX-M-132:Beta-lactam resistance:
+blaCTX-M-133:Beta-lactam resistance:Amino acid sequences of CTX-M-3 and CTX-M-133 are identical
+blaCTX-M-134:Beta-lactam resistance:
+blaCTX-M-135:Beta-lactam resistance:
+blaCTX-M-136:Beta-lactam resistance:
+blaCTX-M-137:Beta-lactam resistance:
+blaCTX-M-138:Beta-lactam resistance:
+blaCTX-M-139:Beta-lactam resistance:
+blaCTX-M-140:Beta-lactam resistance:
+blaCTX-M-141:Beta-lactam resistance:
+blaCTX-M-142:Beta-lactam resistance:
+blaCTX-M-143:Beta-lactam resistance:
+blaCTX-M-144:Beta-lactam resistance:
+blaCTX-M-145:Beta-lactam resistance:
+blaCTX-M-146:Beta-lactam resistance:
+blaCTX-M-147:Beta-lactam resistance:
+blaCTX-M-148:Beta-lactam resistance:
+blaCTX-M-149:Beta-lactam resistance:
+blaCTX-M-12:Beta-lactam resistance:
+blaCTX-M-13:Beta-lactam resistance:
+blaCTX-M-14:Beta-lactam resistance:Amino acid sequences of CTX-M-14 and CTX-M-18 are identical
+blaCTX-M-15:Beta-lactam resistance:Alternate name; UOE-1
+blaCTX-M-16:Beta-lactam resistance:
+blaCTX-M-17:Beta-lactam resistance:
+blaCTX-M-18:Beta-lactam resistance:Amino acid sequences of CTX-M-14 and CTX-M-18 are identical 
+blaCTX-M-19:Beta-lactam resistance:
+blaCTX-M-2:Beta-lactam resistance:Amino acid sequences of CTX-M-2 and CTX-M-97 are identical
+blaCTX-M-20:Beta-lactam resistance:
+blaCTX-M-21:Beta-lactam resistance:
+blaCTX-M-22:Beta-lactam resistance:
+blaCTX-M-23:Beta-lactam resistance:
+blaCTX-M-24:Beta-lactam resistance:
+blaCTX-M-25:Beta-lactam resistance:
+blaCTX-M-26:Beta-lactam resistance:
+blaCTX-M-27:Beta-lactam resistance:
+blaCTX-M-28:Beta-lactam resistance:
+blaCTX-M-29:Beta-lactam resistance:
+blaCTX-M-3:Beta-lactam resistance:Amino acid sequences of CTX-M-3 and CTX-M-133 are identical
+blaCTX-M-30:Beta-lactam resistance:
+blaCTX-M-31:Beta-lactam resistance:
+blaCTX-M-32:Beta-lactam resistance:
+blaCTX-M-33:Beta-lactam resistance:
+blaCTX-M-34:Beta-lactam resistance:
+blaCTX-M-35:Beta-lactam resistance:
+blaCTX-M-36:Beta-lactam resistance:
+blaCTX-M-37:Beta-lactam resistance:
+blaCTX-M-38:Beta-lactam resistance:
+blaCTX-M-39:Beta-lactam resistance:
+blaCTX-M-4:Beta-lactam resistance:
+blaCTX-M-40:Beta-lactam resistance:
+blaCTX-M-41:Beta-lactam resistance:
+blaCTX-M-42:Beta-lactam resistance:
+blaCTX-M-43:Beta-lactam resistance:
+blaCTX-M-44:Beta-lactam resistance:Alternate name; Toho-1
+blaCTX-M-45:Beta-lactam resistance:Alternate name; Toho-2
+blaCTX-M-46:Beta-lactam resistance:
+blaCTX-M-47:Beta-lactam resistance:
+blaCTX-M-48:Beta-lactam resistance:
+blaCTX-M-49:Beta-lactam resistance:
+blaCTX-M-5:Beta-lactam resistance:
+blaCTX-M-50:Beta-lactam resistance:
+blaCTX-M-51:Beta-lactam resistance:
+blaCTX-M-52:Beta-lactam resistance:
+blaCTX-M-53:Beta-lactam resistance:
+blaCTX-M-54:Beta-lactam resistance:
+blaCTX-M-55:Beta-lactam resistance:Amino acid sequences of CTX-M-55 and CTX-M-57 are identical
+blaCTX-M-56:Beta-lactam resistance:
+blaCTX-M-57:Beta-lactam resistance:Amino acid sequences of CTX-M-55 and CTX-M-57 are identical
+blaCTX-M-58:Beta-lactam resistance:
+blaCTX-M-59:Beta-lactam resistance:
+blaCTX-M-6:Beta-lactam resistance:
+blaCTX-M-60:Beta-lactam resistance:
+blaCTX-M-61:Beta-lactam resistance:
+blaCTX-M-62:Beta-lactam resistance:
+blaCTX-M-63:Beta-lactam resistance:
+blaCTX-M-64:Beta-lactam resistance:
+blaCTX-M-65:Beta-lactam resistance:
+blaCTX-M-66:Beta-lactam resistance:
+blaCTX-M-67:Beta-lactam resistance:
+blaCTX-M-68:Beta-lactam resistance:
+blaCTX-M-69:Beta-lactam resistance:
+blaCTX-M-7:Beta-lactam resistance:
+blaCTX-M-70:Beta-lactam resistance:
+blaCTX-M-71:Beta-lactam resistance:
+blaCTX-M-72:Beta-lactam resistance:
+blaCTX-M-73:Beta-lactam resistance:
+blaCTX-M-74:Beta-lactam resistance:
+blaCTX-M-75:Beta-lactam resistance:
+blaCTX-M-76:Beta-lactam resistance:
+blaCTX-M-77:Beta-lactam resistance:
+blaCTX-M-78:Beta-lactam resistance:
+blaCTX-M-79:Beta-lactam resistance:
+blaCTX-M-8:Beta-lactam resistance:
+blaCTX-M-80:Beta-lactam resistance:
+blaCTX-M-81:Beta-lactam resistance:
+blaCTX-M-82:Beta-lactam resistance:
+blaCTX-M-83:Beta-lactam resistance:
+blaCTX-M-84:Beta-lactam resistance:
+blaCTX-M-85:Beta-lactam resistance:
+blaCTX-M-86:Beta-lactam resistance:
+blaCTX-M-87:Beta-lactam resistance:
+blaCTX-M-88:Beta-lactam resistance:
+blaCTX-M-89:Beta-lactam resistance:
+blaCTX-M-9:Beta-lactam resistance:
+blaCTX-M-90:Beta-lactam resistance:
+blaCTX-M-91:Beta-lactam resistance:
+blaCTX-M-92:Beta-lactam resistance:
+blaCTX-M-93:Beta-lactam resistance:
+blaCTX-M-94:Beta-lactam resistance:
+blaCTX-M-95:Beta-lactam resistance:
+blaCTX-M-96:Beta-lactam resistance:
+blaCTX-M-97:Beta-lactam resistance:Amino acid sequences of CTX-M-2 and CTX-M-97 are identical
+blaCTX-M-98:Beta-lactam resistance:
+blaCTX-M-99:Beta-lactam resistance:
+blaIMP-1:Beta-lactam resistance:
+blaIMP-10:Beta-lactam resistance:
+blaIMP-11:Beta-lactam resistance:
+blaIMP-12:Beta-lactam resistance:
+blaIMP-13:Beta-lactam resistance:
+blaIMP-14:Beta-lactam resistance:
+blaIMP-15:Beta-lactam resistance:
+blaIMP-16:Beta-lactam resistance:
+blaIMP-18:Beta-lactam resistance:
+blaIMP-19:Beta-lactam resistance:
+blaIMP-2:Beta-lactam resistance:
+blaIMP-20:Beta-lactam resistance:
+blaIMP-21:Beta-lactam resistance:
+blaIMP-22:Beta-lactam resistance:
+blaIMP-23:Beta-lactam resistance:
+blaIMP-24:Beta-lactam resistance:
+blaIMP-25:Beta-lactam resistance:
+blaIMP-26:Beta-lactam resistance:
+blaIMP-27:Beta-lactam resistance:
+blaIMP-28:Beta-lactam resistance:
+blaIMP-29:Beta-lactam resistance:
+blaIMP-30:Beta-lactam resistance:
+blaIMP-31:Beta-lactam resistance:
+blaIMP-32:Beta-lactam resistance:
+blaIMP-17:Beta-lactam resistance:
+blaIMP-3:Beta-lactam resistance:
+blaIMP-4:Beta-lactam resistance:
+blaIMP-5:Beta-lactam resistance:
+blaIMP-6:Beta-lactam resistance:
+blaIMP-7:Beta-lactam resistance:
+blaIMP-8:Beta-lactam resistance:
+blaIMP-9:Beta-lactam resistance:
+blaIMP-33:Beta-lactam resistance:
+blaIMP-40:Beta-lactam resistance:
+blaIMP-41:Beta-lactam resistance:
+blaIMP-42:Beta-lactam resistance:
+blaIMP-43:Beta-lactam resistance:
+blaIMP-44:Beta-lactam resistance:
+blaIMP-45:Beta-lactam resistance:
+blaIMP-46:Beta-lactam resistance:
+blaIMP-47:Beta-lactam resistance:
+blaIMP-34:Beta-lactam resistance:
+blaIMP-35:Beta-lactam resistance:
+blaIMP-36:Beta-lactam resistance:
+blaIMP-37:Beta-lactam resistance:
+blaIMP-38:Beta-lactam resistance:
+blaIMP-39:Beta-lactam resistance:
+blaIMP-40:Beta-lactam resistance:
+blaMOX-1:Beta-lactam resistance:AmpC-type
+blaMOX-2:Beta-lactam resistance:AmpC-type
+blaMOX-3:Beta-lactam resistance:AmpC-type
+blaMOX-4:Beta-lactam resistance:AmpC-type
+blaMOX-5:Beta-lactam resistance:AmpC-type
+blaMOX-6:Beta-lactam resistance:AmpC-type
+blaMOX-7:Beta-lactam resistance:AmpC-type
+blaMOX-8:Beta-lactam resistance:AmpC-type
+blaOXA-1:Beta-lactam resistance:
+blaOXA-10:Beta-lactam resistance:Alternate name; PSE-2
+blaOXA-101:Beta-lactam resistance:
+blaOXA-102:Beta-lactam resistance:
+blaOXA-103:Beta-lactam resistance:
+blaOXA-104:Beta-lactam resistance:
+blaOXA-105:Beta-lactam resistance:
+blaOXA-106:Beta-lactam resistance:
+blaOXA-107:Beta-lactam resistance:
+blaOXA-108:Beta-lactam resistance:
+blaOXA-109:Beta-lactam resistance:
+blaOXA-11:Beta-lactam resistance:
+blaOXA-110:Beta-lactam resistance:
+blaOXA-111:Beta-lactam resistance:
+blaOXA-112:Beta-lactam resistance:
+blaOXA-113:Beta-lactam resistance:
+blaOXA-114:Beta-lactam resistance:
+blaOXA-115:Beta-lactam resistance:
+blaOXA-116:Beta-lactam resistance:
+blaOXA-117:Beta-lactam resistance:
+blaOXA-118:Beta-lactam resistance:
+blaOXA-119:Beta-lactam resistance:
+blaOXA-12:Beta-lactam resistance:
+blaOXA-120:Beta-lactam resistance:
+blaOXA-121:Beta-lactam resistance:
+blaOXA-122:Beta-lactam resistance:
+blaOXA-123:Beta-lactam resistance:
+blaOXA-124:Beta-lactam resistance:
+blaOXA-125:Beta-lactam resistance:
+blaOXA-126:Beta-lactam resistance:
+blaOXA-127:Beta-lactam resistance:
+blaOXA-128:Beta-lactam resistance:
+blaOXA-129:Beta-lactam resistance:
+blaOXA-13:Beta-lactam resistance:
+blaOXA-130:Beta-lactam resistance:
+blaOXA-131:Beta-lactam resistance:
+blaOXA-132:Beta-lactam resistance:
+blaOXA-133:Beta-lactam resistance:
+blaOXA-134:Beta-lactam resistance:
+blaOXA-135:Beta-lactam resistance:
+blaOXA-136:Beta-lactam resistance:
+blaOXA-137:Beta-lactam resistance:
+blaOXA-138:Beta-lactam resistance:
+blaOXA-139:Beta-lactam resistance:
+blaOXA-14:Beta-lactam resistance:
+blaOXA-140:Beta-lactam resistance:
+blaOXA-141:Beta-lactam resistance:
+blaOXA-142:Beta-lactam resistance:
+blaOXA-143:Beta-lactam resistance:
+blaOXA-144:Beta-lactam resistance:
+blaOXA-145:Beta-lactam resistance:
+blaOXA-146:Beta-lactam resistance:
+blaOXA-147:Beta-lactam resistance:
+blaOXA-148:Beta-lactam resistance:
+blaOXA-149:Beta-lactam resistance:
+blaOXA-15:Beta-lactam resistance:
+blaOXA-150:Beta-lactam resistance:
+blaOXA-151:Beta-lactam resistance:
+blaOXA-152:Beta-lactam resistance:
+blaOXA-153:Beta-lactam resistance:
+blaOXA-154:Beta-lactam resistance:
+blaOXA-155:Beta-lactam resistance:
+blaOXA-156:Beta-lactam resistance:
+blaOXA-157:Beta-lactam resistance:
+blaOXA-158:Beta-lactam resistance:
+blaOXA-159:Beta-lactam resistance:
+blaOXA-16:Beta-lactam resistance:
+blaOXA-160:Beta-lactam resistance:
+blaOXA-161:Beta-lactam resistance:
+blaOXA-162:Beta-lactam resistance:
+blaOXA-163:Beta-lactam resistance:
+blaOXA-164:Beta-lactam resistance:
+blaOXA-165:Beta-lactam resistance:
+blaOXA-166:Beta-lactam resistance:
+blaOXA-167:Beta-lactam resistance:
+blaOXA-168:Beta-lactam resistance:
+blaOXA-169:Beta-lactam resistance:
+blaOXA-17:Beta-lactam resistance:
+blaOXA-170:Beta-lactam resistance:
+blaOXA-171:Beta-lactam resistance:
+blaOXA-172:Beta-lactam resistance:
+blaOXA-173:Beta-lactam resistance:
+blaOXA-174:Beta-lactam resistance:
+blaOXA-175:Beta-lactam resistance:
+blaOXA-176:Beta-lactam resistance:
+blaOXA-177:Beta-lactam resistance:
+blaOXA-178:Beta-lactam resistance:
+blaOXA-179:Beta-lactam resistance:
+blaOXA-18:Beta-lactam resistance:
+blaOXA-180:Beta-lactam resistance:
+blaOXA-181:Beta-lactam resistance:
+blaOXA-182:Beta-lactam resistance:
+blaOXA-183:Beta-lactam resistance:
+blaOXA-184:Beta-lactam resistance:
+blaOXA-185:Beta-lactam resistance:
+blaOXA-186:Beta-lactam resistance:
+blaOXA-187:Beta-lactam resistance:
+blaOXA-188:Beta-lactam resistance:
+blaOXA-189:Beta-lactam resistance:
+blaOXA-19:Beta-lactam resistance:
+blaOXA-190:Beta-lactam resistance:
+blaOXA-191:Beta-lactam resistance:
+blaOXA-192:Beta-lactam resistance:
+blaOXA-193:Beta-lactam resistance:
+blaOXA-194:Beta-lactam resistance:
+blaOXA-195:Beta-lactam resistance:
+blaOXA-196:Beta-lactam resistance:
+blaOXA-197:Beta-lactam resistance:
+blaOXA-198:Beta-lactam resistance:
+blaOXA-199:Beta-lactam resistance:
+blaOXA-2:Beta-lactam resistance:
+blaOXA-20:Beta-lactam resistance:
+blaOXA-200:Beta-lactam resistance:
+blaOXA-201:Beta-lactam resistance:
+blaOXA-202:Beta-lactam resistance:
+blaOXA-203:Beta-lactam resistance:
+blaOXA-204:Beta-lactam resistance:
+blaOXA-205:Beta-lactam resistance:
+blaOXA-206:Beta-lactam resistance:
+blaOXA-207:Beta-lactam resistance:
+blaOXA-208:Beta-lactam resistance:
+blaOXA-209:Beta-lactam resistance:
+blaOXA-21:Beta-lactam resistance:
+blaOXA-210:Beta-lactam resistance:
+blaOXA-211:Beta-lactam resistance:
+blaOXA-212:Beta-lactam resistance:
+blaOXA-213:Beta-lactam resistance:
+blaOXA-214:Beta-lactam resistance:
+blaOXA-215:Beta-lactam resistance:
+blaOXA-216:Beta-lactam resistance:
+blaOXA-217:Beta-lactam resistance:
+blaOXA-218:Beta-lactam resistance:
+blaOXA-219:Beta-lactam resistance:
+blaOXA-230:Beta-lactam resistance:
+blaOXA-231:Beta-lactam resistance:
+blaOXA-232:Beta-lactam resistance:
+blaOXA-233:Beta-lactam resistance:
+blaOXA-234:Beta-lactam resistance:
+blaOXA-235:Beta-lactam resistance:
+blaOXA-236:Beta-lactam resistance:
+blaOXA-237:Beta-lactam resistance:
+blaOXA-238:Beta-lactam resistance:
+blaOXA-239:Beta-lactam resistance:
+blaOXA-240:Beta-lactam resistance:
+blaOXA-241:Beta-lactam resistance:
+blaOXA-242:Beta-lactam resistance:
+blaOXA-243:Beta-lactam resistance:
+blaOXA-244:Beta-lactam resistance:
+blaOXA-245:Beta-lactam resistance:
+blaOXA-246:Beta-lactam resistance:
+blaOXA-247:Beta-lactam resistance:
+blaOXA-248:Beta-lactam resistance:
+blaOXA-249:Beta-lactam resistance:
+blaOXA-250:Beta-lactam resistance:
+blaOXA-251:Beta-lactam resistance:
+blaOXA-252:Beta-lactam resistance:
+blaOXA-253:Beta-lactam resistance:
+blaOXA-254:Beta-lactam resistance:
+blaOXA-255:Beta-lactam resistance:
+blaOXA-256:Beta-lactam resistance:
+blaOXA-257:Beta-lactam resistance:
+blaOXA-258:Beta-lactam resistance:
+blaOXA-259:Beta-lactam resistance:
+blaOXA-260:Beta-lactam resistance:
+blaOXA-261:Beta-lactam resistance:
+blaOXA-262:Beta-lactam resistance:
+blaOXA-263:Beta-lactam resistance:
+blaOXA-264:Beta-lactam resistance:
+blaOXA-265:Beta-lactam resistance:
+blaOXA-266:Beta-lactam resistance:
+blaOXA-267:Beta-lactam resistance:
+blaOXA-268:Beta-lactam resistance:
+blaOXA-269:Beta-lactam resistance:
+blaOXA-270:Beta-lactam resistance:
+blaOXA-271:Beta-lactam resistance:
+blaOXA-272:Beta-lactam resistance:
+blaOXA-273:Beta-lactam resistance:
+blaOXA-274:Beta-lactam resistance:
+blaOXA-275:Beta-lactam resistance:
+blaOXA-276:Beta-lactam resistance:
+blaOXA-277:Beta-lactam resistance:
+blaOXA-278:Beta-lactam resistance:
+blaOXA-279:Beta-lactam resistance:
+blaOXA-280:Beta-lactam resistance:
+blaOXA-281:Beta-lactam resistance:
+blaOXA-282:Beta-lactam resistance:
+blaOXA-283:Beta-lactam resistance:
+blaOXA-284:Beta-lactam resistance:
+blaOXA-285:Beta-lactam resistance:
+blaOXA-286:Beta-lactam resistance:
+blaOXA-287:Beta-lactam resistance:
+blaOXA-288:Beta-lactam resistance:
+blaOXA-289:Beta-lactam resistance:
+blaOXA-290:Beta-lactam resistance:
+blaOXA-291:Beta-lactam resistance:
+blaOXA-292:Beta-lactam resistance:
+blaOXA-293:Beta-lactam resistance:
+blaOXA-294:Beta-lactam resistance:
+blaOXA-295:Beta-lactam resistance:
+blaOXA-296:Beta-lactam resistance:
+blaOXA-297:Beta-lactam resistance:
+blaOXA-298:Beta-lactam resistance:
+blaOXA-299:Beta-lactam resistance:
+blaOXA-300:Beta-lactam resistance:
+blaOXA-301:Beta-lactam resistance:
+blaOXA-302:Beta-lactam resistance:
+blaOXA-303:Beta-lactam resistance:
+blaOXA-304:Beta-lactam resistance:
+blaOXA-305:Beta-lactam resistance:
+blaOXA-306:Beta-lactam resistance:
+blaOXA-307:Beta-lactam resistance:
+blaOXA-308:Beta-lactam resistance:
+blaOXA-309:Beta-lactam resistance:
+blaOXA-310:Beta-lactam resistance:
+blaOXA-311:Beta-lactam resistance:
+blaOXA-312:Beta-lactam resistance:
+blaOXA-313:Beta-lactam resistance:
+blaOXA-314:Beta-lactam resistance:
+blaOXA-315:Beta-lactam resistance:
+blaOXA-316:Beta-lactam resistance:
+blaOXA-317:Beta-lactam resistance:
+blaOXA-318:Beta-lactam resistance:
+blaOXA-319:Beta-lactam resistance:
+blaOXA-320:Beta-lactam resistance:
+blaOXA-321:Beta-lactam resistance:
+blaOXA-322:Beta-lactam resistance:
+blaOXA-323:Beta-lactam resistance:
+blaOXA-324:Beta-lactam resistance:
+blaOXA-325:Beta-lactam resistance:
+blaOXA-326:Beta-lactam resistance:
+blaOXA-327:Beta-lactam resistance:
+blaOXA-328:Beta-lactam resistance:
+blaOXA-329:Beta-lactam resistance:
+blaOXA-330:Beta-lactam resistance:
+blaOXA-331:Beta-lactam resistance:
+blaOXA-332:Beta-lactam resistance:
+blaOXA-333:Beta-lactam resistance:
+blaOXA-334:Beta-lactam resistance:
+blaOXA-335:Beta-lactam resistance:
+blaOXA-336:Beta-lactam resistance:
+blaOXA-337:Beta-lactam resistance:
+blaOXA-338:Beta-lactam resistance:
+blaOXA-339:Beta-lactam resistance:
+blaOXA-340:Beta-lactam resistance:
+blaOXA-341:Beta-lactam resistance:
+blaOXA-342:Beta-lactam resistance:
+blaOXA-343:Beta-lactam resistance:
+blaOXA-344:Beta-lactam resistance:
+blaOXA-345:Beta-lactam resistance:
+blaOXA-346:Beta-lactam resistance:
+blaOXA-347:Beta-lactam resistance:
+blaOXA-348:Beta-lactam resistance:
+blaOXA-349:Beta-lactam resistance:
+blaOXA-350:Beta-lactam resistance:
+blaOXA-351:Beta-lactam resistance:
+blaOXA-352:Beta-lactam resistance:
+blaOXA-353:Beta-lactam resistance:
+blaOXA-354:Beta-lactam resistance:
+blaOXA-355:Beta-lactam resistance:
+blaOXA-356:Beta-lactam resistance:
+blaOXA-357:Beta-lactam resistance:
+blaOXA-358:Beta-lactam resistance:
+blaOXA-359:Beta-lactam resistance:
+blaOXA-360:Beta-lactam resistance:
+blaOXA-361:Beta-lactam resistance:
+blaOXA-362:Beta-lactam resistance:
+blaOXA-363:Beta-lactam resistance:
+blaOXA-364:Beta-lactam resistance:
+blaOXA-365:Beta-lactam resistance:
+blaOXA-366:Beta-lactam resistance:
+blaOXA-367:Beta-lactam resistance:
+blaOXA-368:Beta-lactam resistance:
+blaOXA-369:Beta-lactam resistance:
+blaOXA-370:Beta-lactam resistance:
+blaOXA-371:Beta-lactam resistance:
+blaOXA-372:Beta-lactam resistance:
+blaOXA-373:Beta-lactam resistance:
+blaOXA-374:Beta-lactam resistance:
+blaOXA-375:Beta-lactam resistance:
+blaOXA-376:Beta-lactam resistance:
+blaOXA-377:Beta-lactam resistance:
+blaOXA-378:Beta-lactam resistance:
+blaOXA-379:Beta-lactam resistance:
+blaOXA-22:Beta-lactam resistance:
+blaOXA-220:Beta-lactam resistance:
+blaOXA-221:Beta-lactam resistance:
+blaOXA-222:Beta-lactam resistance:
+blaOXA-223:Beta-lactam resistance:
+blaOXA-224:Beta-lactam resistance:
+blaOXA-225:Beta-lactam resistance:
+blaOXA-226:Beta-lactam resistance:
+blaOXA-227:Beta-lactam resistance:
+blaOXA-228:Beta-lactam resistance:
+blaOXA-229:Beta-lactam resistance:
+blaOXA-23:Beta-lactam resistance:
+blaOXA-24:Beta-lactam resistance:
+blaOXA-25:Beta-lactam resistance:
+blaOXA-26:Beta-lactam resistance:
+blaOXA-27:Beta-lactam resistance:
+blaOXA-28:Beta-lactam resistance:
+blaOXA-29:Beta-lactam resistance:
+blaOXA-3:Beta-lactam resistance:
+blaOXA-30:Beta-lactam resistance:
+blaOXA-31:Beta-lactam resistance:
+blaOXA-32:Beta-lactam resistance:
+blaOXA-33:Beta-lactam resistance:
+blaOXA-34:Beta-lactam resistance:
+blaOXA-35:Beta-lactam resistance:
+blaOXA-36:Beta-lactam resistance:
+blaOXA-37:Beta-lactam resistance:
+blaOXA-38:Beta-lactam resistance:
+blaOXA-39:Beta-lactam resistance:
+blaOXA-4:Beta-lactam resistance:
+blaOXA-40:Beta-lactam resistance:
+blaOXA-41:Beta-lactam resistance:
+blaOXA-42:Beta-lactam resistance:
+blaOXA-43:Beta-lactam resistance:
+blaOXA-44:Beta-lactam resistance:
+blaOXA-45:Beta-lactam resistance:
+blaOXA-46:Beta-lactam resistance:
+blaOXA-47:Beta-lactam resistance:
+blaOXA-48:Beta-lactam resistance:
+blaOXA-49:Beta-lactam resistance:
+blaOXA-5:Beta-lactam resistance:
+blaOXA-50:Beta-lactam resistance:
+blaOXA-51:Beta-lactam resistance:
+blaOXA-52:Beta-lactam resistance:
+blaOXA-53:Beta-lactam resistance:
+blaOXA-54:Beta-lactam resistance:
+blaOXA-55:Beta-lactam resistance:
+blaOXA-56:Beta-lactam resistance:
+blaOXA-57:Beta-lactam resistance:
+blaOXA-58:Beta-lactam resistance:
+blaOXA-59:Beta-lactam resistance:
+blaOXA-6:Beta-lactam resistance:
+blaOXA-60:Beta-lactam resistance:
+blaOXA-61:Beta-lactam resistance:Alternate name; Cam-1
+blaOXA-62:Beta-lactam resistance:
+blaOXA-63:Beta-lactam resistance:
+blaOXA-64:Beta-lactam resistance:
+blaOXA-65:Beta-lactam resistance:
+blaOXA-66:Beta-lactam resistance:
+blaOXA-67:Beta-lactam resistance:
+blaOXA-68:Beta-lactam resistance:
+blaOXA-69:Beta-lactam resistance:
+blaOXA-7:Beta-lactam resistance:
+blaOXA-70:Beta-lactam resistance:
+blaOXA-71:Beta-lactam resistance:
+blaOXA-72:Beta-lactam resistance:
+blaOXA-73:Beta-lactam resistance:
+blaOXA-74:Beta-lactam resistance:
+blaOXA-75:Beta-lactam resistance:
+blaOXA-76:Beta-lactam resistance:
+blaOXA-77:Beta-lactam resistance:
+blaOXA-78:Beta-lactam resistance:
+blaOXA-79:Beta-lactam resistance:
+blaOXA-8:Beta-lactam resistance:
+blaOXA-80:Beta-lactam resistance:
+blaOXA-81:Beta-lactam resistance:
+blaOXA-82:Beta-lactam resistance:
+blaOXA-83:Beta-lactam resistance:
+blaOXA-84:Beta-lactam resistance:
+blaOXA-85:Beta-lactam resistance:
+blaOXA-86:Beta-lactam resistance:
+blaOXA-87:Beta-lactam resistance:
+blaOXA-88:Beta-lactam resistance:
+blaOXA-89:Beta-lactam resistance:
+blaOXA-9:Beta-lactam resistance:
+blaOXA-90:Beta-lactam resistance:
+blaOXA-91:Beta-lactam resistance:
+blaOXA-92:Beta-lactam resistance:
+blaOXA-93:Beta-lactam resistance:
+blaOXA-94:Beta-lactam resistance:
+blaOXA-95:Beta-lactam resistance:
+blaOXA-96:Beta-lactam resistance:
+blaOXA-97:Beta-lactam resistance:
+blaOXA-98:Beta-lactam resistance:
+blaOXA-99:Beta-lactam resistance:
+blaPER-1:Beta-lactam resistance:
+blaPER-2:Beta-lactam resistance:
+blaPER-3:Beta-lactam resistance:
+blaPER-4:Beta-lactam resistance:
+blaPER-5:Beta-lactam resistance:
+blaPER-6:Beta-lactam resistance:
+blaPER-7:Beta-lactam resistance:
+blaSHV-1:Beta-lactam resistance:
+blaSHV-100:Beta-lactam resistance:
+blaSHV-101:Beta-lactam resistance:
+blaSHV-102:Beta-lactam resistance:
+blaSHV-103:Beta-lactam resistance:
+blaSHV-104:Beta-lactam resistance:
+blaSHV-105:Beta-lactam resistance:
+blaSHV-106:Beta-lactam resistance:
+blaSHV-107:Beta-lactam resistance:
+blaSHV-108:Beta-lactam resistance:
+blaSHV-109:Beta-lactam resistance:
+blaSHV-11:Beta-lactam resistance:Alternate name; SHV-1-2a
+blaSHV-110:Beta-lactam resistance:
+blaSHV-111:Beta-lactam resistance:
+blaSHV-112:Beta-lactam resistance:
+blaSHV-113:Beta-lactam resistance:
+blaSHV-114:Beta-lactam resistance:
+blaSHV-115:Beta-lactam resistance:
+blaSHV-116:Beta-lactam resistance:
+blaSHV-117:Beta-lactam resistance:
+blaSHV-118:Beta-lactam resistance:
+blaSHV-119:Beta-lactam resistance:
+blaSHV-12:Beta-lactam resistance:Alternate name; SHV-5-2a
+blaSHV-120:Beta-lactam resistance:
+blaSHV-121:Beta-lactam resistance:
+blaSHV-122:Beta-lactam resistance:
+blaSHV-123:Beta-lactam resistance:
+blaSHV-124:Beta-lactam resistance:
+blaSHV-125:Beta-lactam resistance:
+blaSHV-126:Beta-lactam resistance:
+blaSHV-127:Beta-lactam resistance:
+blaSHV-128:Beta-lactam resistance:
+blaSHV-129:Beta-lactam resistance:
+blaSHV-13:Beta-lactam resistance:
+blaSHV-130:Beta-lactam resistance:
+blaSHV-131:Beta-lactam resistance:
+blaSHV-132:Beta-lactam resistance:
+blaSHV-133:Beta-lactam resistance:
+blaSHV-134:Beta-lactam resistance:
+blaSHV-135:Beta-lactam resistance:
+blaSHV-136:Beta-lactam resistance:
+blaSHV-137:Beta-lactam resistance:
+blaSHV-138:Beta-lactam resistance:
+blaSHV-139:Beta-lactam resistance:
+blaSHV-140:Beta-lactam resistance:
+blaSHV-141:Beta-lactam resistance:
+blaSHV-142:Beta-lactam resistance:
+blaSHV-143:Beta-lactam resistance:
+blaSHV-144:Beta-lactam resistance:
+blaSHV-145:Beta-lactam resistance:
+blaSHV-146:Beta-lactam resistance:
+blaSHV-147:Beta-lactam resistance:
+blaSHV-148:Beta-lactam resistance:
+blaSHV-149:Beta-lactam resistance:
+blaSHV-150:Beta-lactam resistance:
+blaSHV-151:Beta-lactam resistance:
+blaSHV-152:Beta-lactam resistance:
+blaSHV-153:Beta-lactam resistance:
+blaSHV-154:Beta-lactam resistance:
+blaSHV-155:Beta-lactam resistance:
+blaSHV-156:Beta-lactam resistance:
+blaSHV-157:Beta-lactam resistance:
+blaSHV-158:Beta-lactam resistance:
+blaSHV-159:Beta-lactam resistance:
+blaSHV-160:Beta-lactam resistance:
+blaSHV-161:Beta-lactam resistance:
+blaSHV-162:Beta-lactam resistance:
+blaSHV-163:Beta-lactam resistance:
+blaSHV-164:Beta-lactam resistance:
+blaSHV-165:Beta-lactam resistance:
+blaSHV-166:Beta-lactam resistance:
+blaSHV-167:Beta-lactam resistance:
+blaSHV-168:Beta-lactam resistance:
+blaSHV-169:Beta-lactam resistance:
+blaSHV-170:Beta-lactam resistance:
+blaSHV-171:Beta-lactam resistance:
+blaSHV-172:Beta-lactam resistance:
+blaSHV-173:Beta-lactam resistance:
+blaSHV-174:Beta-lactam resistance:
+blaSHV-175:Beta-lactam resistance:
+blaSHV-176:Beta-lactam resistance:
+blaSHV-177:Beta-lactam resistance:
+blaSHV-178:Beta-lactam resistance:
+blaSHV-179:Beta-lactam resistance:
+blaSHV-180:Beta-lactam resistance:
+blaSHV-181:Beta-lactam resistance:
+blaSHV-182:Beta-lactam resistance:
+blaSHV-183:Beta-lactam resistance:
+blaSHV-184:Beta-lactam resistance:
+blaSHV-185:Beta-lactam resistance:
+blaSHV-186:Beta-lactam resistance:
+blaSHV-187:Beta-lactam resistance:
+blaSHV-188:Beta-lactam resistance:
+blaSHV-189:Beta-lactam resistance:
+blaSHV-14:Beta-lactam resistance:
+blaSHV-140:Beta-lactam resistance:
+blaSHV-141:Beta-lactam resistance:
+blaSHV-15:Beta-lactam resistance:
+blaSHV-16:Beta-lactam resistance:
+blaSHV-17:Beta-lactam resistance:
+blaSHV-18:Beta-lactam resistance:
+blaSHV-19:Beta-lactam resistance:
+blaSHV-2:Beta-lactam resistance:
+blaSHV-2a:Beta-lactam resistance:
+blaSHV-20:Beta-lactam resistance:
+blaSHV-21:Beta-lactam resistance:
+blaSHV-22:Beta-lactam resistance:
+blaSHV-23:Beta-lactam resistance:
+blaSHV-24:Beta-lactam resistance:
+blaSHV-25:Beta-lactam resistance:
+blaSHV-26:Beta-lactam resistance:
+blaSHV-27:Beta-lactam resistance:
+blaSHV-28:Beta-lactam resistance:
+blaSHV-29:Beta-lactam resistance:
+blaSHV-3:Beta-lactam resistance:
+blaSHV-30:Beta-lactam resistance:
+blaSHV-31:Beta-lactam resistance:
+blaSHV-32:Beta-lactam resistance:
+blaSHV-33:Beta-lactam resistance:
+blaSHV-34:Beta-lactam resistance:
+blaSHV-35:Beta-lactam resistance:
+blaSHV-36:Beta-lactam resistance:
+blaSHV-37:Beta-lactam resistance:
+blaSHV-38:Beta-lactam resistance:
+blaSHV-39:Beta-lactam resistance:
+blaSHV-4:Beta-lactam resistance:
+blaSHV-40:Beta-lactam resistance:
+blaSHV-41:Beta-lactam resistance:
+blaSHV-42:Beta-lactam resistance:
+blaSHV-43:Beta-lactam resistance:
+blaSHV-44:Beta-lactam resistance:
+blaSHV-45:Beta-lactam resistance:
+blaSHV-46:Beta-lactam resistance:
+blaSHV-47:Beta-lactam resistance:
+blaSHV-48:Beta-lactam resistance:
+blaSHV-49:Beta-lactam resistance:
+blaSHV-5:Beta-lactam resistance:
+blaSHV-50:Beta-lactam resistance:
+blaSHV-51:Beta-lactam resistance:
+blaSHV-52:Beta-lactam resistance:
+blaSHV-53:Beta-lactam resistance:
+blaSHV-54:Beta-lactam resistance:
+blaSHV-55:Beta-lactam resistance:
+blaSHV-56:Beta-lactam resistance:
+blaSHV-57:Beta-lactam resistance:
+blaSHV-58:Beta-lactam resistance:
+blaSHV-59:Beta-lactam resistance:
+blaSHV-6:Beta-lactam resistance:
+blaSHV-60:Beta-lactam resistance:
+blaSHV-61:Beta-lactam resistance:
+blaSHV-62:Beta-lactam resistance:
+blaSHV-63:Beta-lactam resistance:
+blaSHV-64:Beta-lactam resistance:
+blaSHV-65:Beta-lactam resistance:
+blaSHV-66:Beta-lactam resistance:
+blaSHV-67:Beta-lactam resistance:
+blaSHV-69:Beta-lactam resistance:
+blaSHV-7:Beta-lactam resistance:
+blaSHV-70:Beta-lactam resistance:
+blaSHV-71:Beta-lactam resistance:
+blaSHV-72:Beta-lactam resistance:
+blaSHV-73:Beta-lactam resistance:
+blaSHV-74:Beta-lactam resistance:
+blaSHV-75:Beta-lactam resistance:
+blaSHV-76:Beta-lactam resistance:
+blaSHV-77:Beta-lactam resistance:
+blaSHV-78:Beta-lactam resistance:
+blaSHV-79:Beta-lactam resistance:
+blaSHV-8:Beta-lactam resistance:
+blaSHV-80:Beta-lactam resistance:
+blaSHV-81:Beta-lactam resistance:
+blaSHV-82:Beta-lactam resistance:
+blaSHV-83:Beta-lactam resistance:
+blaSHV-84:Beta-lactam resistance:
+blaSHV-85:Beta-lactam resistance:
+blaSHV-86:Beta-lactam resistance:
+blaSHV-87:Beta-lactam resistance:
+blaSHV-88:Beta-lactam resistance:
+blaSHV-89:Beta-lactam resistance:
+blaSHV-9:Beta-lactam resistance:Alternate name; SHV-5a
+blaSHV-90:Beta-lactam resistance:
+blaSHV-91:Beta-lactam resistance:
+blaSHV-92:Beta-lactam resistance:
+blaSHV-93:Beta-lactam resistance:
+blaSHV-94:Beta-lactam resistance:
+blaSHV-95:Beta-lactam resistance:
+blaSHV-96:Beta-lactam resistance:
+blaSHV-97:Beta-lactam resistance:
+blaSHV-98:Beta-lactam resistance:
+blaSHV-99:Beta-lactam resistance:
+blaTEM-1:Beta-lactam resistance:Alternate name; RblaTEM-1
+blaTEM-1A:Beta-lactam resistance:Alternate name; RblaTEM-1
+blaTEM-1B:Beta-lactam resistance:Alternate name; RblaTEM-1
+blaTEM-1C:Beta-lactam resistance:Alternate name; RblaTEM-1
+blaTEM-1D:Beta-lactam resistance:Alternate name; RblaTEM-1
+blaTEM-10:Beta-lactam resistance:Alternate name; MGH-1, blaTEM-23, blaTEM-E3 
+blaTEM-101:Beta-lactam resistance:
+blaTEM-102:Beta-lactam resistance:
+blaTEM-103:Beta-lactam resistance:Alternate name; ITR-28
+blaTEM-104:Beta-lactam resistance:
+blaTEM-105:Beta-lactam resistance:
+blaTEM-106:Beta-lactam resistance:
+blaTEM-107:Beta-lactam resistance:
+blaTEM-108:Beta-lactam resistance:
+blaTEM-109:Beta-lactam resistance:Alternate name; CMT-5
+blaTEM-11:Beta-lactam resistance:Alternate name; CAZ-lo
+blaTEM-110:Beta-lactam resistance:
+blaTEM-111:Beta-lactam resistance:
+blaTEM-112:Beta-lactam resistance:
+blaTEM-113:Beta-lactam resistance:
+blaTEM-114:Beta-lactam resistance:
+blaTEM-115:Beta-lactam resistance:
+blaTEM-116:Beta-lactam resistance:
+blaTEM-117:Beta-lactam resistance:
+blaTEM-118:Beta-lactam resistance:Alternate name; blaTEM-HM
+blaTEM-119:Beta-lactam resistance:
+blaTEM-12:Beta-lactam resistance:Alternate name; YOU-2, CAZ-3, blaTEM-E2
+blaTEM-120:Beta-lactam resistance:
+blaTEM-121:Beta-lactam resistance:Alternate name; CMT-4
+blaTEM-122:Beta-lactam resistance:
+blaTEM-123:Beta-lactam resistance:
+blaTEM-124:Beta-lactam resistance:
+blaTEM-125:Beta-lactam resistance:Alternate name; CTM-type
+blaTEM-126:Beta-lactam resistance:
+blaTEM-127:Beta-lactam resistance:
+blaTEM-128:Beta-lactam resistance:
+blaTEM-129:Beta-lactam resistance:
+blaTEM-13:Beta-lactam resistance:
+blaTEM-130:Beta-lactam resistance:
+blaTEM-131:Beta-lactam resistance:
+blaTEM-132:Beta-lactam resistance:
+blaTEM-133:Beta-lactam resistance:
+blaTEM-134:Beta-lactam resistance:
+blaTEM-135:Beta-lactam resistance:
+blaTEM-136:Beta-lactam resistance:
+blaTEM-137:Beta-lactam resistance:
+blaTEM-138:Beta-lactam resistance:
+blaTEM-139:Beta-lactam resistance:
+blaTEM-140:Beta-lactam resistance:
+blaTEM-141:Beta-lactam resistance:
+blaTEM-142:Beta-lactam resistance:
+blaTEM-143:Beta-lactam resistance:
+blaTEM-144:Beta-lactam resistance:
+blaTEM-145:Beta-lactam resistance:
+blaTEM-146:Beta-lactam resistance:
+blaTEM-147:Beta-lactam resistance:
+blaTEM-148:Beta-lactam resistance:
+blaTEM-149:Beta-lactam resistance:
+blaTEM-15:Beta-lactam resistance:
+blaTEM-150:Beta-lactam resistance:
+blaTEM-151:Beta-lactam resistance:Alternate name; CTM-type
+blaTEM-152:Beta-lactam resistance:Alternate name; CTM-type
+blaTEM-153:Beta-lactam resistance:
+blaTEM-154:Beta-lactam resistance:Alternate name; CTM-type
+blaTEM-155:Beta-lactam resistance:
+blaTEM-156:Beta-lactam resistance:
+blaTEM-157:Beta-lactam resistance:
+blaTEM-158:Beta-lactam resistance:Alternate name; CTM-9
+blaTEM-159:Beta-lactam resistance:
+blaTEM-16:Beta-lactam resistance:Alternate name; CAZ-7
+blaTEM-160:Beta-lactam resistance:
+blaTEM-161:Beta-lactam resistance:
+blaTEM-162:Beta-lactam resistance:
+blaTEM-163:Beta-lactam resistance:
+blaTEM-164:Beta-lactam resistance:
+blaTEM-165:Beta-lactam resistance:
+blaTEM-166:Beta-lactam resistance:
+blaTEM-167:Beta-lactam resistance:
+blaTEM-168:Beta-lactam resistance:
+blaTEM-169:Beta-lactam resistance:
+blaTEM-17:Beta-lactam resistance:
+blaTEM-170:Beta-lactam resistance:
+blaTEM-171:Beta-lactam resistance:
+blaTEM-172:Beta-lactam resistance:
+blaTEM-173:Beta-lactam resistance:
+blaTEM-174:Beta-lactam resistance:
+blaTEM-175:Beta-lactam resistance:
+blaTEM-176:Beta-lactam resistance:
+blaTEM-177:Beta-lactam resistance:
+blaTEM-178:Beta-lactam resistance:
+blaTEM-179:Beta-lactam resistance:
+blaTEM-18:Beta-lactam resistance:
+blaTEM-180:Beta-lactam resistance:
+blaTEM-181:Beta-lactam resistance:
+blaTEM-182:Beta-lactam resistance:
+blaTEM-183:Beta-lactam resistance:
+blaTEM-184:Beta-lactam resistance:
+blaTEM-185:Beta-lactam resistance:
+blaTEM-186:Beta-lactam resistance:
+blaTEM-187:Beta-lactam resistance:
+blaTEM-188:Beta-lactam resistance:
+blaTEM-189:Beta-lactam resistance:
+blaTEM-19:Beta-lactam resistance:
+blaTEM-190:Beta-lactam resistance:
+blaTEM-191:Beta-lactam resistance:
+blaTEM-192:Beta-lactam resistance:
+blaTEM-193:Beta-lactam resistance:
+blaTEM-194:Beta-lactam resistance:
+blaTEM-195:Beta-lactam resistance:
+blaTEM-196:Beta-lactam resistance:
+blaTEM-197:Beta-lactam resistance:
+blaTEM-198:Beta-lactam resistance:
+blaTEM-199:Beta-lactam resistance:
+blaTEM-20:Beta-lactam resistance:
+blaTEM-201:Beta-lactam resistance:
+blaTEM-202:Beta-lactam resistance:
+blaTEM-203:Beta-lactam resistance:
+blaTEM-204:Beta-lactam resistance:
+blaTEM-205:Beta-lactam resistance:
+blaTEM-206:Beta-lactam resistance:
+blaTEM-207:Beta-lactam resistance:
+blaTEM-208:Beta-lactam resistance:
+blaTEM-209:Beta-lactam resistance:
+blaTEM-210:Beta-lactam resistance:
+blaTEM-211:Beta-lactam resistance:
+blaTEM-212:Beta-lactam resistance:
+blaTEM-213:Beta-lactam resistance:
+blaTEM-214:Beta-lactam resistance:
+blaTEM-215:Beta-lactam resistance:
+blaTEM-216:Beta-lactam resistance:
+blaTEM-217:Beta-lactam resistance:
+blaTEM-218:Beta-lactam resistance:
+blaTEM-219:Beta-lactam resistance:
+blaTEM-2:Beta-lactam resistance:
+blaTEM-20:Beta-lactam resistance:
+blaTEM-21:Beta-lactam resistance:
+blaTEM-22:Beta-lactam resistance:
+blaTEM-23:Beta-lactam resistance:
+blaTEM-24:Beta-lactam resistance:Alternate name; CAZ-1
+blaTEM-25:Beta-lactam resistance:Alternate name; blaCTX-2
+blaTEM-26:Beta-lactam resistance:Alternate name; YOU-1
+blaTEM-27:Beta-lactam resistance:
+blaTEM-28:Beta-lactam resistance:
+blaTEM-29:Beta-lactam resistance:
+blaTEM-3:Beta-lactam resistance:Alternate name; blaCTX-1, blaTEM-14
+blaTEM-30:Beta-lactam resistance:Alternate name; IRT-2, TRI-2, E-guer
+blaTEM-31:Beta-lactam resistance:Alternate name; IRT-1, TRI-1, E-sal
+blaTEM-32:Beta-lactam resistance:Alternate name; IRT-3
+blaTEM-33:Beta-lactam resistance:Alternate name; IRT-5
+blaTEM-34:Beta-lactam resistance:Alternate name; IRT-6
+blaTEM-35:Beta-lactam resistance:Alternate name; IRT-4
+blaTEM-36:Beta-lactam resistance:Alternate name; IRT-7
+blaTEM-37:Beta-lactam resistance:Alternate name; IRT-8
+blaTEM-38:Beta-lactam resistance:Alternate name; IRT-9
+blaTEM-39:Beta-lactam resistance:Alternate name; IRT-10
+blaTEM-4:Beta-lactam resistance:
+blaTEM-40:Beta-lactam resistance:Alternate name; IRT-167, IRT-11
+blaTEM-41:Beta-lactam resistance:Alternate name; IRT-12
+blaTEM-42:Beta-lactam resistance:
+blaTEM-43:Beta-lactam resistance:
+blaTEM-44:Beta-lactam resistance:Alternate name; IRT(2)-2, IT-13
+blaTEM-45:Beta-lactam resistance:Alternate name; IRT-14
+blaTEM-46:Beta-lactam resistance:Alternate name; CAZ-9
+blaTEM-47:Beta-lactam resistance:
+blaTEM-48:Beta-lactam resistance:
+blaTEM-49:Beta-lactam resistance:
+blaTEM-5:Beta-lactam resistance:Alternate name; CAZ-1
+blaTEM-50:Beta-lactam resistance:Alternate name; CMT-1
+blaTEM-51:Beta-lactam resistance:Alternate name; IRT-15
+blaTEM-52:Beta-lactam resistance:
+blaTEM-52B:Beta-lactam resistance:
+blaTEM-52C:Beta-lactam resistance:
+blaTEM-53:Beta-lactam resistance:
+blaTEM-54:Beta-lactam resistance:
+blaTEM-55:Beta-lactam resistance:
+blaTEM-56:Beta-lactam resistance:
+blaTEM-57:Beta-lactam resistance:
+blaTEM-58:Beta-lactam resistance:
+blaTEM-59:Beta-lactam resistance:Alternate name; IRT-17
+blaTEM-6:Beta-lactam resistance:
+blaTEM-60:Beta-lactam resistance:
+blaTEM-61:Beta-lactam resistance:Alternate name; CAZ-hi
+blaTEM-62:Beta-lactam resistance:
+blaTEM-63:Beta-lactam resistance:Alternate name; blaTEM-64
+blaTEM-65:Beta-lactam resistance:Alternate name; IRT-16
+blaTEM-66:Beta-lactam resistance:
+blaTEM-67:Beta-lactam resistance:
+blaTEM-68:Beta-lactam resistance:Alternate name; CMT-2
+blaTEM-69:Beta-lactam resistance:
+blaTEM-7:Beta-lactam resistance:
+blaTEM-70:Beta-lactam resistance:
+blaTEM-71:Beta-lactam resistance:
+blaTEM-72:Beta-lactam resistance:
+blaTEM-73:Beta-lactam resistance:Alternate name; IRT-18
+blaTEM-74:Beta-lactam resistance:Alternate name; IRT-19
+blaTEM-75:Beta-lactam resistance:
+blaTEM-76:Beta-lactam resistance:Alternate name; IRT-20
+blaTEM-77:Beta-lactam resistance:Alternate name; IRT-21
+blaTEM-78:Beta-lactam resistance:Alternate name; IRT-22
+blaTEM-79:Beta-lactam resistance:
+blaTEM-8:Beta-lactam resistance:Alternate name; CAZ-2
+blaTEM-80:Beta-lactam resistance:Alternate name; IRT-24
+blaTEM-81:Beta-lactam resistance:
+blaTEM-82:Beta-lactam resistance:
+blaTEM-83:Beta-lactam resistance:
+blaTEM-84:Beta-lactam resistance:
+blaTEM-85:Beta-lactam resistance:
+blaTEM-86:Beta-lactam resistance:
+blaTEM-87:Beta-lactam resistance:
+blaTEM-88:Beta-lactam resistance:
+blaTEM-89:Beta-lactam resistance:Alternate name; CMT-3
+blaTEM-9:Beta-lactam resistance:Alternate name; RHH-1
+blaTEM-90:Beta-lactam resistance:Alternate name; TLE-1
+blaTEM-91:Beta-lactam resistance:
+blaTEM-92:Beta-lactam resistance:
+blaTEM-93:Beta-lactam resistance:
+blaTEM-94:Beta-lactam resistance:
+blaTEM-95:Beta-lactam resistance:
+blaTEM-96:Beta-lactam resistance:
+blaTEM-97:Beta-lactam resistance:Alternate name; blaTEM-34
+blaTEM-98:Beta-lactam resistance:Alternate name; blaTEM-1
+blaTEM-99:Beta-lactam resistance:Alternate name; blaTEM-30
+blaTLA-1:Beta-lactam resistance:
+blaVEB-1:Beta-lactam resistance:
+blaVEB-2:Beta-lactam resistance:
+blaVEB-3:Beta-lactam resistance:
+blaVEB-4:Beta-lactam resistance:
+blaVEB-5:Beta-lactam resistance:
+blaVEB-6:Beta-lactam resistance:
+blaVEB-7:Beta-lactam resistance:
+blaVEB-8:Beta-lactam resistance:
+blaVIM-1:Beta-lactam resistance:
+blaVIM-10:Beta-lactam resistance:
+blaVIM-11:Beta-lactam resistance:
+blaVIM-12:Beta-lactam resistance:
+blaVIM-13:Beta-lactam resistance:
+blaVIM-14:Beta-lactam resistance:
+blaVIM-15:Beta-lactam resistance:
+blaVIM-16:Beta-lactam resistance:
+blaVIM-17:Beta-lactam resistance:
+blaVIM-18:Beta-lactam resistance:
+blaVIM-19:Beta-lactam resistance:
+blaVIM-2:Beta-lactam resistance:
+blaVIM-20:Beta-lactam resistance:
+blaVIM-21:Beta-lactam resistance:
+blaVIM-22:Beta-lactam resistance:
+blaVIM-23:Beta-lactam resistance:
+blaVIM-24:Beta-lactam resistance:
+blaVIM-25:Beta-lactam resistance:
+blaVIM-26:Beta-lactam resistance:
+blaVIM-27:Beta-lactam resistance:
+blaVIM-28:Beta-lactam resistance:
+blaVIM-29:Beta-lactam resistance:
+blaVIM-3:Beta-lactam resistance:
+blaVIM-30:Beta-lactam resistance:
+blaVIM-31:Beta-lactam resistance:
+blaVIM-32:Beta-lactam resistance:
+blaVIM-33:Beta-lactam resistance:
+blaVIM-34:Beta-lactam resistance:
+blaVIM-35:Beta-lactam resistance:
+blaVIM-36:Beta-lactam resistance:
+blaVIM-37:Beta-lactam resistance:
+blaVIM-38:Beta-lactam resistance:
+blaVIM-39:Beta-lactam resistance:
+blaVIM-4:Beta-lactam resistance:
+blaVIM-5:Beta-lactam resistance:
+blaVIM-6:Beta-lactam resistance:
+blaVIM-7:Beta-lactam resistance:
+blaVIM-8:Beta-lactam resistance:
+blaVIM-9:Beta-lactam resistance:
+blaNDM-1:Beta-lactam resistance:
+blaNDM-2:Beta-lactam resistance:
+blaNDM-3:Beta-lactam resistance:
+blaNDM-4:Beta-lactam resistance:
+blaNDM-5:Beta-lactam resistance:
+blaNDM-6:Beta-lactam resistance:
+blaNDM-7:Beta-lactam resistance:
+blaNDM-8:Beta-lactam resistance:
+blaNDM-9:Beta-lactam resistance:
+blaSME-1:Beta-lactam resistance:
+blaSME-2:Beta-lactam resistance:
+blaSME-3:Beta-lactam resistance:
+blaGES-1:Beta-lactam resistance:
+blaGES-2:Beta-lactam resistance:
+blaGES-3:Beta-lactam resistance:
+blaGES-4:Beta-lactam resistance:
+blaGES-5:Beta-lactam resistance:
+blaGES-6:Beta-lactam resistance:
+blaGES-7:Beta-lactam resistance:Alternate name IBC-1
+blaGES-8:Beta-lactam resistance:Alternate name IBC-2
+blaGES-9:Beta-lactam resistance:
+blaGES-10:Beta-lactam resistance:
+blaGES-11:Beta-lactam resistance:
+blaGES-12:Beta-lactam resistance:
+blaGES-13:Beta-lactam resistance:
+blaGES-14:Beta-lactam resistance:
+blaGES-15:Beta-lactam resistance:
+blaGES-16:Beta-lactam resistance:
+blaGES-17:Beta-lactam resistance:
+blaGES-18:Beta-lactam resistance:
+blaGES-19:Beta-lactam resistance:
+blaGES-20:Beta-lactam resistance:
+blaGES-21:Beta-lactam resistance:
+blaGES-22:Beta-lactam resistance:
+blaGES-23:Beta-lactam resistance:
+blaKPC-1:Beta-lactam resistance:
+blaKPC-2:Beta-lactam resistance: 
+blaKPC-3:Beta-lactam resistance:
+blaKPC-4:Beta-lactam resistance:
+blaKPC-5:Beta-lactam resistance:
+blaKPC-6:Beta-lactam resistance:
+blaKPC-7:Beta-lactam resistance:
+blaKPC-8:Beta-lactam resistance:
+blaKPC-9:Beta-lactam resistance:
+blaKPC-10:Beta-lactam resistance:
+blaKPC-11:Beta-lactam resistance:
+blaKPC-12:Beta-lactam resistance:
+blaKPC-13:Beta-lactam resistance:
+blaKPC-14:Beta-lactam resistance:
+blaKPC-15:Beta-lactam resistance:
+blaKPC-16:Beta-lactam resistance:
+blaIND-1:Beta-lactam resistance:
+blaIND-2:Beta-lactam resistance:
+blaIND-2a:Beta-lactam resistance:
+blaIND-2b:Beta-lactam resistance:
+blaIND-2c:Beta-lactam resistance:
+blaIND-3:Beta-lactam resistance:
+blaIND-4:Beta-lactam resistance:
+blaIND-5:Beta-lactam resistance:
+blaIND-6:Beta-lactam resistance:
+blaIND-7:Beta-lactam resistance:
+blaIND-8:Beta-lactam resistance:
+blaIND-9:Beta-lactam resistance:
+blaIND-10:Beta-lactam resistance:
+blaIND-11:Beta-lactam resistance:
+blaIND-12:Beta-lactam resistance:
+blaIND-13:Beta-lactam resistance:
+blaIND-14:Beta-lactam resistance:
+blaIND-15:Beta-lactam resistance:
+blaLAT-1:Beta-lactam resistance: AmpC-type
+blaMIR-1:Beta-lactam resistance: AmpC-type
+blaMIR-2:Beta-lactam resistance: AmpC-type
+blaMIR-3:Beta-lactam resistance: AmpC-type
+blaMIR-4:Beta-lactam resistance: AmpC-type
+blaMIR-5:Beta-lactam resistance: AmpC-type
+blaMIR-6:Beta-lactam resistance: AmpC-type
+blaFOX-1:Beta-lactam resistance: AmpC-type
+blaFOX-2:Beta-lactam resistance: AmpC-type
+blaFOX-3:Beta-lactam resistance: AmpC-type
+blaFOX-4:Beta-lactam resistance: AmpC-type
+blaFOX-5:Beta-lactam resistance: AmpC-type
+blaFOX-6:Beta-lactam resistance: AmpC-type
+blaFOX-7:Beta-lactam resistance: AmpC-type
+blaFOX-8:Beta-lactam resistance: AmpC-type
+blaFOX-9:Beta-lactam resistance: AmpC-type
+blaFOX-10:Beta-lactam resistance: AmpC-type
+blaCFE-1:Beta-lactam resistance: AmpC-type
+blaDHA-1:Beta-lactam resistance: AmpC-type
+blaDHA-2:Beta-lactam resistance: AmpC-type
+blaDHA-3:Beta-lactam resistance: AmpC-type
+blaDHA-4:Beta-lactam resistance: AmpC-type
+blaDHA-5:Beta-lactam resistance: AmpC-type
+blaDHA-6:Beta-lactam resistance: AmpC-type
+blaDHA-7:Beta-lactam resistance: AmpC-type
+blaDHA-8:Beta-lactam resistance: AmpC-type
+blaACT-1:Beta-lactam resistance:AmpC-type
+blaACT-2:Beta-lactam resistance:AmpC-type
+blaACT-3:Beta-lactam resistance:AmpC-type
+blaACT-4:Beta-lactam resistance:AmpC-type
+blaACT-5:Beta-lactam resistance:AmpC-type
+blaACT-6:Beta-lactam resistance:AmpC-type
+blaACT-7:Beta-lactam resistance:AmpC-type
+blaACT-8:Beta-lactam resistance:AmpC-type
+blaACT-9:Beta-lactam resistance:AmpC-type
+blaACT-10:Beta-lactam resistance:AmpC-type
+blaACT-11:Beta-lactam resistance:AmpC-type
+blaACT-12:Beta-lactam resistance:AmpC-type
+blaACT-13:Beta-lactam resistance:AmpC-type
+blaACT-14:Beta-lactam resistance:AmpC-type
+blaACT-15:Beta-lactam resistance:AmpC-type
+blaACT-16:Beta-lactam resistance:AmpC-type
+blaADC-25:Beta-lactam resistance:
+blaCARB-1:Beta-lactam resistance:Alternate name; PSE-4, blaP1a
+blaCARB-2:Beta-lactam resistance:Alternate name; PSE-1, blaP1b
+blaCARB-3:Beta-lactam resistance:Alternate name; PSE-3
+blaCARB-4:Beta-lactam resistance:Alternate name; blaP3
+blaCARB-5:Beta-lactam resistance:Alternate name; bla(RTG-2)
+blaCARB-6:Beta-lactam resistance:
+blaCARB-7:Beta-lactam resistance:
+blaCARB-8:Beta-lactam resistance:
+blaCARB-9:Beta-lactam resistance:
+blaCARB-10:Beta-lactam resistance:Alternate name; RTG-4
+blaCARB-11:Beta-lactam resistance:Alternate name; PSE-5, blaCARB-7
+blaCARB-12:Beta-lactam resistance:Alternate name; BlaP
+blaCARB-13:Beta-lactam resistance:
+blaZ:Beta-lactam resistance:
+cepA:Beta-lactam resistance:
+cepA-29:Beta-lactam resistance:
+cepA-44:Beta-lactam resistance:
+cepA-49:Beta-lactam resistance:
+blaLEN1:Beta-lactam resistance:
+blaLEN10:Beta-lactam resistance:
+blaLEN11:Beta-lactam resistance:
+blaLEN12:Beta-lactam resistance:
+blaLEN13:Beta-lactam resistance:
+blaLEN14:Beta-lactam resistance:
+blaLEN15:Beta-lactam resistance:
+blaLEN16:Beta-lactam resistance:
+blaLEN17:Beta-lactam resistance:
+blaLEN18:Beta-lactam resistance:
+blaLEN19:Beta-lactam resistance:
+blaLEN2:Beta-lactam resistance:
+blaLEN20:Beta-lactam resistance:
+blaLEN21:Beta-lactam resistance:
+blaLEN22:Beta-lactam resistance:
+blaLEN23:Beta-lactam resistance:
+blaLEN24:Beta-lactam resistance:
+blaLEN25:Beta-lactam resistance:
+blaLEN26:Beta-lactam resistance:
+blaLEN27:Beta-lactam resistance:
+blaLEN28:Beta-lactam resistance:
+blaLEN29:Beta-lactam resistance:
+blaLEN3:Beta-lactam resistance:
+blaLEN4:Beta-lactam resistance:
+blaLEN5:Beta-lactam resistance:
+blaLEN6:Beta-lactam resistance:
+blaLEN7:Beta-lactam resistance:
+blaLEN8:Beta-lactam resistance:
+blaLEN9:Beta-lactam resistance:
+blaOKP-A-1:Beta-lactam resistance:
+blaOKP-A-10:Beta-lactam resistance:
+blaOKP-A-11:Beta-lactam resistance:
+blaOKP-A-12:Beta-lactam resistance:
+blaOKP-A-13:Beta-lactam resistance:
+blaOKP-A-14:Beta-lactam resistance:
+blaOKP-A-15:Beta-lactam resistance:
+blaOKP-A-16:Beta-lactam resistance:
+blaOKP-A-2:Beta-lactam resistance:
+blaOKP-A-3:Beta-lactam resistance:
+blaOKP-A-4:Beta-lactam resistance:
+blaOKP-A-5:Beta-lactam resistance:
+blaOKP-A-6:Beta-lactam resistance:
+blaOKP-A-7:Beta-lactam resistance:
+blaOKP-A-8:Beta-lactam resistance:
+blaOKP-A-9:Beta-lactam resistance:
+blaOKP-B-1:Beta-lactam resistance:
+blaOKP-B-10:Beta-lactam resistance:
+blaOKP-B-11:Beta-lactam resistance:
+blaOKP-B-12:Beta-lactam resistance:
+blaOKP-B-13:Beta-lactam resistance:
+blaOKP-B-14:Beta-lactam resistance:
+blaOKP-B-15:Beta-lactam resistance:
+blaOKP-B-16:Beta-lactam resistance:
+blaOKP-B-17:Beta-lactam resistance:
+blaOKP-B-18:Beta-lactam resistance:
+blaOKP-B-19:Beta-lactam resistance:
+blaOKP-B-2:Beta-lactam resistance:
+blaOKP-B-20:Beta-lactam resistance:
+blaOKP-B-3:Beta-lactam resistance:
+blaOKP-B-4:Beta-lactam resistance:
+blaOKP-B-5:Beta-lactam resistance:
+blaOKP-B-6:Beta-lactam resistance:
+blaOKP-B-7:Beta-lactam resistance:
+blaOKP-B-8:Beta-lactam resistance:
+blaOKP-B-9:Beta-lactam resistance:
+blaOXY-1-1:Beta-lactam resistance:
+blaOXY-1-2:Beta-lactam resistance:
+blaOXY-1-3:Beta-lactam resistance:
+blaOXY-1-4:Beta-lactam resistance:
+blaOXY-1-5:Beta-lactam resistance:
+blaOXY-1-6:Beta-lactam resistance:
+blaOXY-1-7:Beta-lactam resistance:
+blaOXY-2-1:Beta-lactam resistance:
+blaOXY-2-2:Beta-lactam resistance:
+blaOXY-2-3:Beta-lactam resistance:
+blaOXY-2-4:Beta-lactam resistance:
+blaOXY-2-5:Beta-lactam resistance:
+blaOXY-2-6:Beta-lactam resistance:
+blaOXY-2-7:Beta-lactam resistance:
+blaOXY-2-8:Beta-lactam resistance:
+blaOXY-2-9:Beta-lactam resistance:
+blaOXY-2-10:Beta-lactam resistance:
+blaOXY-2-11:Beta-lactam resistance:
+blaOXY-2-12:Beta-lactam resistance:
+blaOXY-2-13:Beta-lactam resistance:
+blaOXY-3-1:Beta-lactam resistance:
+blaOXY-4-1:Beta-lactam resistance:
+blaOXY-5-1:Beta-lactam resistance:
+blaOXY-5-2:Beta-lactam resistance:
+blaOXY-6-1:Beta-lactam resistance:
+blaOXY-6-2:Beta-lactam resistance:
+blaOXY-6-3:Beta-lactam resistance:
+blaOXY-6-4:Beta-lactam resistance:
+blaNPS:Beta-lactam resistance:
+blaLCR-1:Beta-lactam resistance:
+blaROB-1:Beta-lactam resistance:
+blaNMC-A:Beta-lactam resistance:
+blaFAR-1:Beta-lactam resistance:
+blaHERA-1:Beta-lactam resistance:
+blaHERA-2:Beta-lactam resistance:
+blaHERA-3:Beta-lactam resistance:
+blaHERA-4:Beta-lactam resistance:
+blaHERA-5:Beta-lactam resistance:
+blaHERA-6:Beta-lactam resistance:
+blaHERA-7:Beta-lactam resistance:
+blaHERA-8:Beta-lactam resistance:
+blaIMI-1:Beta-lactam resistance:
+blaIMI-2:Beta-lactam resistance:
+blaIMI-3:Beta-lactam resistance:
+blaOCH-2:Beta-lactam resistance:
+blaOCH-3:Beta-lactam resistance:
+blaOCH-4:Beta-lactam resistance:
+blaOCH-5:Beta-lactam resistance:
+blaOCH-6:Beta-lactam resistance:
+blaOCH-7:Beta-lactam resistance:
+blaOCH-8:Beta-lactam resistance:
+blaROB-1:Beta-lactam resistance:
+blaCEPA:Beta-lactam resistance:
+blaCEPA-29:Beta-lactam resistance:
+blaCEPA-44:Beta-lactam resistance:
+blaCEPA-49:Beta-lactam resistance:
+blaCEPA-85:Beta-lactam resistance:
+cfxA:Beta-lactam resistance:
+cfxA2:Beta-lactam resistance:
+cfxA3:Beta-lactam resistance:
+cfxA4:Beta-lactam resistance:
+cfxA5:Beta-lactam resistance:
+cfxA6:Beta-lactam resistance:
+blaFAR-1:Beta-lactam resistance:
+blaFONA-1:Beta-lactam resistance:
+blaFONA-2:Beta-lactam resistance:
+blaFONA-3:Beta-lactam resistance:
+blaFONA-4:Beta-lactam resistance:
+blaFONA-5:Beta-lactam resistance:
+blaFONA-6:Beta-lactam resistance:
+blaL1:Beta-lactam resistance:
+blaKHM-1:Beta-lactam resistance:
+blaCEPH-A3:Beta-lactam resistance:
+blaA:Beta-lactam resistance:
+blaBEL-1:Beta-lactam resistance:
+blaBEL-2:Beta-lactam resistance:
+blaBEL-3:Beta-lactam resistance:
+blaSIM-1:Beta-lactam resistance:
+blaGIM-1:Beta-lactam resistance:
+blaSPM-1:Beta-lactam resistance:
+blaGOB-16:Beta-lactam resistance:
+blaGOB-1:Beta-lactam resistance:
+blaGOB-16:Beta-lactam resistance:
+blaGOB-13:Beta-lactam resistance:
+blaGOB-12:Beta-lactam resistance:
+blaGOB-10:Beta-lactam resistance:
+blaGOB-8:Beta-lactam resistance:
+blaGOB-17:Beta-lactam resistance:
+blaGOB-15:Beta-lactam resistance:
+blaGOB-13:Beta-lactam resistance:
+blaGOB-11:Beta-lactam resistance:
+blaGOB-9:Beta-lactam resistance:
+blaGOB-3:Beta-lactam resistance:
+blaGOB-1:Beta-lactam resistance:
+blaGOB-5:Beta-lactam resistance:
+blaGOB-14:Beta-lactam resistance:
+blaGOB-2:Beta-lactam resistance:
+blaGOB-4:Beta-lactam resistance:
+blaGOB-7:Beta-lactam resistance:
+blaGOB-6:Beta-lactam resistance:
+blaGOB-18:Beta-lactam resistance:
+blaB-14:Beta-lactam resistance:
+blaB-12:Beta-lactam resistance:
+blaB-10:Beta-lactam resistance:
+blaB-13:Beta-lactam resistance:
+blaB-11:Beta-lactam resistance:
+blaB-9:Beta-lactam resistance:
+blaB-3:Beta-lactam resistance:
+blaB-2:Beta-lactam resistance:
+blaB-8:Beta-lactam resistance:
+blaB-5:Beta-lactam resistance:
+blaB-7:Beta-lactam resistance:
+blaB-6:Beta-lactam resistance:
+cfiA14:Beta-lactam resistance:
+cfiA13:Beta-lactam resistance:
+cfiA16:Beta-lactam resistance:
+cfiA15:Beta-lactam resistance:
+cfiA12:Beta-lactam resistance:
+cfiA11:Beta-lactam resistance:
+cfiA9:Beta-lactam resistance:
+cfiA7:Beta-lactam resistance:
+cfiA5:Beta-lactam resistance:
+cfiA3:Beta-lactam resistance:
+cfiA2:Beta-lactam resistance:
+cfiA8:Beta-lactam resistance:
+cfiA6:Beta-lactam resistance:
+cfiA4:Beta-lactam resistance:
+cfiA10:Beta-lactam resistance:
+cfiA1:Beta-lactam resistance:
+cphA7:Beta-lactam resistance:
+cphA5:Beta-lactam resistance:
+cphA2:Beta-lactam resistance:
+cphA6:Beta-lactam resistance:
+cphA4:Beta-lactam resistance:
+cphA8:Beta-lactam resistance:
+cphA1:Beta-lactam resistance:
+blaPAO:Beta-lactam resistance:
+ampH: Beta-lactam resistance:
+ampS: Beta-lactam resistance:
+blaACI-1: Beta-lactam resistance:
+blaAER-1: Beta-lactam resistance:
+blaAST-1: Beta-lactam resistance:
+blaBES-1: Beta-lactam resistance:
+blaBIC-1: Beta-lactam resistance:
+blaBIL-1: Beta-lactam resistance:
+blaCGB-1: Beta-lactam resistance:
+blaCKO-1: Beta-lactam resistance:
+blaCME-1: Beta-lactam resistance:
+blaCMG: Beta-lactam resistance:
+blaDES-1: Beta-lactam resistance:
+blaDIM-1: Beta-lactam resistance:
+blaEBR-1: Beta-lactam resistance:
+blaERP-1: Beta-lactam resistance:
+blaJOHN-1: Beta-lactam resistance:
+blaLUT-1: Beta-lactam resistance:
+blaMAL-1: Beta-lactam resistance:
+blaMOR: Beta-lactam resistance:
+blaMOR-2: Beta-lactam resistance:
+blaMUS-1: Beta-lactam resistance:
+blaPME-1: Beta-lactam resistance:
+blaRAHN-1: Beta-lactam resistance:
+blaRAHN-2: Beta-lactam resistance:
+blaSED1: Beta-lactam resistance:
+blaSFC-1: Beta-lactam resistance:
+blaSFO-1: Beta-lactam resistance:
+blaTRU: Beta-lactam resistance:
+blaTUS-1: Beta-lactam resistance:
+blaZEG-1: Beta-lactam resistance:
+hugA: Beta-lactam resistance:
+imiH: Beta-lactam resistance:
+imiS: Beta-lactam resistance:
+penA: Beta-lactam resistance:
+#Rifampicin resistance:
+ARR-1:Rifampicin resistance:
+ARR-2:Rifampicin resistance:
+ARR-3:Rifampicin resistance:
+ARR-4:Rifampicin resistance:
+ARR-5:Rifampicin resistance:
+ARR-6:Rifampicin resistance:
+ARR-7:Rifampicin resistance:
+#Fosfomycin resistance:
+fosA:Fosfomycin resistance:
+fosB:Fosfomycin resistance:
+fosC:Fosfomycin resistance:
+#Fusidic acid resistance:
+fusA:Fusidic acid resistance:
+fusB:Fusidic acid resistance:
+fusC:Fusidic acid resistance:
+fusD:Fusidic acid resistance:
+#Nitroimidazole resistance:
+nimA:metronidazole (5-nitroimidazole):
+nimB:metronidazole (5-nitroimidazole):
+nimC:metronidazole (5-nitroimidazole):
+nimD:metronidazole (5-nitroimidazole):
+nimE:metronidazole (5-nitroimidazole):
+nimF:metronidazole (5-nitroimidazole):
+nimH:metronidazole (5-nitroimidazole):
+nimI:metronidazole (5-nitroimidazole):
+nimJ:metronidazole (5-nitroimidazole):
