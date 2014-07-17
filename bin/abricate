@@ -37,6 +37,7 @@ if ($list) {
     $total+=$num;
   }
   print STDERR "TOTAL\t$total\n";
+  exit;
 }
 
 $OUTSEP = ',' if $csv;  # default is tab
