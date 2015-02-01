@@ -1,4 +1,27 @@
 
+# Data based on Resfinder
+# http://cge.cbs.dtu.dk/services/data.php
 
-http://cge.cbs.dtu.dk/services/data.php
+RM="rm -fv --"
+DB=resfinder
+TITLE="Abricate / ResFinder database"
+
+$RM $DB.n??
+
+#cat *.fsa | sed 's/_.*$//' > $DB.tmp
+cat *.fsa  > $DB.tmp
+
+nrdb -o $DB $DB.tmp
+
+$RM $DB.tmp
+
+#formatdb -i $DB -p F -t "$TITLE"
+makeblastdb -in $DB -dbtype nucl -title "$TITLE" -logfile /dev/null -taxid 2
+
+$RM formatdb.log
+
+ls -lsa $DB.*
+
+
+blastdbcmd -info -db $DB
 
