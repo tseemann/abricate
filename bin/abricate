@@ -10,15 +10,26 @@ use Bio::SearchIO;
 use FindBin;
 
 #..............................................................................
-# Globals
-
-my $OUTSEP = "\t";
-
-#..............................................................................
 # Command line options
 
 my(@Options, $verbose, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
 setOptions();
+
+#..............................................................................
+# Globals
+
+my $OUTSEP = "\t";
+
+my @BLAST_FIELDS = qw(
+  qseqid qstart qend qlen
+  sseqid sstart send slen sstrand
+  evalue length pident gaps
+);
+
+my @COLUMNS = qw(
+ FILE SEQUENCE START END GENE COVERAGE COVERAGE_MAP %COVERAGE %IDENTITY
+);
+$COLUMNS[0] = '#'.$COLUMNS[0];
 
 #..............................................................................
 # Option parsing
@@ -46,13 +57,16 @@ $OUTSEP = ',' if $csv;  # default is tab
 my($blast)=qx(which blastn);
 $blast && $blast =~ m/blastn/ or die "Could not find 'blastn'. Please install it.";
 
-# header
-my @hit;
+# output format
+my $format = "6 @BLAST_FIELDS";
+print line(@COLUMNS) unless $noheader;
 
 for my $fasta (@ARGV) {
-  print STDERR "Processing: $fasta\n" if $verbose;
+  my %seen;
+  my @hit;
+  print STDERR "Processing: $fasta\n";
   my $cmd = "blastn -ungapped -query \Q$fasta\E -db $datadir/resfinder "
-          . " -evalue 1E-99 -dust no -outfmt 6"
+          . " -evalue 1E-99 -dust no -outfmt '$format'"
 #          . " -culling_limit 1"
           . " -best_hit_overhang 0.49 -best_hit_score_edge 0.0001"
           ;
@@ -61,19 +75,51 @@ for my $fasta (@ARGV) {
   open BLAST, "$cmd |";
   while (<BLAST>) { 
 #    print "#$_";
-    my @x = split m/\t/; 
-    my $gene = $x[1];
-    $gene =~ s/_.*$//;
-    print "# [$.] @x" if $verbose;
-    push @hit, [ $fasta, $x[0], $gene, $x[3], $x[2], $x[6], $x[7] ];
+    chomp;
+    my @x = split m/\t/;
+    my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
+    ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
+    next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
+    $hit{sseqid} =~ s/_.*$//;
+#    print STDERR Dumper(\%hit);
+    my $minimap = minimap(@hit{qw(sstart send slen)});
+    push @hit, [ 
+      $fasta, 
+      $hit{qseqid}, $hit{qstart}, $hit{qend},
+      $hit{sseqid}, 
+      $hit{sstart}.'-'.$hit{send}.'/'.$hit{slen}, 
+      $minimap, 
+      sprintf("%.2f", 100 * $hit{length} / $hit{slen}),
+      $hit{pident},
+    ];
   }
   close BLAST;
+
+  printf STDERR "Found %d ABR genes in $fasta\n", scalar(@hit);
+  @hit = sort { $a->[1] cmp $b->[1] || $a->[2] <=> $b->[2] } @hit;
+  print line(@$_) for @hit;
+  
 }
 
-print line(qw(FILE SEQUENCE ABR_GENE LEN_BP IDENTITY START END)) unless $noheader;
-@hit = sort { $a->[1] cmp $b->[1] || $a->[5] <=> $b->[5] } @hit;
-for my $hit (@hit) {
-  print line(@$hit);
+
+
+#----------------------------------------------------------------------
+
+sub minimap {
+  my($x, $y, $L, $scale, $on, $off) = @_;
+  my $WIDTH = 10;
+  $scale ||= ($L/$WIDTH);
+  $on  ||= '=';
+  $off ||= '.';
+  $x = int( $x / $scale );
+  $y = int( $y / $scale );
+  $L = int( $L / $scale );
+  my $map='';
+  for my $i (0 .. $WIDTH-1) {
+#    print STDERR "$i $x $y $L $scale\n";
+    $map .= ($i >= $x and $i <= $y) ? $on : $off;
+  }
+  return $map;
 }
 
 #----------------------------------------------------------------------
