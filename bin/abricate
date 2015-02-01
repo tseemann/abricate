@@ -51,8 +51,11 @@ print line(qw(FILE SEQUENCE ABR_GENE LEN_BP IDENTITY START END)) unless $noheade
 
 for my $fasta (@ARGV) {
   print STDERR "Processing: $fasta\n" if $verbose;
-  my $cmd = "blastn -word_size 32 -query \Q$fasta\E -db $datadir/resfinder ".
-            " -evalue 1E-99 -dust no -outfmt 6 -culling_limit 1";
+  my $cmd = "blastn -ungapped -query \Q$fasta\E -db $datadir/resfinder "
+          . " -evalue 1E-99 -dust no -outfmt 6"
+#          . " -culling_limit 1"
+          . " -best_hit_overhang 0.49 -best_hit_score_edge 0.0001"
+          ;
   print STDERR "Running: $cmd\n" if $verbose;
 
   open BLAST, "$cmd |";
