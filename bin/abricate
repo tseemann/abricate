@@ -47,7 +47,7 @@ my($blast)=qx(which blastn);
 $blast && $blast =~ m/blastn/ or die "Could not find 'blastn'. Please install it.";
 
 # header
-print line(qw(FILE SEQUENCE ABR_GENE LEN_BP IDENTITY START END)) unless $noheader;
+my @hit;
 
 for my $fasta (@ARGV) {
   print STDERR "Processing: $fasta\n" if $verbose;
@@ -57,16 +57,23 @@ for my $fasta (@ARGV) {
           . " -best_hit_overhang 0.49 -best_hit_score_edge 0.0001"
           ;
   print STDERR "Running: $cmd\n" if $verbose;
-
+  
   open BLAST, "$cmd |";
   while (<BLAST>) { 
 #    print "#$_";
     my @x = split m/\t/; 
     my $gene = $x[1];
     $gene =~ s/_.*$//;
-    print line($fasta, $x[0], $gene, $x[3], $x[2], $x[6], $x[7]);
+    print "# [$.] @x" if $verbose;
+    push @hit, [ $fasta, $x[0], $gene, $x[3], $x[2], $x[6], $x[7] ];
   }
   close BLAST;
+}
+
+print line(qw(FILE SEQUENCE ABR_GENE LEN_BP IDENTITY START END)) unless $noheader;
+@hit = sort { $a->[1] cmp $b->[1] || $a->[5] <=> $b->[5] } @hit;
+for my $hit (@hit) {
+  print line(@$hit);
 }
 
 #----------------------------------------------------------------------
