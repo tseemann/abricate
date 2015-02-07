@@ -2,26 +2,19 @@
 # Data based on Resfinder
 # http://cge.cbs.dtu.dk/services/data.php
 
-RM="rm -fv --"
-DB=resfinder
-TITLE="Abricate / ResFinder database"
+#RM="rm -fv --"
 
-$RM $DB.n??
+DB="resfinder"
+TITLE="Abricate Antiobiotic Resistance database (filtered ResFinder)"
 
-#cat *.fsa | sed 's/_.*$//' > $DB.tmp
-cat *.fsa  > $DB.tmp
+#$RM $DB.n??
 
-nrdb -o $DB $DB.tmp
-
-$RM $DB.tmp
-
-#formatdb -i $DB -p F -t "$TITLE"
-makeblastdb -in $DB -dbtype nucl -title "$TITLE" -logfile /dev/null -taxid 2
-
-$RM formatdb.log
+cat *.fsa | \
+	../bin/abricate-fix_resfinder_fasta - | \
+	makeblastdb -out "$DB" -dbtype nucl -title "$TITLE" -logfile /dev/null -taxid 2
 
 ls -lsa $DB.*
 
+blastdbcmd -info -db "$DB"
 
-blastdbcmd -info -db $DB
 
