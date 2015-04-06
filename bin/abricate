@@ -12,6 +12,8 @@ use FindBin;
 #..............................................................................
 # Command line options
 
+my $VERSION = "0.2";
+
 my(@Options, $verbose, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
 setOptions();
 
@@ -133,6 +135,13 @@ sub line {
 }
 
 #----------------------------------------------------------------------
+
+sub version {
+  print "$FindBin::RealScript $VERSION\n";
+  exit;
+}
+
+#----------------------------------------------------------------------
 # Option setting routines
 
 sub setOptions {
@@ -141,6 +150,7 @@ sub setOptions {
   @Options = (
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
     {OPT=>"verbose!",  VAR=>\$verbose, DEFAULT=>0, DESC=>"Verbose output"},
+    {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Downloaded ResFinder data"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
