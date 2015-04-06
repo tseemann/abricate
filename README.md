@@ -2,7 +2,7 @@
 
 Mass screening of contigs for antiobiotic resistance genes.
 
-By Torsten Seemann (@tseemann)
+By Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [blog](http://thegenomefactory.blogspot.com/)
 
 ##Quick Start
 
