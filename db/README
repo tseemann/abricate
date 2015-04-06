@@ -1,13 +1,12 @@
 
-# Data based on Resfinder
+# Resfinder
 # http://cge.cbs.dtu.dk/services/data.php
 
-#RM="rm -fv --"
+# ARG-ANNOT
+# http://en.mediterranee-infection.com/article.php?laref=283&titre=arg-annot-
 
 DB="resfinder"
-TITLE="Abricate Antiobiotic Resistance database (filtered ResFinder)"
-
-#$RM $DB.n??
+TITLE="Abricate Antiobiotic Resistance database (filtered ResFinder/ARG-ANNOT)"
 
 cat *.fsa | \
 	../bin/abricate-fix_resfinder_fasta - | \
