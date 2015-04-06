@@ -7,8 +7,10 @@ By Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [bl
 ##Quick Start
 
 ```
-% abricate Klebsiella.fasta
-
+% abricate 6008.fasta
+#FILE	SEQUENCE	START	END	GENE	COVERAGE	COVERAGE_MAP	GAPS	%COVERAGE	%IDENTITY
+Processing: 6008.fna
+Found 12 ABR genes in 6008.fna
 Klebsiella.fna	NC_021232.1	872545	872964	fosA	1-420/420	===============	0	100.00	100.00
 Klebsiella.fna	NC_021232.1	1381252	1382427	oqxA	1-1176/1176	===============	0	100.00	99.32
 Klebsiella.fna  NC_021232.1 2584899	2585759	blaSHV1	1-861/861	===============	0	100.00	99.88
@@ -31,7 +33,10 @@ If you don't use Brew, you will also need to make sure you have BLAST+ installed
 
 ##Input
 
-Abricate takes FASTA contig files.
+Abricate takes FASTA contig files. It can take multiple fasta files at once!
+
+    % abricate ref.fa strains*.fasta /ncbi/Ecoli/*.fna
+
 It does not accept raw FASTQ reads; please see [SRTS2](https://github.com/katholt/srst2) for that.
 
 ##Output
