@@ -11,7 +11,7 @@ By Torsten Seemann (@tseemann)
 
 Klebsiella.fna	NC_021232.1	872545	872964	fosA	1-420/420	===============	0	100.00	100.00
 Klebsiella.fna	NC_021232.1	1381252	1382427	oqxA	1-1176/1176	===============	0	100.00	99.32
-Klebsiella.fna  NC_021232.1     2584899	2585759	blaSHV1	1-861/861	===============	0	100.00	99.88
+Klebsiella.fna  NC_021232.1 2584899	2585759	blaSHV1	1-861/861	===============	0	100.00	99.88
 ```
 
 ##Installation
@@ -25,6 +25,7 @@ If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/l
 
 ###Source
 If you don't use Brew, you will also need to make sure you have BLAST+ installed for ```blastn```.
+    
     git clone https://github.com/tseemann/abricate.git
     ./abricate/bin/abricate --help
 
@@ -38,7 +39,7 @@ It does not accept raw FASTQ reads; please see [SRTS2](https://github.com/kathol
 Abricate produces a tap-separated output file with the following columns:
 
 Column | Example | Description
--------+---------+------------
+-------|---------|------------
 FILE | Ecoli.fna | The filename this hit came from
 SEQUENCE | contig000324 | The sequence in the filename
 START | 23423 | Start coordinate in the sequence
@@ -97,5 +98,7 @@ GPL Version 2: https://raw.githubusercontent.com/tseemann/abricate/master/LICENS
 The name "ABRicate" was chosen as the first 3 letters are a common acronym
 for "Anti-Biotic Resistance". It laso has the form of an English _verb_, 
 which suggests the tool actual taking "action" against the problem of antibiotic resistance.
-It is also relatively unique in [Google](https://www.google.com.au/search?q=abricate).
+It is also relatively unique in [Google](https://www.google.com.au/search?q=abricate),
+and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/2014/12/1/time-for-a-new-jabba-award-for-just-another-bogus-bioinformatics-acronym).
+
 
