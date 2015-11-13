@@ -59,6 +59,11 @@ $OUTSEP = ',' if $csv;  # default is tab
 my($blast)=qx(which blastn);
 $blast && $blast =~ m/blastn/ or die "Could not find 'blastn'. Please install it.";
 
+# check if blastn > 2.2.30 to support 'gaps' custom field
+my($version) = qx(blastn -version 2>&1);
+$version =~ m/2.(\d+.\d+)\+/ or die "Could not parse blastn version from '$version'";
+$1 >= 2.30 or die "You need to install BLAST+ 2.2.30 or higher";
+
 # output format
 my $format = "6 @BLAST_FIELDS";
 print line(@COLUMNS) unless $noheader;
@@ -101,11 +106,8 @@ for my $fasta (@ARGV) {
 
   printf STDERR "Found %d ABR genes in $fasta\n", scalar(@hit);
   @hit = sort { $a->[1] cmp $b->[1] || $a->[2] <=> $b->[2] } @hit;
-  print line(@$_) for @hit;
-  
+  print line(@$_) for @hit;  
 }
-
-
 
 #----------------------------------------------------------------------
 
