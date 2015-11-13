@@ -12,7 +12,7 @@ use FindBin;
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.2";
+my $VERSION = "0.3-dev";
 
 my(@Options, $verbose, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
 setOptions();
