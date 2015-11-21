@@ -14,7 +14,7 @@ use FindBin;
 
 my $VERSION = "0.3-dev";
 
-my(@Options, $verbose, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
+my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
 setOptions();
 
 #..............................................................................
@@ -77,7 +77,7 @@ for my $fasta (@ARGV) {
           . " -culling_limit 1"
 #          . " -best_hit_overhang 0.49 -best_hit_score_edge 0.0001"
           ;
-  print STDERR "Running: $cmd\n" if $verbose;
+  print STDERR "Running: $cmd\n" if $debug;
   
   open BLAST, "$cmd |";
   while (<BLAST>) { 
@@ -151,7 +151,7 @@ sub setOptions {
 
   @Options = (
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
-    {OPT=>"verbose!",  VAR=>\$verbose, DEFAULT=>0, DESC=>"Verbose output"},
+    {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Downloaded ResFinder data"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
