@@ -2,11 +2,8 @@
 
 use warnings;
 use strict;
-use File::Temp qw(tempdir);
 use File::Spec;
 use Data::Dumper;
-use Bio::SeqIO;
-use Bio::SearchIO;
 use FindBin;
 
 #..............................................................................
@@ -14,7 +11,7 @@ use FindBin;
 
 my $VERSION = "0.3-dev";
 
-my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $cutoff);
+my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $minid);
 setOptions();
 
 #..............................................................................
@@ -72,10 +69,9 @@ for my $fasta (@ARGV) {
   my %seen;
   my @hit;
   print STDERR "Processing: $fasta\n";
-  my $cmd = "blastn -query \Q$fasta\E -db $datadir/resfinder "
-          . " -task blastn -evalue 1E-99 -dust no -outfmt '$format'"
-          . " -culling_limit 1"
-#          . " -best_hit_overhang 0.49 -best_hit_score_edge 0.0001"
+  my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/resfinder\E -outfmt '$format'"
+          . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
+          . " -ungapped -culling_limit 1"
           ;
   print STDERR "Running: $cmd\n" if $debug;
   
@@ -105,7 +101,8 @@ for my $fasta (@ARGV) {
   close BLAST;
 
   printf STDERR "Found %d ABR genes in $fasta\n", scalar(@hit);
-  @hit = sort { $a->[1] cmp $b->[1] || $a->[2] <=> $b->[2] } @hit;
+  @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
+#  @hit = sort { $a->[1] cmp $b->[1] || $b->[2] <=> $a->[2] } @hit;
   print line(@$_) for @hit;  
 }
 
@@ -157,7 +154,7 @@ sub setOptions {
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
-#    {OPT=>"cutoff=f",  VAR=>\$cutoff, DEFAULT=>80, DESC=>"Minimum DNA identity cutoff"},
+    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>95, DESC=>"Minimum DNA identity"},
 #    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
   );
 
