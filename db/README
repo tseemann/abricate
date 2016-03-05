@@ -20,7 +20,7 @@ rm -f all*.fsa
 TITLE="Abricate Antiobiotic Resistance database (filtered ResFinder)"
 
 cat *.fsa | \
-	../../sbin/abricate-fix_resfinder_fasta - | \
+	../../scripts/abricate-fix_resfinder_fasta - | \
 	makeblastdb -out "$DB" -dbtype nucl -title "$TITLE" -logfile /dev/null -taxid 2
 
 ls -lsa $DB.*
