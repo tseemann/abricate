@@ -22,7 +22,7 @@ while (my $seq = $in->next_seq) {
   $read++;
 
   if ($seq->length % 3 != 0) {
-    print STDERR "$id - skipping as length not multiple of 3\n";
+    print STDERR "$id - skipping as length ".$seq->length." not multiple of 3\n";
     next;
   }
 
@@ -36,7 +36,7 @@ while (my $seq = $in->next_seq) {
     print STDERR "$id - has internal stop codons, trying revcom\n";
     $aa = $seq->revcom->translate->seq;
     if ($aa =~ m/\*./) {
-      print STDERR "$id - revcom has internal stop codons, skipping\n";
+      print STDERR "$id - revcom has internal stop codons too, skipping\n";
       next;
     }
     else {
