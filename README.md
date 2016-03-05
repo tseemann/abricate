@@ -64,31 +64,62 @@ GAPS | 0 | Was there any gaps in the alignment - possible pseudogene?
 
 ##Database
 
-The current database is built on [ResFinder](http://cge.cbs.dtu.dk/services/ResFinder/).
-It contains 2203 genes across 13 drug classes:
+The current database is built from [ResFinder](http://cge.cbs.dtu.dk/services/ResFinder/).
 
 ```
 % abricate --list
-aminoglycoside	166
-beta-lactamase	1328
-fosfomycin	21
-fusidicacid	4
-macrolide	140
-nitroimidazole	14
-phenicol	35
-quinolone	114
-rifampicin	12
-sulphonamide	56
-tetracycline	118
-trimethoprim	59
-vancomycin	136
-TOTAL	2203
+aminoglycoside  164
+beta-lactamase  1310
+colistin        1
+fosfomycin      21
+fusidicacid     3
+macrolide       136
+nitroimidazole  14
+oxazolidinone   3
+phenicol        36
+quinolone       103
+rifampicin      9
+sulphonamide    50
+tetracycline    113
+trimethoprim    53
+vancomycin      124
+TOTAL   2140
 ```
 
-I curated it by removing redundant sequences, re-orienting backward sequences, and removing
-sequences with non-DNA bases and partial coding sequences.
+The raw ResFinder database is processed using the `scripts/abricate-fix_resfinder_fasta` tool which:
+* removes redundant sequences
+* re-orients backward sequences
+* removes sequences with non-DNA bases 
+* removes partial coding sequences
+This could have unexpected consequences on your results and needs to be investigated 
+further with the curators of ResFinder.
 
-There is a newer 2.1 version which I it does not seem to be downloadable yet.
+##Updating the database
+
+If you don't want to wait for a new release of Abricate you can updated the `db` folder manually.
+
+```
+# Download and create a new db.XXXXXX folder
+cd /path/to/abricate/scripts
+./abricate-update_db
+
+# Check it all looks ok
+ls -l db.XXXXXX
+
+# Replace the old db folder
+mv ../db ../db.old
+mv db.XXXXXX ../db
+
+# See if it worked
+abricate --list
+```
+
+##Adding your own sequences
+
+There is nothing particularly special about ABRicate - it's just a glorified BLASTN tool.
+If you want to add in your own sequences, just add them to the BLASTN database `db/resfinder`.
+The sequence ID that is reported is the FASTA ID, 
+but stripped to the right after the first underscore '_'.
 
 ##Issues
 
