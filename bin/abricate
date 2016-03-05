@@ -11,7 +11,7 @@ use FindBin;
 
 my $VERSION = "0.3-dev";
 
-my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $minid);
+my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $minid, $cull);
 setOptions();
 
 #..............................................................................
@@ -71,7 +71,7 @@ for my $fasta (@ARGV) {
   print STDERR "Processing: $fasta\n";
   my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/resfinder\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
-          . " -ungapped -culling_limit 1"
+          . " -culling_limit $cull"
           ;
   print STDERR "Running: $cmd\n" if $debug;
   
@@ -103,7 +103,20 @@ for my $fasta (@ARGV) {
   printf STDERR "Found %d ABR genes in $fasta\n", scalar(@hit);
   @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
 #  @hit = sort { $a->[1] cmp $b->[1] || $b->[2] <=> $a->[2] } @hit;
-  print line(@$_) for @hit;  
+
+  # filter hits after we sort based on what we want
+  # keep the first one we find of the same gene on the same contig
+  # this is NOT perfect and could remove duplicates on same contig!!!!
+  # need to take overlap into consideration
+  my @filt;
+  my %have;
+#  foreach (@hit) {
+#    push @filt, $_ unless $have{ $_->[1].$_->[4] }++;
+#  }
+  @filt = @hit;
+  printf STDERR "Filtered %d hits, %d remain.\n", scalar(@hit), scalar(@filt);
+
+  print line(@$_) for @filt;  
 }
 
 #----------------------------------------------------------------------
@@ -154,7 +167,8 @@ sub setOptions {
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
-    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>95, DESC=>"Minimum DNA identity"},
+    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA identity"},
+    {OPT=>"cull=i",  VAR=>\$cull, DEFAULT=>1, DESC=>"Culling limit (encompassing hits)"},
 #    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
   );
 
