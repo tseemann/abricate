@@ -9,7 +9,7 @@ use FindBin;
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.3-dev";
+my $VERSION = "0.3";
 
 my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $minid, $cull);
 setOptions();
