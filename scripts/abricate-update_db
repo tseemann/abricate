@@ -17,6 +17,7 @@ BLASTDB="$DB"
 
 DIR=$(mktemp -d db.XXXXXXXX)
 echo "Created temp folder: $DIR"
+chmod a+rx "$DIR"
 cd "$DIR"
 
 echo "Getting $DB components:"
