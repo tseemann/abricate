@@ -30,6 +30,9 @@ done
 unzip -j resfinder.zip
 rm -f all*.fsa resfinder.zip
 
+# remove exe permissions...
+chmod -x *
+
 TITLE="Abricate Antiobiotic Resistance database (filtered ResFinder)"
 
 cat *.fsa | \
@@ -41,4 +44,3 @@ ls -lsa ${BLASTDB}.*
 blastdbcmd -info -db "$BLASTDB"
 
 echo "Results in: $DIR"
-
