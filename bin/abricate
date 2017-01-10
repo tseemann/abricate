@@ -84,7 +84,7 @@ for my $fasta (@ARGV) {
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
     next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
     $hit{sseqid} =~ s/_.*$//;
-#    print STDERR Dumper(\%hit);
+    print STDERR Dumper(\%hit) if $debug;
     my $minimap = minimap( @hit{qw(sstart send slen gaps)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 

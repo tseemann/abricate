@@ -386,6 +386,7 @@ tet(A):Tetracycline resistance:
 tet(B):Tetracycline resistance:
 tet(C):Tetracycline resistance:
 tet(D):Tetracycline resistance:
+tet(D)-like:Tetracycline resistance:
 tet(E):Tetracycline resistance:
 tet(G):Tetracycline resistance:
 tet(H):Tetracycline resistance:
@@ -437,6 +438,7 @@ dfrA6:Trimethoprim resistance:
 dfrA7:Trimethoprim resistance:
 dfrA8:Trimethoprim resistance:
 dfrA9:Trimethoprim resistance:
+dfrA-like:Trimethoprim resistance:
 dfrB1:Trimethoprim resistance:
 dfrB2:Trimethoprim resistance:
 dfrB3:Trimethoprim resistance:
@@ -541,6 +543,7 @@ VanH-Ao2:Vancomycin resistance (Glycopeptid resistance):VanAo2 vancomycin resist
 VanX-Ao2:Vancomycin resistance (Glycopeptid resistance):VanAo2 vancomycin resistance operon, (VanAo2, VanH-Ao2 and VanX-Ao2)
 VanH-A(Bc):Vancomycin resistance (Glycopeptid resistance):VanA(Bc) vancomycin resistance operon, (VanH-A(Bc))
 #Beta-Lactamase:
+blaVCC-1:Beta-lactam resistance:
 blaPAM-1:Beta-lactam resistance:
 blaTMB-1:Beta-lactam resistance:
 blaTMB-2:Beta-lactam resistance:
@@ -1753,7 +1756,7 @@ blaGES-21:Beta-lactam resistance:
 blaGES-22:Beta-lactam resistance:
 blaGES-23:Beta-lactam resistance:
 blaKPC-1:Beta-lactam resistance:
-blaKPC-2:Beta-lactam resistance: 
+blaKPC-2:Beta-lactam resistance:
 blaKPC-3:Beta-lactam resistance:
 blaKPC-4:Beta-lactam resistance:
 blaKPC-5:Beta-lactam resistance:
@@ -1786,32 +1789,32 @@ blaIND-12:Beta-lactam resistance:
 blaIND-13:Beta-lactam resistance:
 blaIND-14:Beta-lactam resistance:
 blaIND-15:Beta-lactam resistance:
-blaLAT-1:Beta-lactam resistance: AmpC-type
-blaMIR-1:Beta-lactam resistance: AmpC-type
-blaMIR-2:Beta-lactam resistance: AmpC-type
-blaMIR-3:Beta-lactam resistance: AmpC-type
-blaMIR-4:Beta-lactam resistance: AmpC-type
-blaMIR-5:Beta-lactam resistance: AmpC-type
-blaMIR-6:Beta-lactam resistance: AmpC-type
-blaFOX-1:Beta-lactam resistance: AmpC-type
-blaFOX-2:Beta-lactam resistance: AmpC-type
-blaFOX-3:Beta-lactam resistance: AmpC-type
-blaFOX-4:Beta-lactam resistance: AmpC-type
-blaFOX-5:Beta-lactam resistance: AmpC-type
-blaFOX-6:Beta-lactam resistance: AmpC-type
-blaFOX-7:Beta-lactam resistance: AmpC-type
-blaFOX-8:Beta-lactam resistance: AmpC-type
-blaFOX-9:Beta-lactam resistance: AmpC-type
-blaFOX-10:Beta-lactam resistance: AmpC-type
-blaCFE-1:Beta-lactam resistance: AmpC-type
-blaDHA-1:Beta-lactam resistance: AmpC-type
-blaDHA-2:Beta-lactam resistance: AmpC-type
-blaDHA-3:Beta-lactam resistance: AmpC-type
-blaDHA-4:Beta-lactam resistance: AmpC-type
-blaDHA-5:Beta-lactam resistance: AmpC-type
-blaDHA-6:Beta-lactam resistance: AmpC-type
-blaDHA-7:Beta-lactam resistance: AmpC-type
-blaDHA-8:Beta-lactam resistance: AmpC-type
+blaLAT-1:Beta-lactam resistance:AmpC-type
+blaMIR-1:Beta-lactam resistance:AmpC-type
+blaMIR-2:Beta-lactam resistance:AmpC-type
+blaMIR-3:Beta-lactam resistance:AmpC-type
+blaMIR-4:Beta-lactam resistance:AmpC-type
+blaMIR-5:Beta-lactam resistance:AmpC-type
+blaMIR-6:Beta-lactam resistance:AmpC-type
+blaFOX-1:Beta-lactam resistance:AmpC-type
+blaFOX-2:Beta-lactam resistance:AmpC-type
+blaFOX-3:Beta-lactam resistance:AmpC-type
+blaFOX-4:Beta-lactam resistance:AmpC-type
+blaFOX-5:Beta-lactam resistance:AmpC-type
+blaFOX-6:Beta-lactam resistance:AmpC-type
+blaFOX-7:Beta-lactam resistance:AmpC-type
+blaFOX-8:Beta-lactam resistance:AmpC-type
+blaFOX-9:Beta-lactam resistance:AmpC-type
+blaFOX-10:Beta-lactam resistance:AmpC-type
+blaCFE-1:Beta-lactam resistance:AmpC-type
+blaDHA-1:Beta-lactam resistance:AmpC-type
+blaDHA-2:Beta-lactam resistance:AmpC-type
+blaDHA-3:Beta-lactam resistance:AmpC-type
+blaDHA-4:Beta-lactam resistance:AmpC-type
+blaDHA-5:Beta-lactam resistance:AmpC-type
+blaDHA-6:Beta-lactam resistance:AmpC-type
+blaDHA-7:Beta-lactam resistance:AmpC-type
+blaDHA-8:Beta-lactam resistance:AmpC-type
 blaACT-1:Beta-lactam resistance:AmpC-type
 blaACT-2:Beta-lactam resistance:AmpC-type
 blaACT-3:Beta-lactam resistance:AmpC-type
@@ -2049,43 +2052,46 @@ cphA4:Beta-lactam resistance:
 cphA8:Beta-lactam resistance:
 cphA1:Beta-lactam resistance:
 blaPAO:Beta-lactam resistance:
-ampH: Beta-lactam resistance:
-ampS: Beta-lactam resistance:
-blaACI-1: Beta-lactam resistance:
-blaAER-1: Beta-lactam resistance:
-blaAST-1: Beta-lactam resistance:
-blaBES-1: Beta-lactam resistance:
-blaBIC-1: Beta-lactam resistance:
-blaBIL-1: Beta-lactam resistance:
-blaCGB-1: Beta-lactam resistance:
-blaCKO-1: Beta-lactam resistance:
-blaCME-1: Beta-lactam resistance:
-blaCMG: Beta-lactam resistance:
-blaDES-1: Beta-lactam resistance:
-blaDIM-1: Beta-lactam resistance:
-blaEBR-1: Beta-lactam resistance:
-blaERP-1: Beta-lactam resistance:
-blaJOHN-1: Beta-lactam resistance:
-blaLUT-1: Beta-lactam resistance:
-blaMAL-1: Beta-lactam resistance:
-blaMOR: Beta-lactam resistance:
-blaMOR-2: Beta-lactam resistance:
-blaMUS-1: Beta-lactam resistance:
-blaPME-1: Beta-lactam resistance:
-blaRAHN-1: Beta-lactam resistance:
-blaRAHN-2: Beta-lactam resistance:
-blaSED1: Beta-lactam resistance:
-blaSFC-1: Beta-lactam resistance:
-blaSFO-1: Beta-lactam resistance:
-blaTRU: Beta-lactam resistance:
-blaTUS-1: Beta-lactam resistance:
-blaZEG-1: Beta-lactam resistance:
-blaFRI-1: Beta-lactam resistance:
-hugA: Beta-lactam resistance:
-imiH: Beta-lactam resistance:
-imiS: Beta-lactam resistance:
-penA: Beta-lactam resistance:
-blaIMP-31: Beta-lactam resistance:
+ampH:Beta-lactam resistance:
+ampS:Beta-lactam resistance:
+blaACI-1:Beta-lactam resistance:
+blaAER-1:Beta-lactam resistance:
+blaAST-1:Beta-lactam resistance:
+blaBES-1:Beta-lactam resistance:
+blaBIC-1:Beta-lactam resistance:
+blaBIL-1:Beta-lactam resistance:
+blaCGB-1:Beta-lactam resistance:
+blaCKO-1:Beta-lactam resistance:
+blaCME-1:Beta-lactam resistance:
+blaCMG:Beta-lactam resistance:
+blaDES-1:Beta-lactam resistance:
+blaDIM-1:Beta-lactam resistance:
+blaEBR-1:Beta-lactam resistance:
+blaERP-1:Beta-lactam resistance:
+blaJOHN-1:Beta-lactam resistance:
+blaLUT-1:Beta-lactam resistance:
+blaMAL-1:Beta-lactam resistance:
+blaMOR:Beta-lactam resistance:
+blaMOR-2:Beta-lactam resistance:
+blaMUS-1:Beta-lactam resistance:
+blaPME-1:Beta-lactam resistance:
+blaRAHN-1:Beta-lactam resistance:
+blaRAHN-2:Beta-lactam resistance:
+blaSED1:Beta-lactam resistance:
+blaSFC-1:Beta-lactam resistance:
+blaSFO-1:Beta-lactam resistance:
+blaTRU:Beta-lactam resistance:
+blaTUS-1:Beta-lactam resistance:
+blaZEG-1:Beta-lactam resistance:
+blaFRI-1:Beta-lactam resistance:
+hugA:Beta-lactam resistance:
+imiH:Beta-lactam resistance:
+imiS:Beta-lactam resistance:
+penA:Beta-lactam resistance:
+blaIMP-31:Beta-lactam resistance:
+blaBRO-1:Beta-lactam resistance:
+blaBRO-2:Beta-lactam resistance:
+blaBKC-1:Beta-lactam resistance:
 #Rifampicin resistance:
 ARR-1:Rifampicin resistance:
 ARR-2:Rifampicin resistance:
@@ -2116,3 +2122,5 @@ nimI:metronidazole (5-nitroimidazole):
 nimJ:metronidazole (5-nitroimidazole):
 #Colistin resistance:
 mcr-1:Colistin resistance:
+mcr-2:Colistin resistance:
+mcr-1.2:Colistin resistance:
