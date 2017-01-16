@@ -69,7 +69,7 @@ for my $fasta (@ARGV) {
   my %seen;
   my @hit;
   print STDERR "Processing: $fasta\n";
-  my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/resfinder\E -outfmt '$format'"
+  my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/$db\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
           . " -culling_limit $cull"
           ;
@@ -164,6 +164,7 @@ sub setOptions {
     {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Downloaded ResFinder data"},
+    {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"BLASTN database to use"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
