@@ -5,19 +5,25 @@ use strict;
 use File::Spec;
 use Data::Dumper;
 use FindBin;
+use File::Spec;
 
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.3";
+my $VERSION = "0.4-dev";
+my $EXE = just_filename( $FindBin::RealScript );
 
-my(@Options, $debug, $datadir, $list, $db, $noheader, $csv, $nopath, $minid, $cull);
+my(@Options, $debug, $list, $summary,
+             $datadir, $db, $minid,
+             $noheader, $csv, $nopath);
 setOptions();
 
 #..............................................................................
 # Globals
 
 my $OUTSEP = "\t";
+
+my $CULL = 1;   # BLAST -culling_limit 
 
 my @BLAST_FIELDS = qw(
   qseqid qstart qend qlen
@@ -71,7 +77,7 @@ for my $fasta (@ARGV) {
   print STDERR "Processing: $fasta\n";
   my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/$db\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
-          . " -culling_limit $cull"
+          . " -culling_limit $CULL"
           ;
   print STDERR "Running: $cmd\n" if $debug;
   
@@ -88,7 +94,7 @@ for my $fasta (@ARGV) {
     my $minimap = minimap( @hit{qw(sstart send slen gaps)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 
-      $fasta, 
+      $nopath ? just_filename($fasta) : $fasta , 
       $hit{qseqid}, $hit{qstart}, $hit{qend},
       $hit{sseqid}, 
       $hit{sstart}.'-'.$hit{send}.'/'.$hit{slen}, 
@@ -149,8 +155,16 @@ sub line {
 #----------------------------------------------------------------------
 
 sub version {
-  print "$FindBin::RealScript $VERSION\n";
+  print "$EXE $VERSION\n";
   exit;
+}
+
+#----------------------------------------------------------------------
+
+sub just_filename {
+  my($path) = @_;
+  my(undef,undef,$fname) = File::Spec->splitpath( $path );
+  return $fname;
 }
 
 #----------------------------------------------------------------------
@@ -163,14 +177,14 @@ sub setOptions {
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
     {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
+    {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
+    {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Downloaded ResFinder data"},
     {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"BLASTN database to use"},
-    {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included ABR databases"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
     {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA identity"},
-    {OPT=>"cull=i",  VAR=>\$cull, DEFAULT=>1, DESC=>"Culling limit (encompassing hits)"},
-#    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
+    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
   );
 
   @ARGV or usage();
@@ -186,9 +200,15 @@ sub setOptions {
 }
 
 sub usage {
-  print "Usage: $0 [options] <contigs.fasta> ... \n";
+  print "Synopsis:\n";
+  print "\tFind AMR genes in assembled contig sequences\n";
+  print "Usage:\n";
+  print "\t% $EXE --list\n";
+  print "\t% $EXE [options] <contigs.fasta> > out.tab\n";
+  print "\t% $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
+  print "Options:\n";
   foreach (@Options) {
-    printf "  --%-13s %s%s.\n",$_->{OPT},$_->{DESC},
+    printf "\t--%-13s %s%s.\n",$_->{OPT},$_->{DESC},
            defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
   }
   exit(1);
