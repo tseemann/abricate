@@ -53,6 +53,10 @@ $seq = dedupe_seq($seq);
 
 save_fasta("$dir/sequences", $seq);
 
+msg("Formatting BLASTN database: $dir");
+system("makeblastdb -in '$dir/sequences' -title '$db' -taxid 2"
+      ." -dbtype nucl -parse_seqids -hash_index -logfile $tmpdir/makeblastdb.log");
+
 msg("Done.");
 
 #..............................................................................
@@ -70,7 +74,6 @@ sub download {
   msg("Destination: $dest");
   msg("Filesize:", (-s $dest), "bytes");
 }
-
 
 #..............................................................................
 sub get_resfinder {
