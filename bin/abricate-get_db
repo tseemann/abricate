@@ -1,0 +1,362 @@
+#!/usr/bin/env perl
+use strict;
+use Bio::SeqIO;
+use File::Spec;
+#use File::Temp qw(tempdir);
+use File::Path qw(make_path);
+#use File::Copy;
+use File::Slurp qw(edit_file read_file);
+use Cwd qw(realpath);
+use Data::Dumper;
+use LWP::Simple;
+
+use FindBin;
+use lib "$FindBin::RealBin/../perl5";
+use Abricate::Headers qw(hash_encode hash_decode);
+
+#..............................................................................
+# Globals
+
+my %DATABASE = (
+  'resfinder'         => \&get_resfinder,
+  'argannot'          => \&get_argannot,
+  'card'              => \&get_card,
+  'ncbibetalactamase' => \&get_ncbibetalactamase,
+  'vfdb'              => \&get_vfdb,
+);
+my $DATABASES = join(' ', sort keys %DATABASE);
+
+#..............................................................................
+# Command line options
+
+my(@Options, $debug, $outdir, $db, $force);
+setOptions();
+
+$db or err("Please choose a --db from: $DATABASES");
+exists $DATABASE{$db} or err("Unknown --db '$db', choose from: $DATABASES ");
+-d $outdir or err("--outdir '$outdir' does not exist");
+
+my $dir = realpath( File::Spec->catdir($outdir, $db) );
+make_path($dir);
+msg("Setting up '$db' in '$dir'");
+#my $tmpdir = tempdir("$db-XXXXXXXX", DIR=>$dir, CLEANUP=>0);
+#my $tmpdir = "/home/tseemann/git/abricate/db/resfinder/resfinder-6Kuphtvv";
+my $tmpdir = "$dir/src";
+make_path($tmpdir);
+
+# run the specific function from --db
+chdir $tmpdir;
+my $seq = $DATABASE{$db}->();
+map { is_full_gene($_) } @$seq;
+$seq = dedupe_seq($seq);
+#print Dumper($seq);
+
+save_fasta("$dir/sequences", $seq);
+
+msg("Done.");
+
+#..............................................................................
+
+sub download {
+  my($url, $dest) = @_;
+  if (-r $dest and not $force) {
+     msg("Won't download existing $dest (use --force)");
+  }
+  else {
+    msg("Downloading: $url");
+    my $ec = mirror($url, $dest);
+    msg("Result: $ec");
+  }
+  msg("Destination: $dest");
+  msg("Filesize:", (-s $dest), "bytes");
+}
+
+
+#..............................................................................
+sub get_resfinder {
+  download(
+    'https://cge.cbs.dtu.dk/cge/download_data.php?folder=resfinder&filename=resfinder.zip&submit=resfinder.zip',
+    "resfinder.zip"
+  );
+  system("unzip -j -u resfinder.zip");
+  
+  my %anno;
+  open NOTES, '<', 'notes.txt';
+  while (<NOTES>) {
+    chomp;
+    chop; # remove the DOS CR ending
+    next if m/^#/;
+    my @x = split m/:/;
+    $anno{$x[0]} = join(':', @x[2..$#x]);
+  }
+  msg("get_resfinder: notes.txt has", scalar(keys %anno), "genes");
+  #print Dumper(\%anno);
+
+  my @seq;
+  for my $fasta (<*.fsa>) {
+    push @seq, @{ load_fasta($fasta) };
+  }
+
+  for my $seq (@seq) {
+    my($id,$copy,$acc) = $seq->{ID} =~ m/(.*)_(\d+)_(\w+)$/;
+    #msg("resfinder: $1 $2 $3", $anno{$1});
+    $seq->{ID}   = "${id}_${copy}";
+    $seq->{ACC}  = $acc;
+    $seq->{DESC} = $anno{$id} || '';
+  }
+  
+  return \@seq;
+}
+
+#..............................................................................
+sub get_argannot {
+  my $fasta = 'arg-annot.fa';
+  download(
+    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
+    $fasta
+  );
+  
+  # fix syntax errors in the FASTA file...
+  edit_file { s/\\//g } $fasta;
+
+  my $seqs = load_fasta($fasta);
+
+  #  0             1         2               3 
+  # >(AGly)Aac2-Ie:NC_011896:3039059-3039607:549
+  for my $s (@$seqs) {
+    my @x = split m/:/, $s->{ID};
+    $s->{ID} = $x[0];
+    $s->{ACC} = $x[1].':'.$x[2];
+    $s->{DESC} = '';
+  }
+
+  return $seqs;
+}
+
+#..............................................................................
+sub get_card {
+  download(
+    'https://card.mcmaster.ca/download/0/broadstreet-v1.1.5.tar.gz',
+    "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
+  );
+  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
+  system("tar xf card.tar.bz2 $fasta");
+
+  my $seqs = load_fasta($fasta);
+
+  #  0  1        2 3     4           5
+  # >gb|HQ845196|+|0-861|ARO:3001109|SHV-52 [Klebsiella pneumoniae]
+  for my $s (@$seqs) {
+    my @x = split m/\|/, $s->{ID};
+    $x[5] =~ s/ .*$//;
+    $s->{ID} = $x[5];
+    $s->{ACC} = $x[1].':'.$x[3];
+    $s->{DESC} = $x[4];
+  }
+
+  return $seqs;
+}
+
+#..............................................................................
+sub get_vfdb {
+  download('http://www.mgc.ac.cn/VFs/Down/VFDB_setA_nt.fas.gz', 'vfdb.fa.gz');
+  system("gzip -f -d -c vfdb.fa.gz > vfdb.fa");
+  my $seqs = load_fasta("vfdb.fa");
+
+  # >VFG000676(gb|AAD32411) (lef) anthrax toxin lethal factor precursor [Anthrax toxin (VF0142)] [Bacillus anthracis str. Sterne]
+  for my $s (@$seqs) {
+#    print STDERR Dumper($s);
+    $s->{ID} =~ m/^(\w+)\(\w+\|(\w+)\)$/;
+    $s->{ACC} = $2 if $2;
+    $s->{DESC} =~ m/^\((.*?)\)/;
+    $s->{ID}  = $1 if $1;
+#    print STDERR Dumper($s); exit;
+  }
+
+  return $seqs;
+}
+
+#..............................................................................
+sub get_ncbibetalactamase {
+  my $fasta = "ncbi.fa";
+  download('ftp://ftp.ncbi.nlm.nih.gov/pathogen/betalactamases/Allele-dna.fa', $fasta);
+  my $tab = "ncbi.tab";
+  download('ftp://ftp.ncbi.nlm.nih.gov/pathogen/betalactamases/Allele.tab', $tab);
+
+  # >ACD12694.1 EU650653.1:1-1173
+  my $seqs = load_fasta($fasta);
+  
+  # ACC-1 ACD12694.1 EU650653.1 blaACC-1 1 1173 + cephalosporin-hydrolyzing class C beta-lactamase ACC-1
+  my %anno;
+  my @anno = read_file($tab);
+  msg("Read", 0+@anno, "annotations");
+  foreach (@anno) {
+    next if m/^#/;
+    chomp;
+    my($name,$id,$acc,$gene,$begin,$end,undef,$product) = split m/\t/;
+    $anno{$id} = {
+      ID => $gene,
+      DESC => $product,
+      ACC => "$acc:$begin-$end",
+    };
+  }
+#  print Dumper(\%anno);
+
+  for my $s (@$seqs) {
+    my $id = $s->{ID};
+    next unless exists $anno{$id};
+    $s->{ID} = $anno{$id}{ID};
+    $s->{ACC} = $anno{$id}{ACC};
+    $s->{DESC} = $anno{$id}{DESC};
+  }
+#  print Dumper($seqs);
+
+  return $seqs;
+}
+
+#..............................................................................
+sub is_full_gene {
+  my($s) = @_;
+
+  my $id = $s->{ID};
+  my $L = length($s->{SEQ});
+  if ($L % 3 != 0) {
+    whine("$id - length $L bp is not multiple of 3");
+    return;
+  }
+  if ($s->{SEQ} !~  m/^[AGCT]+$/) {
+    whine("$id - has non-AGTC bases");
+    # don't return though
+  }
+
+  my $seq = Bio::Seq->new( -id=>$s->{ID}, -seq=>$s->{SEQ} );
+  my $aa = $seq->translate->seq;
+  
+  if ($aa =~ m/\*./) {
+    whine("$id - has internal stop codons, trying revcom");
+    $aa = $seq->revcom->translate->seq;
+    if ($aa =~ m/\*./) {
+      print STDERR "$id - revcom has internal stop codons too\n";
+      return 0;
+    }
+    else {
+      msg("$id - revcom resolves problem, hooray!");
+      $s->{SEQ} = $seq->revcom->seq;
+    }
+  }                                                                                                                                                                                                            
+}
+
+#..............................................................................
+sub dedupe_seq {
+  my($seq) = @_;
+  my %seen;
+  my $good;
+  for my $s (@$seq) {
+    if ($seen{ $s->{SEQ} }) {
+      whine("duplicate", length($s->{SEQ}), "bp sequence:", 
+        $s->{ID}, '~', $seen{$s->{SEQ}} );
+    }
+    else {
+      push @$good, $s;
+    }
+    $seen{ $s->{SEQ} } .= ' '.$s->{ID};
+  }
+  msg( "dedupe_seq: read", scalar(@$seq), "/ kept", scalar(@$good) );
+  return $good;
+}
+
+#..............................................................................
+sub load_fasta {
+  my($fasta) = @_;
+  my $list;
+  msg("load_fasta: $fasta");
+  my $in = Bio::SeqIO->new(-file=>$fasta, -format=>'fasta');
+  while (my $seq = $in->next_seq) {
+    my $dna = uc($seq->seq);
+    $dna =~ s/[^AGTC]/N/g;
+    push @$list, {
+      ID   => $seq->id,
+      DESC => $seq->desc,
+      SEQ  => uc($seq->seq),
+    }
+  }
+  msg("load_fasta: read", scalar(@$list), "sequences");
+  return $list;
+}
+
+#..............................................................................
+sub save_fasta {
+  my($fasta, $seq) = @_;
+  msg("save_fasta: $fasta");
+  my %seen;
+  my $out = Bio::SeqIO->new(-file=>">$fasta", -format=>'fasta');
+  for my $s (@$seq) {
+    $seen{$s->{ID}}++;
+    my $freq = $seen{$s->{ID}};
+    whine("seen $s->{ID} now $freq times") if $freq > 1;
+#    print Dumper($s);
+    my $obj = Bio::Seq->new(
+      -id   => $s->{ID}."~~~".$s->{ACC},
+      -desc => ($s->{DESC} || $s->{ID}),
+      -seq  => $s->{SEQ},
+    );
+#    $obj->desc( hash_encode($s) );
+    $out->write_seq($obj);
+#    $seen{ $s->{ID} }++;
+  }
+  msg("save_fasta: wrote", scalar(@$seq), "sequences");
+}
+
+#----------------------------------------------------------------------
+sub msg {
+  print STDERR "@_\n";
+}
+
+#----------------------------------------------------------------------
+sub whine {
+  print STDERR "WARNING: @_\n";
+}
+
+#----------------------------------------------------------------------
+sub err {
+  msg("ERROR:", @_);
+  exit(1);
+}
+
+#----------------------------------------------------------------------
+# Option setting routines
+
+sub setOptions {
+  use Getopt::Long;
+
+  @Options = (
+    {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
+    {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
+    {OPT=>"dbdir=s", VAR=>\$outdir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Parent folder"},
+    {OPT=>"db=s",    VAR=>\$db, DEFAULT=>"",  DESC=>"Options: $DATABASES" },
+    {OPT=>"force!",  VAR=>\$force, DEFAULT=>0, DESC=>"Force download even if exists"},
+  );
+
+#  @ARGV or usage();
+
+  &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage();
+
+  # Now setup default values.
+  foreach (@Options) {
+    if (defined($_->{DEFAULT}) && !defined(${$_->{VAR}})) {
+      ${$_->{VAR}} = $_->{DEFAULT};
+    }
+  }
+}
+
+sub usage {
+  print "Usage: $0 [options]\n";
+  foreach (@Options) {
+    printf "  --%-13s %s%s.\n",$_->{OPT},$_->{DESC},
+           defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
+  }
+  exit(1);
+}
+ 
+#----------------------------------------------------------------------
+
