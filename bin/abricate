@@ -8,6 +8,7 @@ use FindBin;
 use File::Spec;
 use File::Slurp;
 use List::MoreUtils qw(zip);
+use Cwd qw(abs_path);
 use lib "$FindBin::RealBin/../perl5";
 use Abricate::Headers qw(hash_encode hash_decode);
 
@@ -67,6 +68,13 @@ my($version) = qx(blastn -version 2>&1);
 $version =~ m/2.(\d+.\d+)\+/ or die "Could not parse blastn version from '$version'";
 $1 >= 2.30 or die "You need to install BLAST+ 2.2.30 or higher";
 
+# check database exists
+$datadir = abs_path($datadir);
+my $db_path = "$datadir/$db/sequences";
+my $dbinfo = blast_database_info($db_path);
+$dbinfo or die "BLASTN database not found: $db_path";
+msg("Using database $db: ", $dbinfo->{SEQUENCES}, "sequences - ", $dbinfo->{DATE});
+
 # output format
 my $format = "6 @BLAST_FIELDS";
 print line(@COLUMNS) unless $noheader;
@@ -75,7 +83,7 @@ for my $fasta (@ARGV) {
   my %seen;
   my @hit;
   msg("Processing: $fasta");
-  my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/$db/sequences\E -outfmt '$format'"
+  my $cmd = "blastn -query \Q$fasta\E -db \Q$db_path\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
           . " -culling_limit $CULL"
           ;
