@@ -29,6 +29,7 @@ my $OUTSEP = "\t";
 my $ABSENT = '.';
 my $FIELD = '%COVERAGE';
 my $FIELDSEP = ';';
+my $IDSEP = '~~~';
 
 my $CULL = 1;   # BLAST -culling_limit 
 
@@ -88,7 +89,13 @@ for my $fasta (@ARGV) {
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
     next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
 #    $hit{sseqid} =~ s/_.*$//;
-    my($database, $gene,$acc) = split m{~~~}, $hit{sseqid};
+    my($database, $gene, $acc) = split m/$IDSEP/, $hit{sseqid};
+    # if it wasn't in the format we expected, try and be sensible
+    if (!defined $gene and !defined $acc) {
+      $acc = '';
+      $gene = $hit{sseqid};
+      $database = $db;  # name specified with --db
+    }
     msg( Dumper(\%hit) ) if $debug;
     my $minimap = minimap( @hit{qw(sstart send slen gaps)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
