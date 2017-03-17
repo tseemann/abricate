@@ -61,18 +61,18 @@ $OUTSEP = ',' if $csv;  # default is tab
 
 # check if 'blastn' installed
 my($blast)=qx(which blastn);
-$blast && $blast =~ m/blastn/ or die "Could not find 'blastn'. Please install it.";
+$blast && $blast =~ m/blastn/ or err("Could not find 'blastn'. Please install it.");
 
 # check if blastn > 2.2.30 to support 'gaps' custom field
 my($version) = qx(blastn -version 2>&1);
-$version =~ m/2.(\d+.\d+)\+/ or die "Could not parse blastn version from '$version'";
-$1 >= 2.30 or die "You need to install BLAST+ 2.2.30 or higher";
+$version =~ m/2.(\d+.\d+)\+/ or err("Could not parse blastn version from '$version'");
+$1 >= 2.30 or err("You need to install BLAST+ 2.2.30 or higher");
 
 # check database exists
 $datadir = abs_path($datadir);
 my $db_path = "$datadir/$db/sequences";
 my $dbinfo = blast_database_info($db_path);
-$dbinfo or die "BLASTN database not found: $db_path";
+$dbinfo or err("BLASTN database not found: $db_path");
 msg("Using database $db: ", $dbinfo->{SEQUENCES}, "sequences - ", $dbinfo->{DATE});
 
 # output format
@@ -253,6 +253,13 @@ sub version {
 
 sub msg {
   print STDERR "@_\n" unless $quiet;
+}
+
+#----------------------------------------------------------------------
+
+sub err {
+  print STDERR "ERROR: @_\n";
+  exit(1);
 }
 
 #----------------------------------------------------------------------
