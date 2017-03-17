@@ -299,7 +299,7 @@ sub save_fasta {
     whine("seen $s->{ID} now $freq times") if $freq > 1;
 #    print Dumper($s);
     my $obj = Bio::Seq->new(
-      -id   => $s->{ID}."~~~".$s->{ACC},
+      -id   => join('~~~', $db, $s->{ID}, $s->{ACC}),
       -desc => ($s->{DESC} || $s->{ID}),
       -seq  => $s->{SEQ},
     );

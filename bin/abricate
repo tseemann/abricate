@@ -6,14 +6,18 @@ use File::Spec;
 use Data::Dumper;
 use FindBin;
 use File::Spec;
+use File::Slurp;
+use List::MoreUtils qw(zip);
+use lib "$FindBin::RealBin/../perl5";
+use Abricate::Headers qw(hash_encode hash_decode);
 
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.4-dev";
+my $VERSION = "0.4";
 my $EXE = just_filename( $FindBin::RealScript );
 
-my(@Options, $debug, $list, $summary,
+my(@Options, $debug, $quiet, $list, $summary,
              $datadir, $db, $minid,
              $noheader, $csv, $nopath);
 setOptions();
@@ -22,6 +26,9 @@ setOptions();
 # Globals
 
 my $OUTSEP = "\t";
+my $ABSENT = '.';
+my $FIELD = '%COVERAGE';
+my $FIELDSEP = ';';
 
 my $CULL = 1;   # BLAST -culling_limit 
 
@@ -32,30 +39,22 @@ my @BLAST_FIELDS = qw(
 );
 
 my @COLUMNS = qw(
- FILE SEQUENCE START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY
+ FILE SEQUENCE START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY DATABASE ACCESSION
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
 #..............................................................................
 # Option parsing
 
-if ($list) {
-  my $total=0;
-  for my $fname (<$datadir/*.fsa>) {
-    my $num=0;
-    open FASTA, $fname;
-    while (<FASTA>) {
-      $num++ if m/>/;
-    }
-    my(undef,undef,$file) = File::Spec->splitpath($fname);
-    $file =~ s/.fsa$//;
-    print STDERR "$file\t$num\n";
-    $total+=$num;
-  }
-  print STDERR "TOTAL\t$total\n";
+if ($summary) {
+  summary_table( \*ARGV );
   exit;
 }
 
+if ($list) {
+  list_databases($datadir);
+  exit;
+}
 $OUTSEP = ',' if $csv;  # default is tab
 
 # check if 'blastn' installed
@@ -74,39 +73,42 @@ print line(@COLUMNS) unless $noheader;
 for my $fasta (@ARGV) {
   my %seen;
   my @hit;
-  print STDERR "Processing: $fasta\n";
-  my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/$db\E -outfmt '$format'"
+  msg("Processing: $fasta");
+  my $cmd = "blastn -query \Q$fasta\E -db \Q$datadir/$db/sequences\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
           . " -culling_limit $CULL"
           ;
-  print STDERR "Running: $cmd\n" if $debug;
+  msg("Running: $cmd") if $debug;
   
   open BLAST, "$cmd |";
   while (<BLAST>) { 
-#    print "#$_";
     chomp;
     my @x = split m/\t/;
     my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
     next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
-    $hit{sseqid} =~ s/_.*$//;
-    print STDERR Dumper(\%hit) if $debug;
+#    $hit{sseqid} =~ s/_.*$//;
+    my($database, $gene,$acc) = split m{~~~}, $hit{sseqid};
+    msg( Dumper(\%hit) ) if $debug;
     my $minimap = minimap( @hit{qw(sstart send slen gaps)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 
       $nopath ? just_filename($fasta) : $fasta , 
       $hit{qseqid}, $hit{qstart}, $hit{qend},
-      $hit{sseqid}, 
+      #$hit{sseqid}, 
+      $gene,
       $hit{sstart}.'-'.$hit{send}.'/'.$hit{slen}, 
       $minimap, 
       $hit{gaps},
       sprintf("%.2f", 100 * ($hit{length}-$hit{gaps}) / $hit{slen}),
       $hit{pident},
+      $database,
+      $acc,
     ];
   }
   close BLAST;
 
-  printf STDERR "Found %d ABR genes in $fasta\n", scalar(@hit);
+  msg("Found", scalar(@hit), "genes in $fasta");
   @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
 #  @hit = sort { $a->[1] cmp $b->[1] || $b->[2] <=> $a->[2] } @hit;
 
@@ -120,7 +122,7 @@ for my $fasta (@ARGV) {
 #    push @filt, $_ unless $have{ $_->[1].$_->[4] }++;
 #  }
   @filt = @hit;
-  printf STDERR "Filtered %d hits, %d remain.\n", scalar(@hit), scalar(@filt);
+  msg("Filtered", scalar(@hit), "hits,", scalar(@filt), "remain.");
 
   print line(@$_) for @filt;  
 }
@@ -139,11 +141,84 @@ sub minimap {
   $L = int( $L / $scale );
   my $map='';
   for my $i (0 .. $WIDTH-1) {
-#    print STDERR "$i $x $y $L $scale\n";
+#    msg("$i $x $y $L $scale");
     $map .= ($i >= $x and $i <= $y) ? $on : $off;
     $map .= '/' if $broken and $i==int($WIDTH/2);
   }
   return $map;
+}
+
+#----------------------------------------------------------------------
+
+sub summary_table {
+  my($fh) = @_;
+  
+  my %gene;  # genes observed
+  my %data = (map { $_ => {} } @ARGV);
+  my @hdr;
+  
+  while (<$fh>) {
+    chomp;
+    my @col = split m/\t/;
+    print STDERR "### [$.] @col\n" if $debug;
+    @hdr = @col if $. == 1;
+    next if $col[0] =~ m/^#/;
+    $col[0] = just_filename($col[0]) if $nopath;
+    my $row = { zip @hdr, @col };    
+    $gene{ $row->{'GENE'} }++;
+    push @{ $data{ $row->{'#FILE'} }{ $row->{'GENE'} } } , $row;
+  }
+
+  my @gene = sort { $a cmp $b } keys %gene;
+  print line('#FILE', 'NUM_FOUND', @gene);
+
+  for my $fname (sort { $a cmp $b } keys %data) {
+    my @present = map { exists $data{$fname}{$_} 
+                        ? join( $FIELDSEP, map { $_->{$FIELD} } @{$data{$fname}{$_}} ) 
+                        : $ABSENT 
+                      } @gene;
+    print line( $fname, scalar( keys %{$data{$fname}} ), @present );
+  }
+}
+
+#----------------------------------------------------------------------
+
+sub blast_database_info {
+  my($prefix) = @_;
+  my(@res) = qx(blastdbcmd -info -db \Q$prefix\E 2> /dev/null);
+  chomp @res;
+  my $res = join(' ', @res);
+  my $info = { PREFIX => $prefix };
+
+  $res =~ m/\b([\d,]+)\s+sequences;/ or return;
+  $info->{SEQUENCES} = $1;
+  $info->{SEQUENCES} =~ s/,//g;
+
+  $res =~ m/\bDatabase: (\S+)/;
+  $info->{TITLE} = $1;
+  
+  $res =~ m/\bDate: (\w+\s+\d+,\s+\d{4})\s/;
+  $info->{DATE} = $1;
+
+  return $info;
+}
+
+#----------------------------------------------------------------------
+
+sub list_databases {
+  my($from) = @_;
+  my @dir = grep { -d "$from/$_" } read_dir($from);
+  my $count=0;
+  for my $name (sort @dir) {
+    # msg("Database: $name");
+    my $info = blast_database_info("$from/$name/sequences");
+    if ($info) {
+      msg("$name: ", $info->{SEQUENCES}, "sequences - ", $info->{DATE});
+    }
+    else {
+      msg("$name: corrupt database? - $from/$name");
+    }
+  }
 }
 
 #----------------------------------------------------------------------
@@ -157,6 +232,12 @@ sub line {
 sub version {
   print "$EXE $VERSION\n";
   exit;
+}
+
+#----------------------------------------------------------------------
+
+sub msg {
+  print STDERR "@_\n" unless $quiet;
 }
 
 #----------------------------------------------------------------------
@@ -176,11 +257,12 @@ sub setOptions {
   @Options = (
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
     {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
+    {OPT=>"quiet!",  VAR=>\$quiet, DEFAULT=>0, DESC=>"Quiet mode, no stderr output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
     {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
-    {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Downloaded ResFinder data"},
-    {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"BLASTN database to use"},
+    {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Location of database folders"},
+    {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"Database to use"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
     {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA identity"},
@@ -201,7 +283,7 @@ sub setOptions {
 
 sub usage {
   print "Synopsis:\n";
-  print "\tFind AMR genes in assembled contig sequences\n";
+  print "\tFind and collate amplicons in assembled contigs\n";
   print "Usage:\n";
   print "\t% $EXE --list\n";
   print "\t% $EXE [options] <contigs.fasta> > out.tab\n";

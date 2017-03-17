@@ -1,0 +1,7 @@
+
+mkdir -p src
+cat ../{card,argannot,ncbibetalactamase,resfinder}/sequences > src/amr.fa
+cd-hit-est -i src/amr.fa -o src/cdhit -c 1.00 -g 1 -T 4 -d 100
+cp -fv src/cdhit sequences
+makeblastdb -in sequences -title abricate -taxid 2 -dbtype nucl -parse_seqids -hash_index -logfile src/makeblastdb.log
+
