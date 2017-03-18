@@ -109,9 +109,10 @@ for my $fasta (@ARGV) {
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 
       $nopath ? just_filename($fasta) : $fasta , 
-      $hit{qseqid}, $hit{qstart}, $hit{qend},
-      #$hit{sseqid}, 
-      $gene,
+      $hit{qseqid}, 
+      $hit{qstart}, 
+      $hit{qend},
+      $gene,  #$hit{sseqid},
       $hit{sstart}.'-'.$hit{send}.'/'.$hit{slen}, 
       $minimap, 
       $hit{gaps},
@@ -124,22 +125,14 @@ for my $fasta (@ARGV) {
   close BLAST;
 
   msg("Found", scalar(@hit), "genes in $fasta");
-  @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
-#  @hit = sort { $a->[1] cmp $b->[1] || $b->[2] <=> $a->[2] } @hit;
 
-  # filter hits after we sort based on what we want
-  # keep the first one we find of the same gene on the same contig
-  # this is NOT perfect and could remove duplicates on same contig!!!!
-  # need to take overlap into consideration
-  my @filt;
-  my %have;
-#  foreach (@hit) {
-#    push @filt, $_ unless $have{ $_->[1].$_->[4] }++;
-#  }
-  @filt = @hit;
-  msg("Filtered", scalar(@hit), "hits,", scalar(@filt), "remain.");
+  # Sort hits
+  #0    1   2     3   4    5
+  #FILE CHR START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY DATABASE ACCESSION
+#  @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
+  @hit = sort { $a->[1] cmp $b->[1] || $b->[2] <=> $a->[2] } @hit;
 
-  print line(@$_) for @filt;  
+  print line(@$_) for @hit;  
 }
 
 #----------------------------------------------------------------------
