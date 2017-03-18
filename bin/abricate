@@ -129,7 +129,7 @@ for my $fasta (@ARGV) {
   #0    1   2     3   4    5
   #FILE CHR START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY DATABASE ACCESSION
 #  @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
-  @hit = sort { $a->[1] cmp $b->[1] || $b->[2] <=> $a->[2] } @hit;
+  @hit = sort { $a->[1] cmp $b->[1] || $a->[2] <=> $b->[2] } @hit;
 
   print line(@$_) for @hit;  
 }
