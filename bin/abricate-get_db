@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 use strict;
+use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
 #use File::Temp qw(tempdir);
@@ -53,7 +54,8 @@ my $seq = $DATABASE{$db}->();
 map { is_full_gene($_) } @$seq;
 $seq = dedupe_seq($seq);
 #print Dumper($seq);
-
+msg("Sorting sequences by ID");
+$seq = [ sort { $a->{ID} cmp $b->{ID} } @$seq ];
 save_fasta("$dir/sequences", $seq);
 
 msg("Formatting BLASTN database: $dir/sequences");
@@ -168,27 +170,42 @@ sub get_card {
     'https://card.mcmaster.ca/download/0/broadstreet-v1.1.5.tar.gz',
     "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
   );
-  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
-  my $json = "./card.json";
-  system("tar xf card.tar.bz2 $fasta $json");
+#  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
+  my $jsonfile = "./card.json";
+  system("tar xf card.tar.bz2 $jsonfile");
 
   # JSON
-  my $meta = decode_json( read_file($json) );
+#  my $json = read_file($json, binmode => ':utf8');
+  my $json = read_file($jsonfile);
+  my $card = from_json( $json, { latin1=>1 });
+#  my $card = decode_json( read_file($json) );
+#  my $card = from_json( read_file($json, binmode => ':utf8'), { utf8=>1 } );
 #  print Dumper($meta);
-  
-  #  0  1        2 3     4           5
-  # >gb|HQ845196|+|0-861|ARO:3001109|SHV-52 [Klebsiella pneumoniae]
-  my $seqs = load_fasta($fasta);
-  for my $s (@$seqs) {
-    my(undef,$acc,$strand,$loc,$ARO,$gene_desc) = split m/\|/, $s->{ID};
-#    msg("DEBUG:", join('~~~',$acc,$strand,$loc,$ARO,$gene_desc));
-    my($gene) = ($gene_desc =~ m/^(\S+)/);
-    $s->{ID} = $gene;
-    $s->{ACC} = "$acc:$loc";
-    $s->{DESC} = join(' ', $ARO, $gene_desc);
+  my @seq;
+  for my $g (values %$card) {
+    next unless ref($g) eq 'HASH';
+#    msg(Dumper($g));
+    next unless $g->{model_type} eq "protein homolog model";  # only 'acquired' genes
+    my $id =  $g->{model_name};
+    err("$id has {model_param}{snp}") if exists $g->{model_param}{snp};
+#    msg("CARD: $id");
+#    print STDERR Dumper($g);
+    my $dna =  $g->{model_sequences}{sequence} or err("$id: no {model_sequences}{sequence} found");
+    my($key) = sort keys %$dna;  # first key
+    $dna = $dna->{$key} or err("$id: invalid key '$key'"); 
+    $dna = $dna->{dna_sequence} or err("$id: no dna_sequence");
+#    msg(Dumper($dna)) if $id eq 'OXA-25';
+    $id =~ s/\s+/_/g;
+    push @seq, {
+      ID   => $id,
+      ACC  => $dna->{accession}.':'.($dna->{fmin} || 1).'-'.$dna->{fmax},
+      DESC => ($g->{ARO_description} || $g->{ARO_accession}),
+      SEQ  => $dna->{sequence},
+    };
+#    msg(Dumper($seq[-1]));
   }
 
-  return $seqs;
+  return \@seq;
 }
 
 #..............................................................................
