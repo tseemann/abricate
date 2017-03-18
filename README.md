@@ -144,8 +144,8 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 # force download of latest version
 % abricate-get_db --db resfinder --force
 
-# force download of latest version
-% abricate-get_db --db resfinder --force
+# re-use existing download and just regenerate the database
+% abricate-get_db --db resfinder
 ```
 
 ## Making your own database
