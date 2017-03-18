@@ -10,8 +10,7 @@ use Data::Dumper;
 use LWP::Simple;
 use Text::CSV;
 use JSON;
-
-#use FindBin;
+use FindBin;
 #use lib "$FindBin::RealBin/../perl5";
 #use Abricate::Headers qw(hash_encode hash_decode);
 
@@ -20,7 +19,8 @@ use JSON;
 
 my %DATABASE = (
   'resfinder'         => \&get_resfinder,
-  'megares'           => \&get_megares,
+  'plasmidfinder'     => \&get_plasmidfinder,
+#  'megares'           => \&get_megares,
   'argannot'          => \&get_argannot,
   'card'              => \&get_card,
   'ncbibetalactamase' => \&get_ncbibetalactamase,
@@ -57,8 +57,12 @@ $seq = [ sort { $a->{ID} cmp $b->{ID} } @$seq ];
 save_fasta("$dir/sequences", $seq);
 
 msg("Formatting BLASTN database: $dir/sequences");
-system("makeblastdb -in '$dir/sequences' -title '$db' -taxid 2"
-      ." -dbtype nucl -parse_seqids -hash_index -logfile $tmpdir/makeblastdb.log");
+my $logfile = "$tmpdir/makeblastdb.log";
+my $ec = system("makeblastdb -in '$dir/sequences' -title '$db' -dbtype nucl -parse_seqids -hash_index -logfile $logfile");
+if ($ec != 0) {
+  system("tail '$logfile'");
+  err("Error with makign BLAST database. See $logfile");
+}
 
 msg("Done.");
 
@@ -80,11 +84,10 @@ sub download {
 
 #..............................................................................
 sub get_resfinder {
-  download(
-    'https://cge.cbs.dtu.dk/cge/download_data.php?folder=resfinder&filename=resfinder.zip&submit=resfinder.zip',
-    "resfinder.zip"
-  );
-  system("unzip -j -u resfinder.zip");
+  my $name = "resfinder";
+  my $zip = "$name.zip";
+  download("https://cge.cbs.dtu.dk/cge/download_data.php?folder=$name&filename=$zip&submit=$zip", $zip);
+  system("unzip -j -u $zip");
   
   my %anno;
   open NOTES, '<', 'notes.txt';
@@ -104,7 +107,7 @@ sub get_resfinder {
   }
 
   for my $seq (@seq) {
-    my($id,$copy,$acc) = $seq->{ID} =~ m/(.*)_(\d+)_(\w+)$/;
+    my($id,$copy,$acc) = $seq->{ID} =~ m/^(.*)_(\d+)_(\w+)$/;
     #msg("resfinder: $1 $2 $3", $anno{$1});
     $seq->{ID}   = "${id}_${copy}";
     $seq->{ACC}  = $acc;
@@ -115,9 +118,32 @@ sub get_resfinder {
 }
 
 #..............................................................................
+sub get_plasmidfinder {
+  my $name = "plasmidfinder";
+  my $zip = "$name.zip";
+  download("https://cge.cbs.dtu.dk/cge/download_data.php?folder=$name&filename=$zip&submit=$zip", $zip);
+  system("unzip -j -u $zip");
+
+  my @seq;
+  for my $fasta (<*.fsa>) {
+    push @seq, @{ load_fasta($fasta) };
+  }
+
+  for my $seq (@seq) {
+    $seq->{DESC} = $seq->{ID};  # no desc, so use ORIGINAL ID as desc
+    my($id,$acc) = ($seq->{ID} =~ m/^(.*)_(([A-Z]+|NC_)\d+(\.\d+)?)$/);
+    $id =~ s/_+$//g;
+    $seq->{ID}   = $id || $seq->{ID};
+    $seq->{ACC}  = $acc || '';
+    whine("Parsed empty ID:", $seq->{DESC}, "=> id='$id' acc='$acc' seq=".substr($seq->{SEQ},0,10)) if not $id;
+  }
+  
+  return \@seq;
+}
+
+#..............................................................................
 sub get_megares {
-  err("MEGARES is currently not supported due issues with its confused
-  metadata.");
+  err("MEGARES is currently not supported due issues with its confused metadata.");
   my $zip = "megares.zip";
   download('https://megares.meglab.org/download/megares_v1.01.zip', $zip);
   system("unzip -j -u $zip");
@@ -285,7 +311,7 @@ sub is_full_gene {
     whine("$id - has internal stop codons, trying revcom");
     $aa = $seq->revcom->translate->seq;
     if ($aa =~ m/\*./) {
-      print STDERR "$id - revcom has internal stop codons too\n";
+      whine("$id - revcom has internal stop codons too");
       return 0;
     }
     else {
@@ -317,16 +343,24 @@ sub dedupe_seq {
 #..............................................................................
 sub load_fasta {
   my($fasta) = @_;
+  my %seen;
   my $list;
   msg("load_fasta: $fasta");
   my $in = Bio::SeqIO->new(-file=>$fasta, -format=>'fasta');
   while (my $seq = $in->next_seq) {
+    my $id = $seq->id or err("Empty ID in $fasta");
+    if ($seen{$id}) {
+      whine("Duplicate ID '$id' in $fasta");
+      $id = $id.'_dupe';
+    }
+    $seen{$id}++;
     my $dna = uc($seq->seq);
     $dna =~ s/[^AGTC]/N/g;
     push @$list, {
-      ID   => $seq->id,
+      ID   => $id,
+      ACC  => '',
       DESC => $seq->desc,
-      SEQ  => uc($seq->seq),
+      SEQ  => $dna,
     }
   }
   msg("load_fasta: read", scalar(@$list), "sequences");

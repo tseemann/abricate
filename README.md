@@ -2,7 +2,8 @@
 # ABRicate
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
-It comes bundled with *five* databases: Resfinder, CARD, ARG-ANNOT, NCBI and VFDB !
+It comes bundled with *six* databases: 
+Resfinder, CARD, ARG-ANNOT, NCBI, PlasmidFinder and VFDB !
 
 
 ## Is this the right tool for me?
@@ -95,6 +96,7 @@ ABRicate comes with some pre-downloaded databases:
 * [ARG-ANNOT](http://en.mediterranee-infection.com/article.php?laref=283%26titre=arg-annot)
 * [CARD](https://card.mcmaster.ca/)
 * [NCBI Betalactamase Database](https://www.ncbi.nlm.nih.gov/pathogens/beta-lactamase-data-resources/)
+* [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
 
 You can check what you have installed with the `--list` command:
