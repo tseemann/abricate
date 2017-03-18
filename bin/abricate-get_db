@@ -198,7 +198,7 @@ sub get_card {
     $id =~ s/\s+/_/g;
     push @seq, {
       ID   => $id,
-      ACC  => $dna->{accession}.':'.($dna->{fmin} || 1).'-'.$dna->{fmax},
+      ACC  => $dna->{accession}.':'.($dna->{fmin}+1).'-'.($dna->{fmax}+1),
       DESC => ($g->{ARO_description} || $g->{ARO_accession}),
       SEQ  => $dna->{sequence},
     };
