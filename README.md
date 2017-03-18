@@ -2,12 +2,14 @@
 # ABRicate
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
+It comes bundled with *five* databases: Resfinder, CARD, ARG-ANNOT, NCBI and VFDB !
+
 
 ## Is this the right tool for me?
 
 1. It only supports contigs, not FASTQ reads
 2. It only detects acquired resistance genes, not point mutations
-3. It needs BLAST+ 2.x to be installed
+3. It needs BLAST+ >= 2.2.30 to be installed
 4. It's written in Perl
 
 If you are happy with the above, then please continue!
