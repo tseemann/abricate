@@ -3,9 +3,7 @@ use strict;
 use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
-#use File::Temp qw(tempdir);
 use File::Path qw(make_path);
-#use File::Copy;
 use File::Slurp qw(edit_file read_file);
 use Cwd qw(abs_path);
 use Data::Dumper;
@@ -13,9 +11,9 @@ use LWP::Simple;
 use Text::CSV;
 use JSON;
 
-use FindBin;
-use lib "$FindBin::RealBin/../perl5";
-use Abricate::Headers qw(hash_encode hash_decode);
+#use FindBin;
+#use lib "$FindBin::RealBin/../perl5";
+#use Abricate::Headers qw(hash_encode hash_decode);
 
 #..............................................................................
 # Globals

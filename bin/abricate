@@ -9,8 +9,7 @@ use File::Spec;
 use File::Slurp;
 use List::MoreUtils qw(zip);
 use Cwd qw(abs_path);
-use lib "$FindBin::RealBin/../perl5";
-use Abricate::Headers qw(hash_encode hash_decode);
+#use lib "$FindBin::RealBin/../perl5";
 
 #..............................................................................
 # Command line options
