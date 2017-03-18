@@ -3,7 +3,7 @@
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 
-##Is this the right tool for me?
+## Is this the right tool for me?
 
 1. It only supports contigs, not FASTQ reads
 2. It only detects acquired resistance genes, not point mutations
@@ -12,7 +12,7 @@ Mass screening of contigs for antimicrobial resistance or virulence genes.
 
 If you are happy with the above, then please continue!
 
-##Quick Start
+## Quick Start
 
 ```
 % abricate 6159.fasta
@@ -25,9 +25,9 @@ Found 3 genes in 6159.fna
 6159.fna  NC_017339.1  10150   10995   blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832
 ```
 
-##Installation
+## Installation
 
-###Brew
+### Brew
 If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
 ```
 brew tap homebrew/science
@@ -35,31 +35,31 @@ brew tap tseemann/homebrew-bioinformatics-linux
 brew install abricate --HEAD
 ```
 
-###Bioconda
+### Bioconda
 If you use [Conda](https://conda.io/docs/install/quick.html) 
 follow the instructions to add the [Bioconda channel](https://bioconda.github.io/):
 ```
 conda install abricate
 ```
 
-###Source
+### Source
 If you don't use Brew, you will also need to make sure you have BLAST+ installed for `blastn` and `makeblastdb`.
 ```
 git clone https://github.com/tseemann/abricate.git
 ./abricate/bin/abricate --help
 ```
 
-##Input
+## Input
 
 Abricate takes FASTA contig files. It can take multiple fasta files at once!
-
-    % abricate ref.fa strains*.fasta /ncbi/Ecoli/*.fna
-
+```
+abricate ref.fa strains*.fasta /ncbi/Ecoli/*.fna
+```
 It does not accept raw FASTQ reads; please see 
 [Ariba](https://github.com/sanger-pathogens/ariba) or
 [SRTS2](https://github.com/katholt/srst2) for that.
 
-##Output
+## Output
 
 Abricate produces a tap-separated output file with the following columns:
 
@@ -78,14 +78,14 @@ GAPS | 1/4 | Openings / gaps in subject and query - possible psuedogene?
 DATABASE | card | The database this sequence comes from
 ACCESSION | NC_009632:49744-50476 | The genomic source of the sequence
 
-##Caveats
+## Caveats
 
 * Does not find mutational resistance, only acquired genes.
 * Gap reporting incomplete
 * Sometimes two heavily overlapping genes will be reported for the same locus
 * Possible coverage calculation issues
 
-##Databases
+## Databases
 
 ABRicate comes with some pre-downloaded databases:
 
@@ -119,7 +119,7 @@ You can choose a different database using the `--db` option:
 6159.fna  NC_017338.1  2771040  2773085  lip      1-2046/2046     ===============  0/0    100.00     98.778     vfdb      NP_647407
 ```
 
-##Combining reports across samples
+## Combining reports across samples
 
 ABRicate can combine results into a simple matrix of gene presence/absence.
 
@@ -136,7 +136,7 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 2.fna     3          .                   .       100.00   .        .              100.00   99.91   .              .
 ```
 
-##Updating the databases
+## Updating the databases
 
 ```
 # force download of latest version
@@ -146,7 +146,7 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 % abricate-get_db --db resfinder --force
 ```
 
-##Making your own database
+## Making your own database
 
 Let's say you want to make your own database called `tinyamr`. 
 All you need is a FASTA file of nucleotide sequences, say `tinyamr.fa`.
@@ -166,7 +166,7 @@ tinyamr:  173 sequences -  Mar 18, 2017
 % abricate --db tinyamr screen_this.fasta
 ```
 
-##Etymology
+## Etymology
 
 The name "ABRicate" was chosen as the first 3 letters are a common acronym
 for "Anti-Biotic Resistance". It laso has the form of an English _verb_, 
@@ -175,11 +175,11 @@ It is also relatively unique in [Google](https://www.google.com.au/search?q=abri
 and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/2014/12/1/time-for-a-new-jabba-award-for-just-another-bogus-bioinformatics-acronym).
 
 
-##Issues
+## Issues
 
 Please report problems here: https://github.com/tseemann/abricate/issues
 
-##License
+## License
 
 GPL Version 2: https://raw.githubusercontent.com/tseemann/abricate/master/LICENSE
 
