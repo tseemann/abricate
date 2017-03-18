@@ -1,8 +1,7 @@
-#ABRicate
+
+# ABRicate
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
-
-By Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [blog](http://thegenomefactory.blogspot.com/)
 
 ##Is this the right tool for me?
 
@@ -167,14 +166,6 @@ tinyamr:  173 sequences -  Mar 18, 2017
 % abricate --db tinyamr screen_this.fasta
 ```
 
-##Issues
-
-Please report problems here: https://github.com/tseemann/abricate/issues
-
-##License
-
-GPL Version 2: https://raw.githubusercontent.com/tseemann/abricate/master/LICENSE
-
 ##Etymology
 
 The name "ABRicate" was chosen as the first 3 letters are a common acronym
@@ -184,3 +175,14 @@ It is also relatively unique in [Google](https://www.google.com.au/search?q=abri
 and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/2014/12/1/time-for-a-new-jabba-award-for-just-another-bogus-bioinformatics-acronym).
 
 
+##Issues
+
+Please report problems here: https://github.com/tseemann/abricate/issues
+
+##License
+
+GPL Version 2: https://raw.githubusercontent.com/tseemann/abricate/master/LICENSE
+
+## Author
+
+Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [blog](http://thegenomefactory.blogspot.com/)
