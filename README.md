@@ -1,35 +1,54 @@
 #ABRicate
 
-Mass screening of contigs for antiobiotic resistance genes.
+Mass screening of contigs for antimicrobial resistance or virulence genes.
 
 By Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [blog](http://thegenomefactory.blogspot.com/)
+
+##Is this the right tool for me?
+
+1. It only supports contigs, not FASTQ reads
+2. It only detects acquired resistance genes, not point mutations
+3. It needs BLAST+ 2.x to be installed
+4. It's written in Perl
+
+If you are happy with the above, then please continue!
 
 ##Quick Start
 
 ```
-% abricate 6008.fasta
-#FILE	SEQUENCE	START	END	GENE	COVERAGE	COVERAGE_MAP	GAPS	%COVERAGE	%IDENTITY
-Processing: 6008.fna
-Found 12 ABR genes in 6008.fna
-Klebsiella.fna	NC_021232.1	872545	872964	fosA	1-420/420	===============	0	100.00	100.00
-Klebsiella.fna	NC_021232.1	1381252	1382427	oqxA	1-1176/1176	===============	0	100.00	99.32
-Klebsiella.fna  NC_021232.1 2584899	2585759	blaSHV1	1-861/861	===============	0	100.00	99.88
+% abricate 6159.fasta
+Using database resfinder:  2130 sequences -  Mar 17, 2017
+Processing: 6159.fna
+Found 3 genes in 6159.fna
+#FILE     SEQUENCE     START   END     GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE   ACCESSION
+6159.fna  NC_017338.1  39177   41186   mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    resfinder  AB505628
+6159.fna  NC_017338.1  727191  728356  norA_1   1-1166/1167  ===============  0/0   99.91      92.367     resfinder  M97169
+6159.fna  NC_017339.1  10150   10995   blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832
 ```
 
 ##Installation
 
 ###Brew
 If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
+```
+brew tap homebrew/science
+brew tap tseemann/homebrew-bioinformatics-linux
+brew install abricate --HEAD
+```
 
-    brew tap homebrew/science
-    brew tap tseemann/homebrew-bioinformatics-linux
-    brew install abricate
+###Bioconda
+If you use [Conda](https://conda.io/docs/install/quick.html) 
+follow the instructions to add the [Bioconda channel](https://bioconda.github.io/):
+```
+conda install abricate
+```
 
 ###Source
-If you don't use Brew, you will also need to make sure you have BLAST+ installed for ```blastn```.
-    
-    git clone https://github.com/tseemann/abricate.git
-    ./abricate/bin/abricate --help
+If you don't use Brew, you will also need to make sure you have BLAST+ installed for `blastn` and `makeblastdb`.
+```
+git clone https://github.com/tseemann/abricate.git
+./abricate/bin/abricate --help
+```
 
 ##Input
 
@@ -37,7 +56,9 @@ Abricate takes FASTA contig files. It can take multiple fasta files at once!
 
     % abricate ref.fa strains*.fasta /ncbi/Ecoli/*.fna
 
-It does not accept raw FASTQ reads; please see [SRTS2](https://github.com/katholt/srst2) for that.
+It does not accept raw FASTQ reads; please see 
+[Ariba](https://github.com/sanger-pathogens/ariba) or
+[SRTS2](https://github.com/katholt/srst2) for that.
 
 ##Output
 
@@ -49,77 +70,102 @@ FILE | Ecoli.fna | The filename this hit came from
 SEQUENCE | contig000324 | The sequence in the filename
 START | 23423 | Start coordinate in the sequence
 END | 24117 | End coordinate
-GENE | tet(M) | ABR gene
+GENE | tet(M) | AMR gene name
 COVERAGE | 1-1920/1920 | What proportion of the gene is in our sequence
 COVERAGE_MAP | =============== | A visual represenation
-GAPS | 0 | Was there any gaps in the alignment - possible pseudogene?
+GAPS | 1/4 | Openings / gaps in subject and query - possible psuedogene?
 %COVERAGE | 100.00% | Proportion of gene covered 
 %IDENTITY | 99.95% | Proportion of exact nucleotide matches
+DATABASE | card | The database this sequence comes from
+ACCESSION | NC_009632:49744-50476 | The genomic source of the sequence
 
 ##Caveats
 
-* Whole codon gaps (3 bp) are still listed as frame-shifts
+* Does not find mutational resistance, only acquired genes.
 * Gap reporting incomplete
+* Sometimes two heavily overlapping genes will be reported for the same locus
 * Possible coverage calculation issues
 
-##Database
+##Databases
 
-The current database is built from [ResFinder](http://cge.cbs.dtu.dk/services/ResFinder/).
+ABRicate comes with some pre-downloaded databases:
 
+* [Resfinder](https://cge.cbs.dtu.dk/services/ResFinder/)
+* [ARG-ANNOT](http://en.mediterranee-infection.com/article.php?laref=283%26titre=arg-annot)
+* [CARD](https://card.mcmaster.ca/)
+* [NCBI Betalactamase Database](https://www.ncbi.nlm.nih.gov/pathogens/beta-lactamase-data-resources/)
+* [VFDB](http://www.mgc.ac.cn/VFs/)
+
+You can check what you have installed with the `--list` command:
 ```
 % abricate --list
-aminoglycoside  164
-beta-lactamase  1310
-colistin        1
-fosfomycin      21
-fusidicacid     3
-macrolide       136
-nitroimidazole  14
-oxazolidinone   3
-phenicol        36
-quinolone       103
-rifampicin      9
-sulphonamide    50
-tetracycline    113
-trimethoprim    53
-vancomycin      124
-TOTAL   2140
+
+argannot:  1749 sequences -  Mar 17, 2017
+card:  2117 sequences -  Mar 18, 2017
+ncbibetalactamase:  1557 sequences -  Mar 17, 2017
+resfinder:  2130 sequences -  Mar 17, 2017
+vfdb:  2597 sequences -  Mar 17, 2017
+```
+The default database is currently `resfinder`.
+You can choose a different database using the `--db` option:
+```
+% abricate --db vfdb --quiet 6159.fa
+
+6159.fna  NC_017338.1  2724620  2726149  aur      1-1530/1530     ===============  0/0    100.00     99.346     vfdb      NP_647375
+6159.fna  NC_017338.1  2766595  2767155  icaR     1-561/561       ===============  0/0    100.00     98.930     vfdb      NP_647402
+6159.fna  NC_017338.1  2767319  2768557  icaA     1-1239/1239     ===============  0/0    100.00     99.677     vfdb      NP_647403
+6159.fna  NC_017338.1  2768521  2768826  icaD     1-306/306       ===============  0/0    100.00     99.020     vfdb      NP_647404
+6159.fna  NC_017338.1  2768823  2769695  icaB     1-873/873       ===============  0/0    100.00     99.542     vfdb      NP_647405
+6159.fna  NC_017338.1  2769682  2770734  icaC     1-1053/1053     ===============  0/0    100.00     98.955     vfdb      NP_647406
+6159.fna  NC_017338.1  2771040  2773085  lip      1-2046/2046     ===============  0/0    100.00     98.778     vfdb      NP_647407
 ```
 
-The raw ResFinder database is processed using the `scripts/abricate-fix_resfinder_fasta` tool which:
-* removes redundant sequences
-* re-orients backward sequences
-* removes sequences with non-DNA bases 
-* removes partial coding sequences
-This could have unexpected consequences on your results and needs to be investigated 
-further with the curators of ResFinder.
+##Combining reports across samples
 
-##Updating the database
-
-If you don't want to wait for a new release of Abricate you can updated the `db` folder manually.
+ABRicate can combine results into a simple matrix of gene presence/absence.
 
 ```
-# Download and create a new db.XXXXXX folder
-cd /path/to/abricate/scripts
-./abricate-update_db
+# Run abricate on each .fa file
+% abricate 1.fna > 1.tab
+% abricate 2.fna > 2.tab
 
-# Check it all looks ok
-ls -l db.XXXXXX
+# Combine
+% abricate --summary 1.tab 2.tab
 
-# Replace the old db folder
-mv ../db ../db.old
-mv db.XXXXXX ../db
-
-# See if it worked
-abricate --list
+#FILE     NUM_FOUND  aac(6')-aph(2'')_1  aadD_1  blaZ_32  blaZ_36  erm(A)_1       mecA_15  norA_1  spc_1          tet(M)_7
+1.fna     8          100.00              100.00  .        100.00   100.00;100.00  100.00   99.91   100.00;100.00  100.00
+2.fna     3          .                   .       100.00   .        .              100.00   99.91   .              .
 ```
 
-##Adding your own sequences
+##Updating the databases
 
-There is nothing particularly special about ABRicate - it's just a glorified BLASTN tool.
-If you want to add in your own sequences, just add them to the BLASTN database `db/resfinder`.
-The sequence ID that is reported is the FASTA ID, 
-but stripped to the right after the first underscore '_'.
+```
+# force download of latest version
+% abricate-get_db --db resfinder --force
+
+# force download of latest version
+% abricate-get_db --db resfinder --force
+```
+
+##Making your own database
+
+Let's say you want to make your own database called `tinyamr`. 
+All you need is a FASTA file of nucleotide sequences, say `tinyamr.fa`.
+Idealy the sequence IDs would have the format `>DB~~~ID~~~ACC DESC`
+where `DB` is `tinyamr`, `ID` is the gene name, and `ACC` is an accession
+number of the sequence source. The `DESC` can be any textual description.
+
+```
+% cd /path/to/abricate/db     # this is the --datadir default option
+% mkdir tinyamr
+% cp /path/to/tinyamr.fa sequences
+% makeblastdb -in sequences -title tinyamr -dbtype nucl -parse_seqids -hash_index
+
+% abricate --list
+tinyamr:  173 sequences -  Mar 18, 2017
+
+% abricate --db tinyamr screen_this.fasta
+```
 
 ##Issues
 
