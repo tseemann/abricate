@@ -6,9 +6,11 @@ use File::Spec;
 use File::Path qw(make_path);
 #use File::Copy;
 use File::Slurp qw(edit_file read_file);
-use Cwd qw(realpath);
+use Cwd qw(abs_path);
 use Data::Dumper;
 use LWP::Simple;
+use Text::CSV;
+use JSON;
 
 use FindBin;
 use lib "$FindBin::RealBin/../perl5";
@@ -19,6 +21,7 @@ use Abricate::Headers qw(hash_encode hash_decode);
 
 my %DATABASE = (
   'resfinder'         => \&get_resfinder,
+  'megares'           => \&get_megares,
   'argannot'          => \&get_argannot,
   'card'              => \&get_card,
   'ncbibetalactamase' => \&get_ncbibetalactamase,
@@ -36,7 +39,7 @@ $db or err("Please choose a --db from: $DATABASES");
 exists $DATABASE{$db} or err("Unknown --db '$db', choose from: $DATABASES ");
 -d $outdir or err("--outdir '$outdir' does not exist");
 
-my $dir = realpath( File::Spec->catdir($outdir, $db) );
+my $dir = abs_path( File::Spec->catdir($outdir, $db) );
 make_path($dir);
 msg("Setting up '$db' in '$dir'");
 #my $tmpdir = tempdir("$db-XXXXXXXX", DIR=>$dir, CLEANUP=>0);
@@ -53,7 +56,7 @@ $seq = dedupe_seq($seq);
 
 save_fasta("$dir/sequences", $seq);
 
-msg("Formatting BLASTN database: $dir");
+msg("Formatting BLASTN database: $dir/sequences");
 system("makeblastdb -in '$dir/sequences' -title '$db' -taxid 2"
       ." -dbtype nucl -parse_seqids -hash_index -logfile $tmpdir/makeblastdb.log");
 
@@ -112,6 +115,29 @@ sub get_resfinder {
 }
 
 #..............................................................................
+sub get_megares {
+  err("MEGARES is currently not supported due issues with its confused
+  metadata.");
+  my $zip = "megares.zip";
+  download('https://megares.meglab.org/download/megares_v1.01.zip', $zip);
+  system("unzip -j -u $zip");
+  my $seqs = load_fasta( glob("megares_database_*.fasta") );
+  
+  # >Bla|OXA-223|JN248564|1-825|825|betalactams|Class_D_betalactamases|OXA
+  # >gi|558607393|gb|KF513179.1|betalactams|Class_A_betalactamases|TEM
+  # >CARD|phgb|AM408573|10027-11077|ARO:3003441|cfrA|Phenicol|Florfenicol_methyltransferases|CFRA
+  for my $s (@$seqs) {
+    # they use | for field sep AND within some fields, arrg
+    $s->{ID} =~ s/\|?(gi|gb)\|(\S+)\|/$2/;
+    my($source,$gene,$acc,$loc,undef,$class,$desc,$family) = split m/\|/, $s->{ID};
+    $s->{ID} = $source eq 'CARD' ? $class : $gene;
+    $s->{ACC} = "$acc:$loc";
+    $s->{DESC} = join(' ', $desc, $class, $family);
+  }
+  return $seqs;
+}
+
+#..............................................................................
 sub get_argannot {
   my $fasta = 'arg-annot.fa';
   download(
@@ -143,18 +169,23 @@ sub get_card {
     "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
   );
   my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
-  system("tar xf card.tar.bz2 $fasta");
+  my $json = "./card.json";
+  system("tar xf card.tar.bz2 $fasta $json");
 
-  my $seqs = load_fasta($fasta);
-
+  # JSON
+  my $meta = decode_json( read_file($json) );
+#  print Dumper($meta);
+  
   #  0  1        2 3     4           5
   # >gb|HQ845196|+|0-861|ARO:3001109|SHV-52 [Klebsiella pneumoniae]
+  my $seqs = load_fasta($fasta);
   for my $s (@$seqs) {
-    my @x = split m/\|/, $s->{ID};
-    $x[5] =~ s/ .*$//;
-    $s->{ID} = $x[5];
-    $s->{ACC} = $x[1].':'.$x[3];
-    $s->{DESC} = $x[4];
+    my(undef,$acc,$strand,$loc,$ARO,$gene_desc) = split m/\|/, $s->{ID};
+#    msg("DEBUG:", join('~~~',$acc,$strand,$loc,$ARO,$gene_desc));
+    my($gene) = ($gene_desc =~ m/^(\S+)/);
+    $s->{ID} = $gene;
+    $s->{ACC} = "$acc:$loc";
+    $s->{DESC} = join(' ', $ARO, $gene_desc);
   }
 
   return $seqs;
@@ -253,7 +284,7 @@ sub is_full_gene {
 sub dedupe_seq {
   my($seq) = @_;
   my %seen;
-  my $good;
+  my $good = [];
   for my $s (@$seq) {
     if ($seen{ $s->{SEQ} }) {
       whine("duplicate", length($s->{SEQ}), "bp sequence:", 
