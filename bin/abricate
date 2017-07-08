@@ -59,8 +59,7 @@ if ($list) {
 $OUTSEP = ',' if $csv;  # default is tab
 
 # check if 'blastn' installed
-my($blast)=qx(which blastn);
-$blast && $blast =~ m/blastn/ or err("Could not find 'blastn'. Please install it.");
+require_exe('blastn');
 
 # check if blastn > 2.2.30 to support 'gaps' custom field
 my($version) = qx(blastn -version 2>&1);
@@ -260,6 +259,28 @@ sub just_filename {
   my($path) = @_;
   my(undef,undef,$fname) = File::Spec->splitpath( $path );
   return $fname;
+}
+
+#----------------------------------------------------------------------
+
+sub require_exe {
+  my(@arg) = @_;
+  for my $exe (@arg) {
+    my $where = '';
+    for my $dir ( File::Spec->path ) {
+      if (-x "$dir/$exe") {
+        $where = "$dir/$exe";
+        last;
+      }
+    }
+    if ($where) {
+      msg("Found '$exe' => $where") if $debug;
+    }
+    else {
+      err("Could not find '$exe'. Please install it and ensure it is in the PATH.");
+    }
+  }
+  return;
 }
 
 #----------------------------------------------------------------------
