@@ -116,7 +116,7 @@ for my $fasta (@ARGV) {
       $minimap, 
       $hit{gapopen}.'/'.$hit{gaps},
       sprintf("%.2f", 100 * ($hit{length}-$hit{gaps}) / $hit{slen}),
-      $hit{pident},
+      sprintf("%.2f", $hit{pident}),
       $database,
       $acc,
     ];
