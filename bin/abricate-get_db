@@ -3,7 +3,7 @@ use strict;
 use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
-use File::Path qw(make_path);
+use File::Path qw(make_path remove_tree);
 use File::Slurp qw(edit_file read_file);
 use Cwd qw(abs_path);
 use Data::Dumper;
@@ -71,7 +71,8 @@ msg("Done.");
 sub download {
   my($url, $dest) = @_;
   if (-r $dest and not $force) {
-     msg("Won't download existing $dest (use --force)");
+     msg("Won't re-download existing $dest (use --force)");
+     exit(1);
   }
   else {
     msg("Downloading: $url");
@@ -84,13 +85,22 @@ sub download {
 
 #..............................................................................
 sub get_resfinder {
-  my $name = "resfinder";
-  my $zip = "$name.zip";
-  download("https://cge.cbs.dtu.dk/cge/download_data.php?folder=$name&filename=$zip&submit=$zip", $zip);
-  system("unzip -j -u $zip");
-  
+  my $name = "resfinder_db";
+  my $url = "https://bitbucket.org/genomicepidemiology/$name.git";
+
+  if (-r $name and not $force) {
+    msg("Won't overwrite existing $name (use --force)");
+    exit(1);
+  }
+  else {
+    msg("Nuking existing folder: $name");
+    remove_tree("./$name");
+  }
+  msg("Cloning $url to $name");
+  system("git clone --quiet $url $name");
+
   my %anno;
-  open NOTES, '<', 'notes.txt';
+  open NOTES, '<', "$name/notes.txt";
   while (<NOTES>) {
     chomp;
     chop; # remove the DOS CR ending
@@ -102,7 +112,7 @@ sub get_resfinder {
   #print Dumper(\%anno);
 
   my @seq;
-  for my $fasta (<*.fsa>) {
+  for my $fasta (<$name/*.fsa>) {
     push @seq, @{ load_fasta($fasta) };
   }
 
