@@ -17,7 +17,7 @@ use Cwd qw(abs_path);
 my $VERSION = "0.5-dev";
 my $EXE = just_filename( $FindBin::RealScript );
 
-my(@Options, $debug, $quiet, $list, $summary,
+my(@Options, $debug, $quiet, $list, $summary, $check,
              $datadir, $db, $minid,
              $noheader, $csv, $nopath);
 setOptions();
@@ -44,6 +44,8 @@ my @COLUMNS = qw(
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
+my @REQUIRE = qw(blastn makeblastdb seqret gzip unzip);
+
 #..............................................................................
 # Option parsing
 
@@ -56,10 +58,19 @@ if ($list) {
   list_databases($datadir);
   exit;
 }
+
+if ($check) {
+  $debug=1;
+  msg("Checking dependencies are installed:");
+  require_exe( @REQUIRE );
+  msg("OK.");
+  exit;
+}
+
 $OUTSEP = ',' if $csv;  # default is tab
 
-# check if 'blastn' installed
-require_exe('blastn', 'gzip', 'seqret', 'makeblastdb', 'unzip');
+# check if dependencies are installed
+require_exe( @REQUIRE );
 
 # check if blastn > 2.2.30 to support 'gaps' custom field
 my($version) = qx(blastn -version 2>&1);
@@ -301,6 +312,7 @@ sub setOptions {
     {OPT=>"quiet!",  VAR=>\$quiet, DEFAULT=>0, DESC=>"Quiet mode, no stderr output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
+    {OPT=>"check!",  VAR=>\$check, DEFAULT=>0, DESC=>"Check dependencies are installed"},
     {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Location of database folders"},
     {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"Database to use"},

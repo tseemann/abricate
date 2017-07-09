@@ -35,7 +35,8 @@ If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/l
 ```
 brew tap homebrew/science
 brew tap tseemann/bioinformatics-linux
-brew install abricate --HEAD
+brew install abricate
+abricate --check
 ```
 
 ### Bioconda
@@ -43,6 +44,7 @@ If you use [Conda](https://conda.io/docs/install/quick.html)
 follow the instructions to add the [Bioconda channel](https://bioconda.github.io/):
 ```
 conda install abricate
+abricate --check
 ```
 
 ### Source
@@ -53,7 +55,7 @@ You will also need to install these dependencies manually:
 Then install directly from github:
 ```
 git clone https://github.com/tseemann/abricate.git
-./abricate/bin/abricate --help
+./abricate/bin/abricate --check
 ```
 
 ## Input
