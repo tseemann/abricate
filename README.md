@@ -52,6 +52,7 @@ You will also need to install these dependencies manually:
 * BLAST+ for `blastn` and `makeblastdb`
 * EMBOSS for `seqret`
 * Decompression tools `gzip` and `unzip`
+
 Then install directly from github:
 ```
 git clone https://github.com/tseemann/abricate.git
@@ -68,6 +69,13 @@ abricate assembly.fa.gz
 abricate assembly.gbk 
 abricate assembly.gbk.gz
 ```
+
+It can take multiple files at once too:
+```
+abricate assembly.*
+abricate /mnt/ncbi/bacteria/*.gbk.gz 
+```
+
 It does not accept raw FASTQ reads; please see 
 [Ariba](https://github.com/sanger-pathogens/ariba) or
 [SRTS2](https://github.com/katholt/srst2) for that.
