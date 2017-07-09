@@ -3,14 +3,14 @@
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 It comes bundled with *six* databases: 
-Resfinder, CARD, ARG-ANNOT, NCBI, PlasmidFinder and VFDB !
+Resfinder, CARD, ARG-ANNOT, NCBI, PlasmidFinder and VFDB.
 
 
 ## Is this the right tool for me?
 
-1. It only supports contigs, not FASTQ reads
+1. It only supports contigs, not FASTQ reads (including Genbank and .gz compressed files)
 2. It only detects acquired resistance genes, not point mutations
-3. It needs BLAST+ >= 2.2.30 to be installed
+3. It needs BLAST+ >= 2.2.30 and EMBOSS to be installed
 4. It's written in Perl
 
 If you are happy with the above, then please continue!
@@ -34,7 +34,7 @@ Found 3 genes in 6159.fna
 If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
 ```
 brew tap homebrew/science
-brew tap tseemann/homebrew-bioinformatics-linux
+brew tap tseemann/bioinformatics-linux
 brew install abricate --HEAD
 ```
 
@@ -46,7 +46,11 @@ conda install abricate
 ```
 
 ### Source
-If you don't use Brew, you will also need to make sure you have BLAST+ installed for `blastn` and `makeblastdb`.
+You will also need to install these dependencies manually:
+* BLAST+ for `blastn` and `makeblastdb`
+* EMBOSS for `seqret`
+* Decompression tools `gzip` and `unzip`
+Then install directly from github:
 ```
 git clone https://github.com/tseemann/abricate.git
 ./abricate/bin/abricate --help
@@ -54,9 +58,13 @@ git clone https://github.com/tseemann/abricate.git
 
 ## Input
 
-Abricate takes FASTA contig files. It can take multiple fasta files at once!
+Abricate takes any sequence file that EMBOSS `seqret` can convert to FASTA files (eg. Genbank,
+EMBL), and they can be optionally `gzip` compressed. It can take multiple files at once too.
 ```
-abricate ref.fa strains*.fasta /ncbi/Ecoli/*.fna
+abricate assembly.fa 
+abricate assembly.fa.gz
+abricate assembly.gbk 
+abricate assembly.gbk.gz
 ```
 It does not accept raw FASTQ reads; please see 
 [Ariba](https://github.com/sanger-pathogens/ariba) or
