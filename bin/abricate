@@ -93,6 +93,10 @@ for my $file (@ARGV) {
   my %seen;
   my @hit;
   msg("Processing: $file");
+  if (! -r $file) {
+    msg("WARNING: '$file' does not exist, or is unreadable");
+    next FILE;
+  }
   my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
           . " blastn -db \Q$db_path\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
