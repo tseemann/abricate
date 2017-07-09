@@ -59,7 +59,7 @@ if ($list) {
 $OUTSEP = ',' if $csv;  # default is tab
 
 # check if 'blastn' installed
-require_exe('blastn');
+require_exe('blastn', 'gzip', 'seqret', 'makeblastdb', 'unzip');
 
 # check if blastn > 2.2.30 to support 'gaps' custom field
 my($version) = qx(blastn -version 2>&1);
@@ -77,13 +77,15 @@ msg("Using database $db: ", $dbinfo->{SEQUENCES}, "sequences - ", $dbinfo->{DATE
 my $format = "6 @BLAST_FIELDS";
 print line(@COLUMNS) unless $noheader;
 
-for my $fasta (@ARGV) {
+FILE:
+for my $file (@ARGV) {
   my %seen;
   my @hit;
-  msg("Processing: $fasta");
-  my $cmd = "blastn -query \Q$fasta\E -db \Q$db_path\E -outfmt '$format'"
+  msg("Processing: $file");
+  my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
+          . " blastn -db \Q$db_path\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
-          . " -culling_limit $CULL"
+          . " -culling_limit $CULL) 2>&1"
           ;
   msg("Running: $cmd") if $debug;
   
@@ -91,6 +93,10 @@ for my $fasta (@ARGV) {
   while (<BLAST>) { 
     chomp;
     my @x = split m/\t/;
+    if (@x != @BLAST_FIELDS) {
+      msg("WARNING: can not find sequence data in '$file'");
+      next FILE;
+    }
     my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
     next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
@@ -106,7 +112,7 @@ for my $fasta (@ARGV) {
     my $minimap = minimap( @hit{qw(sstart send slen gapopen)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 
-      $nopath ? just_filename($fasta) : $fasta , 
+      $nopath ? just_filename($file) : $file ,
       $hit{qseqid}, 
       $hit{qstart}, 
       $hit{qend},
@@ -122,7 +128,7 @@ for my $fasta (@ARGV) {
   }
   close BLAST;
 
-  msg("Found", scalar(@hit), "genes in $fasta");
+  msg("Found", scalar(@hit), "genes in $file");
 
   # Sort hits
   #0    1   2     3   4    5
@@ -321,7 +327,7 @@ sub usage {
   print "\tFind and collate amplicons in assembled contigs\n";
   print "Usage:\n";
   print "\t% $EXE --list\n";
-  print "\t% $EXE [options] <contigs.fasta> > out.tab\n";
+  print "\t% $EXE [options] <sequence.{fasta,gbk,embl}[.gz]> > out.tab\n";
   print "\t% $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
   print "Options:\n";
   foreach (@Options) {
