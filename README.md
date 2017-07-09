@@ -62,7 +62,7 @@ git clone https://github.com/tseemann/abricate.git
 ## Input
 
 Abricate takes any sequence file that EMBOSS `seqret` can convert to FASTA files (eg. Genbank,
-EMBL), and they can be optionally `gzip` compressed. It can take multiple files at once too.
+EMBL), and they can be optionally `gzip` compressed.
 ```
 abricate assembly.fa 
 abricate assembly.fa.gz
@@ -76,7 +76,7 @@ abricate assembly.*
 abricate /mnt/ncbi/bacteria/*.gbk.gz 
 ```
 
-It does not accept raw FASTQ reads; please see 
+It does not accept raw FASTQ reads; please use
 [Ariba](https://github.com/sanger-pathogens/ariba) or
 [SRTS2](https://github.com/katholt/srst2) for that.
 
@@ -121,10 +121,11 @@ You can check what you have installed with the `--list` command:
 ```
 % abricate --list
 
-argannot:  1749 sequences -  Mar 17, 2017
-card:  2117 sequences -  Mar 18, 2017
+argannot:  1749 sequences -  Jul 8, 2017
+card:  2124 sequences -  Jul 8, 2017
 ncbibetalactamase:  1557 sequences -  Mar 17, 2017
-resfinder:  2130 sequences -  Mar 17, 2017
+plasmidfinder:  263 sequences -  Mar 19, 2017
+resfinder:  2228 sequences -  Jul 8, 2017
 vfdb:  2597 sequences -  Mar 17, 2017
 ```
 The default database is currently `resfinder`.
