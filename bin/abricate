@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.5";
+my $VERSION = "0.6-dev";
 my $EXE = just_filename( $FindBin::RealScript );
 
 my(@Options, $debug, $quiet, $list, $summary, $check,
@@ -237,13 +237,13 @@ sub list_databases {
   my @dir = grep { -d "$from/$_" } read_dir($from);
   my $count=0;
   for my $name (sort @dir) {
-    # msg("Database: $name");
-    my $info = blast_database_info("$from/$name/sequences");
-    if ($info) {
+    my $dbname = "$from/$name/sequences";
+    if (-r "$dbname.nin") {
+      my $info = blast_database_info( $dbname );
       msg("$name: ", $info->{SEQUENCES}, "sequences - ", $info->{DATE});
     }
     else {
-      msg("$name: corrupt database? - $from/$name");
+      msg("$name: corrupt or missing database? - $dbname") if $debug;
     }
   }
 }
