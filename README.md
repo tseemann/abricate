@@ -48,13 +48,16 @@ abricate --check
 ```
 
 ### Source
-You will also need to install these dependencies manually:
+If you install from source, Abricate has the following package dependencies:
 * BLAST+ for `blastn` and `makeblastdb`
 * EMBOSS for `seqret`
 * Decompression tools `gzip` and `unzip`
+* Perl modules: `LWP::Simple`, `Text::CSV`, `Bio::Perl`, `JSON`, `File::Slurp`
 
-Then install directly from github:
+These are easy to install on an Ubuntu-based system:
 ```
+sudo apt-get install emboss bioperl ncbi-blast+ gzip \
+  libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl libwww-perl
 git clone https://github.com/tseemann/abricate.git
 ./abricate/bin/abricate --check
 ```
