@@ -37,6 +37,7 @@ brew tap homebrew/science
 brew tap tseemann/bioinformatics-linux
 brew install abricate
 abricate --check
+abricate --setupdb  # is done by the installer normally
 ```
 
 ### Bioconda
@@ -45,6 +46,7 @@ follow the instructions to add the [Bioconda channel](https://bioconda.github.io
 ```
 conda install abricate
 abricate --check
+abricate --setupdb  # is done by the installer normally
 ```
 
 ### Source
@@ -60,6 +62,7 @@ sudo apt-get install emboss bioperl ncbi-blast+ gzip unzip \
   libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl libwww-perl
 git clone https://github.com/tseemann/abricate.git
 ./abricate/bin/abricate --check
+./abricate/bin/abricate --setupdb
 ```
 
 ## Input
