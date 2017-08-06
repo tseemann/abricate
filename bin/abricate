@@ -17,7 +17,7 @@ use Cwd qw(abs_path);
 my $VERSION = "0.6-dev";
 my $EXE = just_filename( $FindBin::RealScript );
 
-my(@Options, $debug, $quiet, $list, $summary, $check,
+my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
              $datadir, $db, $minid, $mincov,
              $noheader, $csv, $nopath);
 setOptions();
@@ -57,8 +57,8 @@ if ($summary) {
   exit;
 }
 
-if ($list) {
-  list_databases($datadir);
+if ($list or $setupdb) {
+  list_databases($datadir, $setupdb);
   exit;
 }
 
@@ -241,17 +241,26 @@ sub blast_database_info {
 #----------------------------------------------------------------------
 
 sub list_databases {
-  my($from) = @_;
+  my($from, $setup_too) = @_;
   my @dir = grep { -d "$from/$_" } read_dir($from);
   my $count=0;
   for my $name (sort @dir) {
     my $dbname = "$from/$name/sequences";
-    if (-r "$dbname.nin") {
-      my $info = blast_database_info( $dbname );
-      msg("$name: ", $info->{SEQUENCES}, "sequences - ", $info->{DATE});
+    if (not -r $dbname) {
+      msg("Database $name has no sequences, please try: abricate-get_db --db $name");
     }
     else {
-      msg("$name: corrupt or missing database? - $dbname") if $debug;
+      if (not -r "$dbname.nin") {
+        if ($setup_too) {
+          msg("Database $name has not been indexed; formatting now.");
+          system("makeblastdb -in '$dbname' -title '$name' -dbtype nucl -parse_seqids -hash_index -logfile $from/$name/makeblastdb.log");
+        }
+        else {
+          err("Database $name is not indexed, please try: abricate --setupdb");
+        }          
+      }
+      my $info = blast_database_info( $dbname );
+      msg("$name: ", $info->{SEQUENCES}, "sequences - ", $info->{DATE});
     }
   }
 }
@@ -323,6 +332,7 @@ sub setOptions {
     {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
     {OPT=>"quiet!",  VAR=>\$quiet, DEFAULT=>0, DESC=>"Quiet mode, no stderr output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
+    {OPT=>"setupdb!",  VAR=>\$setupdb, DEFAULT=>0, DESC=>"Format all the BLAST databases"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
     {OPT=>"check!",  VAR=>\$check, DEFAULT=>0, DESC=>"Check dependencies are installed"},
     {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
