@@ -5,6 +5,7 @@ use Bio::SeqIO;
 use File::Spec;
 use File::Path qw(make_path remove_tree);
 use File::Slurp qw(edit_file read_file);
+use List::Util qw(first);
 use Cwd qw(abs_path);
 use Data::Dumper;
 use LWP::Simple;
@@ -24,6 +25,7 @@ my %DATABASE = (
   'argannot'          => \&get_argannot,
   'card'              => \&get_card,
   'ncbibetalactamase' => \&get_ncbibetalactamase,
+  'ncbi'              => \&get_ncbi,
   'vfdb'              => \&get_vfdb,
 );
 my $DATABASES = join(' ', sort keys %DATABASE);
@@ -63,6 +65,7 @@ if ($ec != 0) {
   system("tail '$logfile'");
   err("Error with makign BLAST database. See $logfile");
 }
+#msg("Run 'abricate --setupdb' to format the database");
 
 msg("Done.");
 
@@ -90,14 +93,14 @@ sub get_resfinder {
 
   if (-r $name and not $force) {
     msg("Won't overwrite existing $name (use --force)");
-    exit(1);
+#    exit(1);
   }
   else {
     msg("Nuking existing folder: $name");
     remove_tree("./$name");
+    msg("Cloning $url to $name");
+    system("git clone --quiet $url $name");
   }
-  msg("Cloning $url to $name");
-  system("git clone --quiet $url $name");
 
   my %anno;
   open NOTES, '<', "$name/notes.txt";
@@ -124,6 +127,72 @@ sub get_resfinder {
     $seq->{DESC} = $anno{$id} || '';
   }
   
+  return \@seq;
+}
+
+#..............................................................................
+sub get_tag {
+  my($f, $tag) = @_;
+  if ($f->has_tag($tag)) {
+    my($val) = $f->get_tag_values($tag);
+    return $val;
+  }
+  return '';
+}
+
+#..............................................................................
+sub get_ncbi {
+  my $name = "ncbi.gbk";
+  my $cmd = "esearch -db nucleotide -query '313047[BioProject]' | efetch -db nuccore -format gbwithparts";
+
+  if (-r $name and not $force) {
+    msg("Won't overwrite existing $name (use --force)");
+#    exit(1);
+  }
+  else {
+    msg("Running: $cmd");
+    system("$cmd | tee $name | grep LOCUS");
+  }
+
+  # LOCUS       NG_054996               1152 bp    DNA     linear   CON 13-JUN-2017
+  #     gene            1..1194
+  #                     /gene="blaPDC"
+  #                     /locus_tag="A7J11_05084"
+  #                     /allele="blaPDC-210"
+  #     CDS             1..1194
+  #                     /gene="blaPDC"
+  #                     /locus_tag="A7J11_05084"
+  #                     /allele="blaPDC-210"
+  #                     /codon_start=1
+  #                     /transl_table=11
+  #                     /product="class C beta-lactamase PDC-210"
+  #                     /protein_id="WP_087587974.1"
+
+  my %seen;
+  my @seq;
+  my $in = Bio::SeqIO->new(-file=>$name, -format=>"genbank");
+  while (my $rec = $in->next_seq) {
+    my $cds = first { $_->primary_tag eq 'CDS' } $rec->get_SeqFeatures;
+    $cds or die("Could not find a CDS in", $rec->id);
+    my $s = {
+      ID   => get_tag($cds, 'allele') || get_tag($cds, 'gene') || get_tag($cds,'locus_tag'),
+      ACC  => get_tag($cds, 'locus_tag'),
+      DESC => get_tag($cds, 'product'),
+      SEQ  => $cds->spliced_seq->seq,
+    };
+
+#    if ($seen{ $s->{ID} }++) {
+#      msg("Duplicate", $s->{ID}, "x", $seen{ $s->{ID} } );
+#      my $end = (split ' ', $s->{DESC})[-1];
+#      msg("\tend=$end");
+#      if ( lc(substr($s->{ID},0,3)) eq lc(substr($end,0,3)) ) {
+#        msg("\t",substr($end,0,3));
+#      }
+#    }
+
+    push @seq, $s;
+    msg("[$name]", 0+@seq, "|", $s->{ID}, "|", $s->{DESC});
+  }
   return \@seq;
 }
 
@@ -202,7 +271,7 @@ sub get_argannot {
 #..............................................................................
 sub get_card {
   download(
-    'https://card.mcmaster.ca/download/0/broadstreet-v1.1.8.tar.gz',
+    'https://card.mcmaster.ca/download/0/broadstreet-v1.1.9.tar.gz',
     "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
   );
 #  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
