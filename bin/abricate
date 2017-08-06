@@ -18,7 +18,7 @@ my $VERSION = "0.6-dev";
 my $EXE = just_filename( $FindBin::RealScript );
 
 my(@Options, $debug, $quiet, $list, $summary, $check,
-             $datadir, $db, $minid,
+             $datadir, $db, $minid, $mincov,
              $noheader, $csv, $nopath);
 setOptions();
 
@@ -48,6 +48,9 @@ my @REQUIRE = qw(blastn makeblastdb seqret gzip unzip);
 
 #..............................................................................
 # Option parsing
+
+($minid > 0 and $minid <= 100) or err("--minid must be between 1 and 100");
+($mincov >= 0 and $mincov <= 100) or err("--mincov must be between 0 and 100");
 
 if ($summary) {
   summary_table( \*ARGV );
@@ -114,7 +117,12 @@ for my $file (@ARGV) {
     }
     my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
+
     next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
+    
+    my $pccov = 100 * ($hit{length}-$hit{gaps}) / $hit{slen};
+    next unless $pccov >= $mincov;
+
 #    $hit{sseqid} =~ s/_.*$//;
     my($database, $gene, $acc) = split m/$IDSEP/, $hit{sseqid};
     # if it wasn't in the format we expected, try and be sensible
@@ -135,7 +143,7 @@ for my $file (@ARGV) {
       $hit{sstart}.'-'.$hit{send}.'/'.$hit{slen}, 
       $minimap, 
       $hit{gapopen}.'/'.$hit{gaps},
-      sprintf("%.2f", 100 * ($hit{length}-$hit{gaps}) / $hit{slen}),
+      sprintf("%.2f", $pccov),
       sprintf("%.2f", $hit{pident}),
       $database,
       $acc,
@@ -322,7 +330,8 @@ sub setOptions {
     {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"Database to use"},
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
-    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA identity"},
+    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA %identity"},
+    {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
     {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
   );
 
