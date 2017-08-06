@@ -347,7 +347,12 @@ sub usage {
   print "\t% $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
   print "Options:\n";
   foreach (@Options) {
-    printf "\t--%-13s %s%s.\n",$_->{OPT},$_->{DESC},
+    my $opt = $_->{OPT};
+    $opt =~ s/!$//;
+    $opt =~ s/=s$/ [X]/;
+    $opt =~ s/=i$/ [N]/;
+    $opt =~ s/=f$/ [n.n]/;
+    printf "\t--%-13s %s%s.\n",$opt,$_->{DESC},
            defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
   }
   exit(1);
