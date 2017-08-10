@@ -191,7 +191,8 @@ number of the sequence source. The `DESC` can be any textual description.
 % cd /path/to/abricate/db     # this is the --datadir default option
 % mkdir tinyamr
 % cp /path/to/tinyamr.fa sequences
-% makeblastdb -in sequences -title tinyamr -dbtype nucl -parse_seqids -hash_index
+% abricate --setupdb
+% # or just do this: makeblastdb -in sequences -title tinyamr -dbtype nucl -parse_seqids -hash_index
 
 % abricate --list
 tinyamr:  173 sequences -  Mar 18, 2017
@@ -206,7 +207,6 @@ for "Anti-Biotic Resistance". It laso has the form of an English _verb_,
 which suggests the tool actual taking "action" against the problem of antibiotic resistance.
 It is also relatively unique in [Google](https://www.google.com.au/search?q=abricate),
 and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/2014/12/1/time-for-a-new-jabba-award-for-just-another-bogus-bioinformatics-acronym).
-
 
 ## Issues
 
