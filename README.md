@@ -2,14 +2,15 @@
 # ABRicate
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
-It comes bundled with *six* databases: 
-Resfinder, CARD, ARG-ANNOT, NCBI, PlasmidFinder and VFDB.
+It comes bundled with *seven* databases: 
+Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI betalactams, PlasmidFinder and
+VFDB.
 
 
 ## Is this the right tool for me?
 
 1. It only supports contigs, not FASTQ reads (including Genbank and .gz compressed files)
-2. It only detects acquired resistance genes, not point mutations
+2. It only detects acquired resistance genes, **not** point mutations
 3. It needs BLAST+ >= 2.2.30 and EMBOSS to be installed
 4. It's written in Perl
 
@@ -119,6 +120,7 @@ ABRicate comes with some pre-downloaded databases:
 * [Resfinder](https://cge.cbs.dtu.dk/services/ResFinder/)
 * [ARG-ANNOT](http://en.mediterranee-infection.com/article.php?laref=283%26titre=arg-annot)
 * [CARD](https://card.mcmaster.ca/)
+* [NCBI Bacterial Antimicrobial Resistance Reference Gene Database](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA313047)
 * [NCBI Betalactamase Database](https://www.ncbi.nlm.nih.gov/pathogens/beta-lactamase-data-resources/)
 * [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
@@ -127,13 +129,15 @@ You can check what you have installed with the `--list` command:
 ```
 % abricate --list
 
-argannot:  1749 sequences -  Jul 8, 2017
-card:  2124 sequences -  Jul 8, 2017
-ncbibetalactamase:  1557 sequences -  Mar 17, 2017
-plasmidfinder:  263 sequences -  Mar 19, 2017
-resfinder:  2228 sequences -  Jul 8, 2017
-vfdb:  2597 sequences -  Mar 17, 2017
+argannot:  1749 sequences -  Aug 6, 2017
+card:  2153 sequences -  Aug 6, 2017
+ncbi:  4124 sequences -  Aug 6, 2017
+ncbibetalactamase:  1557 sequences -  Aug 6, 2017
+plasmidfinder:  263 sequences -  Aug 6, 2017
+resfinder:  2228 sequences -  Aug 7, 2017
+vfdb:  2597 sequences -  Aug 6, 2017
 ```
+
 The default database is currently `resfinder`.
 You can choose a different database using the `--db` option:
 ```
