@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.6-dev";
+my $VERSION = "0.6";
 my $EXE = just_filename( $FindBin::RealScript );
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
