@@ -125,17 +125,20 @@ ABRicate comes with some pre-downloaded databases:
 * [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
 
-You can check what you have installed with the `--list` command:
+You can check what you have installed with the `--list` command.
+This lists the available databases in TSV (or CSV with `--csv`) and three
+columns:
 ```
 % abricate --list
 
-argannot:  1749 sequences -  Aug 6, 2017
-card:  2153 sequences -  Aug 6, 2017
-ncbi:  4124 sequences -  Aug 6, 2017
-ncbibetalactamase:  1557 sequences -  Aug 6, 2017
-plasmidfinder:  263 sequences -  Aug 6, 2017
-resfinder:  2228 sequences -  Aug 7, 2017
-vfdb:  2597 sequences -  Aug 6, 2017
+DATABASE           SEQUENCES  DATE
+argannot           1749       2017-Aug-6
+card               2153       2017-Aug-6
+ncbi               4124       2017-Aug-6
+ncbibetalactamase  1557       2017-Aug-6
+plasmidfinder      263        2017-Aug-6
+resfinder          2228       2017-Aug-7
+vfdb               2597       2017-Aug-6
 ```
 
 The default database is currently `resfinder`.
@@ -165,8 +168,8 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 % abricate --summary 1.tab 2.tab
 
 #FILE     NUM_FOUND  aac(6')-aph(2'')_1  aadD_1  blaZ_32  blaZ_36  erm(A)_1       mecA_15  norA_1  spc_1          tet(M)_7
-1.fna     8          100.00              100.00  .        100.00   100.00;100.00  100.00   99.91   100.00;100.00  100.00
-2.fna     3          .                   .       100.00   .        .              100.00   99.91   .              .
+1.tab     8          100.00              100.00  .        100.00   100.00;100.00  100.00   99.91   100.00;100.00  100.00
+2.tab     3          .                   .       100.00   .        .              100.00   99.91   .              .
 ```
 
 ## Updating the databases
@@ -195,7 +198,8 @@ number of the sequence source. The `DESC` can be any textual description.
 % # or just do this: makeblastdb -in sequences -title tinyamr -dbtype nucl -parse_seqids -hash_index
 
 % abricate --list
-tinyamr:  173 sequences -  Mar 18, 2017
+DATABASE           SEQUENCES  DATE
+tinyamr            173        2017-Aug-28
 
 % abricate --db tinyamr screen_this.fasta
 ```
