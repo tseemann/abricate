@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.6";
+my $VERSION = "0.7-dev";
 my $EXE = just_filename( $FindBin::RealScript );
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
@@ -246,10 +246,7 @@ sub list_databases {
   my $count=0;
   for my $name (sort @dir) {
     my $dbname = "$from/$name/sequences";
-    if (not -r $dbname) {
-      msg("Database $name has no sequences, please try: abricate-get_db --db $name");
-    }
-    else {
+    if (-r $dbname) {
       if (not -r "$dbname.nin") {
         if ($setup_too) {
           msg("Database $name has not been indexed; formatting now.");
