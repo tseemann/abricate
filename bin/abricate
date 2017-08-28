@@ -51,6 +51,7 @@ my @REQUIRE = qw(blastn makeblastdb seqret gzip unzip);
 
 ($minid > 0 and $minid <= 100) or err("--minid must be between 1 and 100");
 ($mincov >= 0 and $mincov <= 100) or err("--mincov must be between 0 and 100");
+$OUTSEP = ',' if $csv;  # default is tab
 
 if ($summary) {
   summary_table( \*ARGV );
@@ -70,7 +71,6 @@ if ($check) {
   exit;
 }
 
-$OUTSEP = ',' if $csv;  # default is tab
 
 # check if dependencies are installed
 require_exe( @REQUIRE );
@@ -232,9 +232,9 @@ sub blast_database_info {
   $res =~ m/\bDatabase: (\S+)/;
   $info->{TITLE} = $1;
   
-  $res =~ m/\bDate: (\w+\s+\d+,\s+\d{4})\s/;
-  $info->{DATE} = $1;
-
+  $res =~ m/\bDate: (\w+)\s+(\d+),\s+(\d{4})\s/;
+  $info->{DATE} = "$3-$1-$2";  # YYYY-MM-DD
+  
   return $info;
 }
 
@@ -244,6 +244,8 @@ sub list_databases {
   my($from, $setup_too) = @_;
   my @dir = grep { -d "$from/$_" } read_dir($from);
   my $count=0;
+  my @list;
+  
   for my $name (sort @dir) {
     my $dbname = "$from/$name/sequences";
     if (-r $dbname) {
@@ -257,8 +259,17 @@ sub list_databases {
         }          
       }
       my $info = blast_database_info( $dbname );
-      msg("$name: ", $info->{SEQUENCES}, "sequences - ", $info->{DATE});
+      # save for end
+      push @list, [ $name, $info->{SEQUENCES}, $info->{DATE} ];
     }
+  }
+  if (@list) {
+    # print to STDOUT
+    print line("DATABASE", "SEQUENCES", "DATE");
+    print map { line(@$_) } @list;
+  }
+  else {
+    msg("No databases found in $from");
   }
 }
 
