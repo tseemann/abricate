@@ -54,7 +54,7 @@ my @REQUIRE = qw(blastn makeblastdb seqret gzip unzip);
 $OUTSEP = ',' if $csv;  # default is tab
 
 if ($summary) {
-  summary_table( \*ARGV );
+  summary_table( @ARGV );
   exit;
 }
 
@@ -186,22 +186,33 @@ sub minimap {
 #----------------------------------------------------------------------
 
 sub summary_table {
-  my($fh) = @_;
+  my(@fname) = @_;
   
   my %gene;  # genes observed
-  my %data = (map { $_ => {} } @ARGV);
+#  my %data = ( map { $_ => {} } @fname); 
+  my %data;
   my @hdr;
-  
-  while (<$fh>) {
-    chomp;
-    my @col = split m/\t/;
-    print STDERR "### [$.] @col\n" if $debug;
-    @hdr = @col if $. == 1;
-    next if $col[0] =~ m/^#/;
-    $col[0] = just_filename($col[0]) if $nopath;
-    my $row = { zip @hdr, @col };    
-    $gene{ $row->{'GENE'} }++;
-    push @{ $data{ $row->{'#FILE'} }{ $row->{'GENE'} } } , $row;
+  my %id_of;
+
+  for my $fname (@fname) {
+    err("Already summarized file '$fname'") if exists $data{$fname};
+    # initialise to empty so it appears in report even if 0 genes found
+    $data{$fname} = {};
+    msg("Parsing: $fname") if $debug;
+    open my $fh, '<', $fname or msg("WARNING: Can not open '$fname' to summarize.");
+    while (<$fh>) {
+      chomp;
+      my @col = split m/\t/;
+      print STDERR "### [$.] @col\n" if $debug;
+      @hdr = @col if ! @hdr;  # first row we see will be header
+      next if $col[0] =~ m/^#/;
+      $col[0] = just_filename($col[0]) if $nopath;
+      $id_of{$fname} ||= $col[0];  # keep alternate "original filename"
+      my $row = { zip @hdr, @col };
+      print STDERR Dumper($row) if $debug;
+      $gene{ $row->{'GENE'} }++;
+      push @{ $data{ $fname }{ $row->{'GENE'} } } , $row;
+    }
   }
 
   my @gene = sort { $a cmp $b } keys %gene;
@@ -212,7 +223,8 @@ sub summary_table {
                         ? join( $FIELDSEP, map { $_->{$FIELD} } @{$data{$fname}{$_}} ) 
                         : $ABSENT 
                       } @gene;
-    print line( $fname, scalar( keys %{$data{$fname}} ), @present );
+    print line( $fname || $fname, scalar( keys %{$data{$fname}} ), @present );
+    # print line( $id_of{$fname} || $fname, scalar( keys %{$data{$fname}} ), @present );
   }
 }
 
