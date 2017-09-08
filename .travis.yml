@@ -1,0 +1,19 @@
+language: perl
+perl:
+    - "5.14"
+
+addons:
+    apt:
+        packages:
+            - ncbi-blast+
+            - emboss
+            - zip
+            - gzip
+            - bioperl
+            - libjson-perl
+            - libwww-perl
+            - libtext-csv-perl
+            - libfile-slurp-perl
+
+script:
+    - "bin/abricate --check"

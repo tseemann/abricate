@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/tseemann/abricate.svg?branch=master)](https://travis-ci.org/tseemann/abricate)
 
 # ABRicate
 
