@@ -16,4 +16,4 @@ addons:
             - libfile-slurp-perl
 
 script:
-    - "bin/abricate --check"
+    - "dzil authordeps --missing | cpanm && bin/abricate --check"
