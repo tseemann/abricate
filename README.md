@@ -51,6 +51,15 @@ abricate --check
 abricate --setupdb  # is done by the installer normally
 ```
 
+### Docker
+[Prebuilt docker containers are available](https://quay.io/repository/biocontainers/abricate?tab=tags) from the biocontainers project, based on Bioconda. These containers will run on Linux/OSX/cloud.
+For example:
+
+```
+docker pull quay.io/biocontainers/abricate:0.7--pl5.22.0_0
+docker run -v /home/ubuntu/data:/data quay.io/biocontainers/abricate:0.7--pl5.22.0_0 abricate /data/*.fa
+```
+
 ### Source
 If you install from source, Abricate has the following package dependencies:
 * BLAST+ for `blastn` and `makeblastdb`
@@ -225,3 +234,4 @@ Please report problems to the [Issues Page](https://github.com/tseemann/abricate
 ## Author
 
 Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [blog](http://thegenomefactory.blogspot.com/)
+ 
