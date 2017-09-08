@@ -103,10 +103,8 @@ for my $file (@ARGV) {
   my %seen;
   my @hit;
   msg("Processing: $file");
-  if (! -r $file) {
-    msg("WARNING: '$file' does not exist, or is unreadable");
-    next FILE;
-  }
+  -r $file or err("'$file' does not exist, or is unreadable");
+
   my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
           . " blastn -db \Q$db_path\E -outfmt '$format'"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
@@ -118,10 +116,9 @@ for my $file (@ARGV) {
   while (<BLAST>) { 
     chomp;
     my @x = split m/\t/;
-    if (@x != @BLAST_FIELDS) {
-      msg("WARNING: can not find sequence data in '$file'");
-      next FILE;
-    }
+
+    @x == @BLAST_FIELDS or err("WARNING: can not find sequence data in '$file'");
+
     my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
 
