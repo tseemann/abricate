@@ -12,10 +12,16 @@ use Cwd qw(abs_path);
 #use lib "$FindBin::RealBin/../perl5";
 
 #..............................................................................
-# Command line options
+# Globals needed before --help etc
 
 my $VERSION = "0.8-dev";
 my $EXE = just_filename( $FindBin::RealScript );
+my $AUTHOR = 'Torsten Seemann';
+my $EMAIL = 'torsten.seemann@gmail.com';
+my $URL = 'https://github.com/tseemann/abricate';
+
+#..............................................................................
+# Command line options
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
              $datadir, $db, $minid, $mincov,
@@ -389,11 +395,11 @@ sub usage {
   $exitcode ||= 0;
   select STDERR if $exitcode; # write to STDERR if exitcode is error
 
-  print "Synopsis:\n";
-  print "\tFind and collate amplicons in assembled contigs\n";
+  print "Synopsis:\n\tFind and collate amplicons in assembled contigs\n";
+  print "Author:\n\t$AUTHOR <$EMAIL>\n";
   print "Usage:\n";
   print "\t% $EXE --list\n";
-  print "\t% $EXE [options] <sequence.{fasta,gbk,embl}[.gz]> > out.tab\n";
+  print "\t% $EXE [options] <contigs.{fasta,gbk,embl}[.gz]> > out.tab\n";
   print "\t% $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
   print "Options:\n";
   foreach (@Options) {
@@ -405,6 +411,7 @@ sub usage {
     printf "\t--%-13s %s%s.\n",$opt,$_->{DESC},
            defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
   }
+  print "Documentation:\n\t$URL\n";
   exit($exitcode);
 }
  
