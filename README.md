@@ -225,3 +225,4 @@ Please report problems to the [Issues Page](https://github.com/tseemann/abricate
 ## Author
 
 Torsten Seemann | [@torstenseemann](https://twitter.com/torstenseemann) | [blog](http://thegenomefactory.blogspot.com/)
+ 
