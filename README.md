@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tseemann/abricate.svg?branch=master)](https://travis-ci.org/tseemann/abricate)
+[![Build Status](https://travis-ci.org/tseemann/abricate.svg?branch=master)](https://travis-ci.org/tseemann/abricate) [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) [![homebrew](https://img.shields.io/homebrew/v/cake.svg)](https://github.com/Homebrew/homebrew-science)
 
 # ABRicate
 
