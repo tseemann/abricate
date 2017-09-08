@@ -2,7 +2,7 @@ language: perl
 sudo: false
 perl:
     - "5.14"
-	- "5.26"
+    - "5.26"
 addons:
     apt:
         packages:
@@ -16,6 +16,6 @@ addons:
             - libtext-csv-perl
             - libfile-slurp-perl
 install: 
-	- "dzil authordeps --missing | cpanm"
+    - "dzil authordeps --missing | cpanm"
 script:
     - "bin/abricate --check"
