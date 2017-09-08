@@ -23,10 +23,10 @@ If you are happy with the above, then please continue!
 Using database resfinder:  2130 sequences -  Mar 17, 2017
 Processing: 6159.fna
 Found 3 genes in 6159.fna
-#FILE     SEQUENCE     START   END     GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE   ACCESSION
-6159.fna  NC_017338.1  39177   41186   mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    resfinder  AB505628
-6159.fna  NC_017338.1  727191  728356  norA_1   1-1166/1167  ===============  0/0   99.91      92.367     resfinder  M97169
-6159.fna  NC_017339.1  10150   10995   blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832
+#FILE     SEQUENCE     START   END     GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE   ACCESSION  PRODUCT
+6159.fna  NC_017338.1  39177   41186   mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    resfinder  AB505628   n/a
+6159.fna  NC_017338.1  727191  728356  norA_1   1-1166/1167  ===============  0/0   99.91      92.367     resfinder  M97169     n/a
+6159.fna  NC_017339.1  10150   10995   blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832   betalactamase
 ```
 
 ## Installation
@@ -105,6 +105,7 @@ GAPS | 1/4 | Openings / gaps in subject and query - possible psuedogene?
 %IDENTITY | 99.95% | Proportion of exact nucleotide matches
 DATABASE | card | The database this sequence comes from
 ACCESSION | NC_009632:49744-50476 | The genomic source of the sequence
+PRODUCT | aminoglycoside O-phosphotransferase APH(3')-IIIa | Gene product (if available)
 
 ## Caveats
 
@@ -146,13 +147,13 @@ You can choose a different database using the `--db` option:
 ```
 % abricate --db vfdb --quiet 6159.fa
 
-6159.fna  NC_017338.1  2724620  2726149  aur      1-1530/1530     ===============  0/0    100.00     99.346     vfdb      NP_647375
-6159.fna  NC_017338.1  2766595  2767155  icaR     1-561/561       ===============  0/0    100.00     98.930     vfdb      NP_647402
-6159.fna  NC_017338.1  2767319  2768557  icaA     1-1239/1239     ===============  0/0    100.00     99.677     vfdb      NP_647403
-6159.fna  NC_017338.1  2768521  2768826  icaD     1-306/306       ===============  0/0    100.00     99.020     vfdb      NP_647404
-6159.fna  NC_017338.1  2768823  2769695  icaB     1-873/873       ===============  0/0    100.00     99.542     vfdb      NP_647405
-6159.fna  NC_017338.1  2769682  2770734  icaC     1-1053/1053     ===============  0/0    100.00     98.955     vfdb      NP_647406
-6159.fna  NC_017338.1  2771040  2773085  lip      1-2046/2046     ===============  0/0    100.00     98.778     vfdb      NP_647407
+6159.fna  NC_017338.1  2724620  2726149  aur      1-1530/1530     ===============  0/0    100.00     99.346     vfdb      NP_647375	zinc metalloproteinase aureolysin
+6159.fna  NC_017338.1  2766595  2767155  icaR     1-561/561       ===============  0/0    100.00     98.930     vfdb      NP_647402	N-acetylglucosaminyltransferase
+6159.fna  NC_017338.1  2767319  2768557  icaA     1-1239/1239     ===============  0/0    100.00     99.677     vfdb      NP_647403	n/a
+6159.fna  NC_017338.1  2768521  2768826  icaD     1-306/306       ===============  0/0    100.00     99.020     vfdb      NP_647404	n/a
+6159.fna  NC_017338.1  2768823  2769695  icaB     1-873/873       ===============  0/0    100.00     99.542     vfdb      NP_647405	n/a
+6159.fna  NC_017338.1  2769682  2770734  icaC     1-1053/1053     ===============  0/0    100.00     98.955     vfdb      NP_647406	n/a
+6159.fna  NC_017338.1  2771040  2773085  lip      1-2046/2046     ===============  0/0    100.00     98.778     vfdb      NP_647407	triacylglycerol lipase precursor
 ```
 
 ## Combining reports across samples
@@ -167,9 +168,9 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 # Combine
 % abricate --summary 1.tab 2.tab
 
-#FILE     NUM_FOUND  aac(6')-aph(2'')_1  aadD_1  blaZ_32  blaZ_36  erm(A)_1       mecA_15  norA_1  spc_1          tet(M)_7
-1.tab     8          100.00              100.00  .        100.00   100.00;100.00  100.00   99.91   100.00;100.00  100.00
-2.tab     3          .                   .       100.00   .        .              100.00   99.91   .              .
+#FILE     NUM_FOUND  aac(6')-aph(2'')_1  aadD_1  blaZ_32  blaZ_36  erm(A)_1  mecA_15  norA_1  spc_1  tet(M)_7
+1.tab     8          100.00              100.00  .        100.00   100.00    100.00   99.91   100.00  100.00
+2.tab     3          .                   .       100.00   .        .         100.00   99.91   .       .
 ```
 
 ## Updating the databases
@@ -214,11 +215,11 @@ and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/201
 
 ## Issues
 
-Please report problems here: https://github.com/tseemann/abricate/issues
+Please report problems to the [Issues Page](https://github.com/tseemann/abricate/issues).
 
 ## License
 
-GPL Version 2: https://raw.githubusercontent.com/tseemann/abricate/master/LICENSE
+[GPLv2](https://raw.githubusercontent.com/tseemann/abricate/master/LICENSE)
 
 ## Author
 

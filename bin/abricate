@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Command line options
 
-my $VERSION = "0.7";
+my $VERSION = "0.8-dev";
 my $EXE = just_filename( $FindBin::RealScript );
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
@@ -37,10 +37,11 @@ my @BLAST_FIELDS = qw(
   qseqid qstart qend qlen
   sseqid sstart send slen sstrand
   evalue length pident gaps gapopen
+  stitle
 );
 
 my @COLUMNS = qw(
- FILE SEQUENCE START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY DATABASE ACCESSION
+ FILE SEQUENCE START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY DATABASE ACCESSION PRODUCT
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
@@ -132,6 +133,10 @@ for my $file (@ARGV) {
       $database = $db;  # name specified with --db
     }
     msg( Dumper(\%hit) ) if $debug;
+
+    my $product = $hit{'stitle'} || "n/a";
+    $product =~ s/[,\t]//g;  # remove output separators
+
     my $minimap = minimap( @hit{qw(sstart send slen gapopen)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 
@@ -147,6 +152,7 @@ for my $file (@ARGV) {
       sprintf("%.2f", $hit{pident}),
       $database,
       $acc,
+      $product,
     ];
   }
   close BLAST;
