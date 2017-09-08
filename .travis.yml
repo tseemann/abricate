@@ -2,7 +2,7 @@ language: perl
 
 perl:
     - "5.14"
-    - "5.26"
+#    - "5.26"
 
 sudo: false
     
@@ -13,13 +13,16 @@ addons:
             - emboss
             - zip
             - gzip
-            - bioperl
-            - libjson-perl
-            - libwww-perl
-            - libtext-csv-perl
-            - libfile-slurp-perl
+#            - bioperl
+#            - libjson-perl
+#            - libwww-perl
+#            - libtext-csv-perl
+#            - libfile-slurp-perl
 
 install:
+    - "cpanm JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
+
+before_script:
     - "bin/abricate --setupdb"
 
 script:
