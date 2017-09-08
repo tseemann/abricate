@@ -371,7 +371,7 @@ sub setOptions {
     {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
   );
 
-  @ARGV or usage();
+  @ARGV or usage(1);
 
   &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage();
 
@@ -384,6 +384,11 @@ sub setOptions {
 }
 
 sub usage {
+  my($exitcode) = @_;
+  $exitcode = 0 if $exitcode eq 'help'; # what gets passed by getopt func ref
+  $exitcode ||= 0;
+  select STDERR if $exitcode; # write to STDERR if exitcode is error
+
   print "Synopsis:\n";
   print "\tFind and collate amplicons in assembled contigs\n";
   print "Usage:\n";
@@ -400,7 +405,7 @@ sub usage {
     printf "\t--%-13s %s%s.\n",$opt,$_->{DESC},
            defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
   }
-  exit(1);
+  exit($exitcode);
 }
  
 #----------------------------------------------------------------------
