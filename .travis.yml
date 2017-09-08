@@ -1,7 +1,11 @@
 language: perl
+
 perl:
     - "5.14"
+    - "5.26"
 
+sudo: false
+    
 addons:
     apt:
         packages:
@@ -15,5 +19,11 @@ addons:
             - libtext-csv-perl
             - libfile-slurp-perl
 
+install:
+    - "bin/abricate --setupdb"
+
 script:
+    - "bin/abricate --version"
+    - "bin/abricate --help"
     - "bin/abricate --check"
+    - "bin/abricate --list"
