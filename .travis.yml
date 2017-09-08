@@ -2,7 +2,7 @@ language: perl
 
 perl:
     - "5.14"
-#    - "5.26"
+    - "5.26"
 
 sudo: false
     
@@ -13,11 +13,6 @@ addons:
             - emboss
             - zip
             - gzip
-#            - bioperl
-#            - libjson-perl
-#            - libwww-perl
-#            - libtext-csv-perl
-#            - libfile-slurp-perl
 
 install:
     - "cpanm JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
@@ -30,3 +25,9 @@ script:
     - "bin/abricate --help"
     - "bin/abricate --check"
     - "bin/abricate --list"
+    - "bin/abricate --quiet test/assembly.fa"
+    - "bin/abricate --quiet test/assembly.fa.gz"
+    - "bin/abricate --quiet test/assembly.gbk"
+    - "bin/abricate --quiet test/assembly.gbk.gz"
+    - "bin/abricate --list | cut -f1 > dbs.txt"
+    - "for DB in `bin/abricate --list`; do bin/abricate --db $DB --quiet test/assembly.fa ; done"
