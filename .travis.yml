@@ -2,7 +2,6 @@ language: perl
 
 perl:
     - "5.14"
-    - "5.26"
 
 sudo: false
     
@@ -17,12 +16,10 @@ install:
     - "cpanm JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
     - "wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-x64-linux.tar.gz"
     - "tar zxvf ncbi-blast-2.6.0+-x64-linux.tar.gz"
-    
-before_script:
-    - "bin/abricate --setupdb"
+    - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.6.0+/bin:$PATH"
 
 script:
-    - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.6.0+/bin:$PATH"
+    - "bin/abricate --setupdb"
     - "abricate --version"
     - "abricate --help"
     - "abricate --check"
@@ -33,4 +30,3 @@ script:
     - "abricate --quiet test/assembly.gbk.gz"
     - "abricate --list | cut -f1 > dbs.txt"
     - "for DB in `abricate --list | cut -f1`; do abricate --db $DB --quiet test/assembly.fa ; done"
-
