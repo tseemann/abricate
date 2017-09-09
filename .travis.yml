@@ -1,9 +1,10 @@
 language: perl
 
+sudo: false
+
 perl:
     - "5.14"
-
-sudo: false
+    - "5.26"
     
 addons:
     apt:
@@ -11,6 +12,7 @@ addons:
             - emboss
             - zip
             - gzip
+            - git
 
 install:
     - "cpanm JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
@@ -19,14 +21,16 @@ install:
     - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.6.0+/bin:$PATH"
 
 script:
-    - "bin/abricate --setupdb"
+    - "abricate --setupdb"
     - "abricate --version"
     - "abricate --help"
     - "abricate --check"
     - "abricate --list"
-    - "abricate --quiet test/assembly.fa"
-    - "abricate --quiet test/assembly.fa.gz"
-    - "abricate --quiet test/assembly.gbk"
-    - "abricate --quiet test/assembly.gbk.gz"
-    - "abricate --list | cut -f1 > dbs.txt"
-    - "for DB in `abricate --list | cut -f1`; do abricate --db $DB --quiet test/assembly.fa ; done"
+    - "abricate test/assembly.fa > 1.tab"
+    - "abricate test/assembly.fa.gz > 2.tab"
+    - "abricate test/assembly.gbk > 3.tab"
+    - "abricate test/assembly.gbk.gz > 4.tab"
+    - "abricate --summary {1,2,3,4}.tab > summary.tab"
+    - "for DB in `abricate --list | cut -f1`; do abricate --db $DB test/assembly.fa > /dev/null ; done"
+    - "abricate-get_db --help"
+    - "abricate-get_db --db argannot --dbdir ."
