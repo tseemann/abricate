@@ -9,25 +9,28 @@ sudo: false
 addons:
     apt:
         packages:
-            - ncbi-blast+
             - emboss
             - zip
             - gzip
 
 install:
     - "cpanm JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
-
+    - "wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-x64-linux.tar.gz"
+    - "tar zxvf ncbi-blast-2.6.0+-x64-linux.tar.gz"
+    
 before_script:
     - "bin/abricate --setupdb"
 
 script:
-    - "bin/abricate --version"
-    - "bin/abricate --help"
-    - "bin/abricate --check"
-    - "bin/abricate --list"
-    - "bin/abricate --quiet test/assembly.fa"
-    - "bin/abricate --quiet test/assembly.fa.gz"
-    - "bin/abricate --quiet test/assembly.gbk"
-    - "bin/abricate --quiet test/assembly.gbk.gz"
-    - "bin/abricate --list | cut -f1 > dbs.txt"
-    - "for DB in `bin/abricate --list`; do bin/abricate --db $DB --quiet test/assembly.fa ; done"
+    - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.6.0+/bin:$PATH"
+    - "abricate --version"
+    - "abricate --help"
+    - "abricate --check"
+    - "abricate --list"
+    - "abricate --quiet test/assembly.fa"
+    - "abricate --quiet test/assembly.fa.gz"
+    - "abricate --quiet test/assembly.gbk"
+    - "abricate --quiet test/assembly.gbk.gz"
+    - "abricate --list | cut -f1 > dbs.txt"
+    - "for DB in `abricate --list | cut -f1`; do abricate --db $DB --quiet test/assembly.fa ; done"
+
