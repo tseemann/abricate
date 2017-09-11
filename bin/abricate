@@ -51,7 +51,7 @@ my @COLUMNS = qw(
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
-my @REQUIRE = qw(blastn makeblastdb seqret gzip unzip);
+my @REQUIRE = qw(blastn makeblastdb blastdbcmd seqret gzip unzip);
 
 #..............................................................................
 # Option parsing
@@ -65,11 +65,6 @@ if ($summary) {
   exit;
 }
 
-if ($list or $setupdb) {
-  list_databases($datadir, $setupdb);
-  exit;
-}
-
 if ($check) {
   $debug=1;
   msg("Checking dependencies are installed:");
@@ -78,9 +73,14 @@ if ($check) {
   exit;
 }
 
-
 # check if dependencies are installed
 require_exe( @REQUIRE );
+
+# do these now that we know the deps are ok
+if ($list or $setupdb) {
+  list_databases($datadir, $setupdb);
+  exit;
+}
 
 # check if blastn > 2.2.30 to support 'gaps' custom field
 my($version) = qx(blastn -version 2>&1);
