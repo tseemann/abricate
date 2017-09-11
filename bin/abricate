@@ -376,7 +376,7 @@ sub setOptions {
 
   @ARGV or usage(1);
 
-  &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage();
+  &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage(1);
 
   # Now setup default values.
   foreach (@Options) {

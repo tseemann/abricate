@@ -26,6 +26,7 @@ script:
     - "abricate --help"
     - "abricate --check"
     - "abricate --list"
+    - "! abricate --doesnotexist;
     - "abricate test/assembly.fa > 1.tab"
     - "abricate test/assembly.fa.gz > 2.tab"
     - "abricate test/assembly.gbk > 3.tab"
