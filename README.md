@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tseemann/abricate.svg?branch=master)](https://travis-ci.org/tseemann/abricate) [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) [![homebrew](https://img.shields.io/homebrew/v/cake.svg)](https://github.com/Homebrew/homebrew-science)
+[![Build Status](https://travis-ci.org/tseemann/abricate.svg?branch=master)](https://travis-ci.org/tseemann/abricate) [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 # ABRicate
 
@@ -53,8 +53,8 @@ abricate --setupdb  # is done by the installer normally
 
 ### Source
 If you install from source, Abricate has the following package dependencies:
-* BLAST+ for `blastn` and `makeblastdb`
 * EMBOSS for `seqret`
+* BLAST+ >2.3.0 for `blastn`, `makeblastdb`, `blastdbcmd`
 * Decompression tools `gzip` and `unzip`
 * Perl modules: `LWP::Simple`, `Text::CSV`, `Bio::Perl`, `JSON`, `File::Slurp`
 
@@ -65,6 +65,7 @@ sudo apt-get install emboss bioperl ncbi-blast+ gzip unzip \
 git clone https://github.com/tseemann/abricate.git
 ./abricate/bin/abricate --check
 ./abricate/bin/abricate --setupdb
+./abricate/bin/abricate ./abricate/test/assembly.fa
 ```
 
 ## Input
