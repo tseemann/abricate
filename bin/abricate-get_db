@@ -27,6 +27,7 @@ my %DATABASE = (
   'ncbibetalactamase' => \&get_ncbibetalactamase,
   'ncbi'              => \&get_ncbi,
   'vfdb'              => \&get_vfdb,
+  'ecoh'              => \&get_ecoh,
 );
 my $DATABASES = join(' ', sort keys %DATABASE);
 
@@ -366,6 +367,29 @@ sub get_ncbibetalactamase {
   }
 #  print Dumper($seqs);
 
+  return $seqs;
+}
+
+#..............................................................................
+sub get_ecoh {
+  my $fasta = "EcOH.fa";
+  download('https://raw.githubusercontent.com/katholt/srst2/master/data/EcOH.fasta', $fasta);
+
+  # https://github.com/katholt/srst2#generating-srst2-compatible-clustered-database-from-raw-sequences
+  # [clusterID]__[gene]__[allele]__[seqID] [other stuff]
+  # >1__fliC__fliC-H1__1 AB028471.1;flagellin;H1
+  # >8__wzx__wzx-O41__246 AB811617.1;O antigen flippase;O41
+  # >9__wzy__wzy-OgN31__597 LC125932.1;O antigen polyermase;OgN31
+  my $seqs = load_fasta($fasta);
+
+  for my $s (@$seqs) {
+    my @id = split m/__/, $s->{ID};
+    my @desc = split m';', $s->{DESC};
+    $s->{ID} = $id[2];
+    $s->{ACC} = shift(@desc);
+    $s->{DESC} = join(' ', @desc);
+  }
+#  print Dumper($seqs);
   return $seqs;
 }
 

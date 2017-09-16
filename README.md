@@ -4,7 +4,7 @@
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 It comes bundled with *seven* databases: 
-Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI betalactams, PlasmidFinder and
+Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI betalactams, EcOH, PlasmidFinder and
 VFDB.
 
 
@@ -125,6 +125,7 @@ ABRicate comes with some pre-downloaded databases:
 * [CARD](https://card.mcmaster.ca/)
 * [NCBI Bacterial Antimicrobial Resistance Reference Gene Database](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA313047)
 * [NCBI Betalactamase Database](https://www.ncbi.nlm.nih.gov/pathogens/beta-lactamase-data-resources/)
+* [EcOH](https://github.com/katholt/srst2/tree/master/data)
 * [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
 
@@ -139,7 +140,8 @@ argannot           1749       2017-Aug-6
 card               2153       2017-Aug-6
 ncbi               4124       2017-Aug-6
 ncbibetalactamase  1557       2017-Aug-6
-plasmidfinder      263        2017-Aug-6
+ecoh                597       2017-Sep-16
+plasmidfinder       263       2017-Aug-6
 resfinder          2228       2017-Aug-7
 vfdb               2597       2017-Aug-6
 ```
