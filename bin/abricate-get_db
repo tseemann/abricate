@@ -152,7 +152,7 @@ sub get_serotypefinder {
   for my $fasta (<$name/*.fsa>) {
     push @seq, @{ load_fasta($fasta) };
   }
- 
+
   # >fliC_44444_AY250028_H52
   # FIXME - this is already in EcOH database!
   for my $seq (@seq) {
@@ -162,7 +162,7 @@ sub get_serotypefinder {
     $seq->{ACC}  = $acc;
     #$seq->{DESC} = $anno{$id} || '';
   }
-  
+
   return \@seq;
 }
 
