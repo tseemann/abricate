@@ -28,6 +28,7 @@ my %DATABASE = (
   'ncbi'              => \&get_ncbi,
   'vfdb'              => \&get_vfdb,
   'ecoh'              => \&get_ecoh,
+#  'serotypefinder'    => \&get_serotypefinder,
 );
 my $DATABASES = join(' ', sort keys %DATABASE);
 
@@ -126,6 +127,40 @@ sub get_resfinder {
     $seq->{ID}   = "${id}_${copy}";
     $seq->{ACC}  = $acc;
     $seq->{DESC} = $anno{$id} || '';
+  }
+  
+  return \@seq;
+}
+
+#..............................................................................
+sub get_serotypefinder {
+  my $name = "serotypefinder_db";
+  my $url = "https://bitbucket.org/genomicepidemiology/$name.git";
+
+  if (-r $name and not $force) {
+    msg("Won't overwrite existing $name (use --force)");
+#    exit(1);
+  }
+  else {
+    msg("Nuking existing folder: $name");
+    remove_tree("./$name");
+    msg("Cloning $url to $name");
+    system("git clone --quiet $url $name");
+  }
+
+  my @seq;
+  for my $fasta (<$name/*.fsa>) {
+    push @seq, @{ load_fasta($fasta) };
+  }
+ 
+  # >fliC_44444_AY250028_H52
+  # FIXME - this is already in EcOH database!
+  for my $seq (@seq) {
+    my($id,$copy,$acc) = $seq->{ID} =~ m/^(.*)_(\d+)_(\w+)$/;
+    #msg("serotypefinder: $1 $2 $3", $anno{$1});
+    $seq->{ID}   = "${id}_${copy}";
+    $seq->{ACC}  = $acc;
+    #$seq->{DESC} = $anno{$id} || '';
   }
   
   return \@seq;
