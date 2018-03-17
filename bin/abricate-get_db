@@ -307,7 +307,7 @@ sub get_argannot {
 #..............................................................................
 sub get_card {
   download(
-    'https://card.mcmaster.ca/download/0/broadstreet-v1.2.1.tar.bz2',
+    'https://card.mcmaster.ca/download/0/broadstreet-v2.0.0.tar.gz',
     "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
   );
 #  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
