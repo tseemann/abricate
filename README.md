@@ -7,15 +7,20 @@ It comes bundled with *seven* databases:
 Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI, EcOH, PlasmidFinder and
 VFDB.
 
-
 ## Is this the right tool for me?
 
 1. It only supports contigs, not FASTQ reads (including Genbank and .gz compressed files)
-2. It only detects acquired resistance genes, **not** point mutations
+2. It only detects acquired resistance genes, **NOT** point mutations
 3. It needs BLAST+ >= 2.2.30 and EMBOSS to be installed
 4. It's written in Perl
 
 If you are happy with the above, then please continue!
+Otherwise consider using
+[Ariba](https://github.com/sanger-pathogens/ariba),
+[Resfinder](https://cge.cbs.dtu.dk/services/ResFinder/),
+[RGI](https://card.mcmaster.ca/analyze/rgi),
+[SRST2](https://github.com/katholt/srst2),
+*etc.*
 
 ## Quick Start
 
@@ -35,11 +40,9 @@ Found 3 genes in 6159.fna
 ### Brew
 If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
 ```
-brew tap homebrew/science
-brew tap tseemann/bioinformatics-linux
-brew install abricate
+brew install brewsci/science/abricate
 abricate --check
-abricate --setupdb  # is done by the installer normally
+abricate --list
 ```
 
 ### Bioconda
@@ -48,7 +51,7 @@ follow the instructions to add the [Bioconda channel](https://bioconda.github.io
 ```
 conda install abricate
 abricate --check
-abricate --setupdb  # is done by the installer normally
+abricate --list
 ```
 
 ### Source
@@ -134,14 +137,15 @@ columns:
 ```
 % abricate --list
 
-DATABASE           SEQUENCES  DATE
-argannot           1749       2017-Aug-6
-card               2153       2017-Aug-6
-ncbi               4124       2017-Aug-6
-ecoh                597       2017-Sep-16
-plasmidfinder       263       2017-Aug-6
-resfinder          2228       2017-Aug-7
-vfdb               2597       2017-Aug-6
+DATABASE       SEQUENCES  DATE
+abricate       4981       2018-Mar-18
+argannot       1749       2017-Aug-6
+card           2158       2017-Oct-23
+ecoh           597        2017-Sep-16
+ncbi           4179       2017-Oct-23
+plasmidfinder  263        2017-Aug-6
+resfinder      2247       2017-Oct-23
+vfdb           2597       2017-Aug-6
 ```
 
 The default database is currently `resfinder`.
