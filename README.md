@@ -3,7 +3,7 @@
 # ABRicate
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
-It comes bundled with *seven* databases: 
+It comes bundled with multiple databases: 
 Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI, EcOH, PlasmidFinder and
 VFDB.
 
