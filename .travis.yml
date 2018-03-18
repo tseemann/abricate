@@ -16,9 +16,9 @@ addons:
 
 install:
     - "cpanm --quiet --notest JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
-    - "wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-x64-linux.tar.gz"
-    - "tar zxvf ncbi-blast-2.6.0+-x64-linux.tar.gz"
-    - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.6.0+/bin:$PATH"
+    - "wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1/ncbi-blast-2.7.1+-x64-linux.tar.gz"
+    - "tar zxvf ncbi-blast-2.7.1+-x64-linux.tar.gz"
+    - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.7.1+/bin:$PATH"
 
 script:
     - "abricate --setupdb"
