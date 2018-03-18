@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8-dev";
+my $VERSION = "0.8";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $EMAIL = 'torsten.seemann@gmail.com';
