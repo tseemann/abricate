@@ -211,7 +211,7 @@ sub summary_table {
     open my $fh, '<', $fname or msg("WARNING: Can not open '$fname' to summarize.");
     while (<$fh>) {
       chomp;
-      my @col = split m/\t/;
+      my @col = split m/$OUTSEP/;
       print STDERR "### [$.] @col\n" if $debug;
       @hdr = @col if ! @hdr;  # first row we see will be header
       next if $col[0] =~ m/^#/;
