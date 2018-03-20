@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8";
+my $VERSION = "0.8.1";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $EMAIL = 'torsten.seemann@gmail.com';
@@ -24,7 +24,7 @@ my $URL = 'https://github.com/tseemann/abricate';
 # Command line options
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
-             $datadir, $db, $minid, $mincov,
+             $datadir, $db, $minid, $mincov, $threads,
              $noheader, $csv, $nopath);
 setOptions();
 
@@ -56,6 +56,7 @@ my @REQUIRE = qw(blastn makeblastdb blastdbcmd seqret gzip unzip);
 #..............................................................................
 # Option parsing
 
+$threads >= 1 or err("Invalid --threads option, must be 1 or higher");
 ($minid > 0 and $minid <= 100) or err("--minid must be between 1 and 100");
 ($mincov >= 0 and $mincov <= 100) or err("--mincov must be between 0 and 100");
 $OUTSEP = ',' if $csv;  # default is tab
@@ -106,7 +107,7 @@ for my $file (@ARGV) {
   -r $file or err("'$file' does not exist, or is unreadable");
 
   my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
-          . " blastn -db \Q$db_path\E -outfmt '$format'"
+          . " blastn -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
           . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
           . " -culling_limit $CULL) 2>&1"
           ;
@@ -371,6 +372,7 @@ sub setOptions {
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
     {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA %identity"},
     {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
+    {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
     {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
   );
 
