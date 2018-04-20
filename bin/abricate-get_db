@@ -54,7 +54,7 @@ make_path($tmpdir);
 # run the specific function from --db
 chdir $tmpdir;
 my $seq = $DATABASE{$db}->();
-map { is_full_gene($_) } @$seq;
+map { is_full_gene($_) } @$seq;  # doesn't do anything?
 $seq = dedupe_seq($seq);
 #print Dumper($seq);
 msg("Sorting sequences by ID");
@@ -283,8 +283,8 @@ sub get_megares {
 sub get_argannot {
   my $fasta = 'arg-annot.fa';
   download(
-    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/1425/argannot-aa-v3-march2017_doc.fasta',
-#    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
+#    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/1425/argannot-aa-v3-march2017_doc.fasta',
+    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
     $fasta
   );
   
@@ -454,6 +454,7 @@ sub get_ecoh {
 #..............................................................................
 sub is_full_gene {
   my($s) = @_;
+  my $has_ambig=0;
 
   my $id = $s->{ID};
   my $L = length($s->{SEQ});
@@ -463,24 +464,27 @@ sub is_full_gene {
   }
   if ($s->{SEQ} !~  m/^[AGCT]+$/) {
     whine("$id - has non-AGTC bases");
-    # don't return though
+    return;
   }
 
   my $seq = Bio::Seq->new( -id=>$s->{ID}, -seq=>$s->{SEQ} );
+
   my $aa = $seq->translate->seq;
-  
+
   if ($aa =~ m/\*./) {
     whine("$id - has internal stop codons, trying revcom");
     $aa = $seq->revcom->translate->seq;
     if ($aa =~ m/\*./) {
       whine("$id - revcom has internal stop codons too");
-      return 0;
+      return;
     }
     else {
       msg("$id - revcom resolves problem, hooray!");
       $s->{SEQ} = $seq->revcom->seq;
     }
-  }                                                                                                                                                                                                            
+  }
+
+  return $L;
 }
 
 #..............................................................................

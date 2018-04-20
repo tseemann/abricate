@@ -25,7 +25,7 @@ my $URL = 'https://github.com/tseemann/abricate';
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
              $datadir, $db, $minid, $mincov, $threads,
-             $noheader, $csv, $nopath);
+             $noheader, $csv, $nopath, $protein);
 setOptions();
 
 #..............................................................................
@@ -51,7 +51,7 @@ my @COLUMNS = qw(
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
-my @REQUIRE = qw(blastn makeblastdb blastdbcmd seqret gzip unzip);
+my @REQUIRE = qw(blastn tblastn makeblastdb blastdbcmd seqret gzip unzip);
 
 #..............................................................................
 # Option parsing
@@ -83,17 +83,19 @@ if ($list or $setupdb) {
   exit;
 }
 
-# check if blastn > 2.2.30 to support 'gaps' custom field
-my($version) = qx(blastn -version 2>&1);
-$version =~ m/2.(\d+.\d+)\+/ or err("Could not parse blastn version from '$version'");
-$1 >= 2.30 or err("You need to install BLAST+ 2.2.30 or higher");
+# check if blast > 2.2.30 to support 'gaps' custom field
+for my $blast ('blastn', 'blastx') {
+  my($version) = qx"$blast -version 2>&1";
+  $version =~ m/2.(\d+.\d+)\+/ or err("Could not parse $blast version from '$version'");
+  $1 >= 2.30 or err("You need to install BLAST+ 2.2.30 or higher");
+}
 
 # check database exists
 $datadir = abs_path($datadir);
 my $db_path = "$datadir/$db/sequences";
 my $dbinfo = blast_database_info($db_path);
-$dbinfo or err("BLASTN database not found: $db_path");
-msg("Using database $db: ", $dbinfo->{SEQUENCES}, "sequences - ", $dbinfo->{DATE});
+$dbinfo or err("BLAST database not found: $db_path");
+msg("Using", $dbinfo->{DBTYPE}, "database $db: ", $dbinfo->{SEQUENCES}, "sequences - ", $dbinfo->{DATE});
 
 # output format
 my $format = "6 @BLAST_FIELDS";
@@ -106,11 +108,18 @@ for my $file (@ARGV) {
   msg("Processing: $file");
   -r $file or err("'$file' does not exist, or is unreadable");
 
+  my $blastcmd = $dbinfo->{DBTYPE} eq 'nucl'
+               ? "blastn -task blastn -dust no -perc_identity $minid"
+               : "blastx -task blastx-fast -seg no"
+               ;
+
   my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
-          . " blastn -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
-          . " -task blastn -evalue 1E-20 -dust no -max_target_seqs 10000 -perc_identity $minid"
-          . " -culling_limit $CULL) 2>&1"
+          . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
+          . " -evalue 1E-20 -culling_limit $CULL"
+          . " -max_target_seqs ".$dbinfo->{SEQUENCES}
+          . ") 2>&1"
           ;
+
   msg("Running: $cmd") if $debug;
   
   open BLAST, "$cmd |";
@@ -251,16 +260,21 @@ sub blast_database_info {
   $info->{SEQUENCES} = $1;
   $info->{SEQUENCES} =~ s/,//g;
 
-  $res =~ m/\bDatabase: (\S+)/;
+  $res =~ m/\btotal\s+(\S+)/ or return;
+  $info->{DBTYPE} = $1 eq 'residues' ? 'prot' : 'nucl';
+
+  $res =~ m/\bDatabase: (\S+)/ or return;
   $info->{TITLE} = $1;
   
-  $res =~ m/\bDate: (\w+)\s+(\d+),\s+(\d{4})\s/;
+  $res =~ m/\bDate: (\w+)\s+(\d+),\s+(\d{4})\s/ or return;
   $info->{DATE} = "$3-$1-$2";  # YYYY-MM-DD
   
   return $info;
 }
 
 #----------------------------------------------------------------------
+# blastdbcmd -list ../db/bacmet2/ -list_outfmt "%f~~~%p~~~%t~~~%d~~~%l~~~%n~~~%U"
+# ../db/bacmet2/sequences~~~Nucleotide~~~bacmet2~~~Apr 6, 2018  1:02 PM~~~280935~~~744~~~629421
 
 sub list_databases {
   my($from, $setup_too) = @_;
@@ -271,10 +285,9 @@ sub list_databases {
   for my $name (sort @dir) {
     my $dbname = "$from/$name/sequences";
     if (-r $dbname) {
-      if (not -r "$dbname.nin") {
+      if (!-r "$dbname.nin" and !-r "$dbname.pin") {
         if ($setup_too) {
-          msg("Database $name has not been indexed; formatting now.");
-          system("makeblastdb -in '$dbname' -title '$name' -dbtype nucl -parse_seqids -hash_index -logfile $from/$name/makeblastdb.log");
+          make_blast_database($dbname, $name);
         }
         else {
           err("Database $name is not indexed, please try: abricate --setupdb");
@@ -282,17 +295,39 @@ sub list_databases {
       }
       my $info = blast_database_info( $dbname );
       # save for end
-      push @list, [ $name, $info->{SEQUENCES}, $info->{DATE} ];
+      push @list, [ $name, $info->{SEQUENCES}, $info->{DBTYPE}, $info->{DATE} ];
     }
   }
   if (@list) {
     # print to STDOUT
-    print line("DATABASE", "SEQUENCES", "DATE");
+    print line("DATABASE", "SEQUENCES", "DBTYPE", "DATE");
     print map { line(@$_) } @list;
   }
   else {
     msg("No databases found in $from");
   }
+}
+
+#----------------------------------------------------------------------
+
+sub make_blast_database {
+  my($path, $name) = @_;
+  -r $path or err("Can't read FASTA file: $path");
+  my $letters = join '', map { chomp } (grep { ! m/^>/ } read_file($path));
+  my $dbtype = mol_type($letters);
+  msg("Making $dbtype BLAST index for $path");
+  system("makeblastdb -in '$path' -title '$name' -dbtype $dbtype -parse_seqids -logfile /dev/null");
+}
+
+#----------------------------------------------------------------------
+
+sub mol_type {
+  my($s) = @_;
+  my $L = length($s);
+  $s =~ s/[AGTC]//gi;
+  my $M = length($s);
+  #msg("mol_type: with_ATGC=$L without_AGTC=$M");
+  return $M > 0.5 * $L ? 'prot' : 'nucl';
 }
 
 #----------------------------------------------------------------------
@@ -374,6 +409,7 @@ sub setOptions {
     {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
     {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
     {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
+    {OPT=>"protein!",  VAR=>\$protein, DEFAULT=>0, DESC=>"DEV_ONLY! Treat database as protein"},
   );
 
   @ARGV or usage(1);
