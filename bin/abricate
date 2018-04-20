@@ -285,14 +285,8 @@ sub list_databases {
   for my $name (sort @dir) {
     my $dbname = "$from/$name/sequences";
     if (-r $dbname) {
-      if (!-r "$dbname.nin" and !-r "$dbname.pin") {
-        if ($setup_too) {
-          make_blast_database($dbname, $name);
-        }
-        else {
-          err("Database $name is not indexed, please try: abricate --setupdb");
-        }          
-      }
+      $setup_too and make_blast_database($dbname, $name);
+      -r "$dbname.pin" || -r "$dbname.nin" or err("Database $name is not indexed, please try: abricate --setupdb");
       my $info = blast_database_info( $dbname );
       # save for end
       push @list, [ $name, $info->{SEQUENCES}, $info->{DBTYPE}, $info->{DATE} ];
@@ -313,8 +307,12 @@ sub list_databases {
 sub make_blast_database {
   my($path, $name) = @_;
   -r $path or err("Can't read FASTA file: $path");
-  my $letters = join '', map { chomp } (grep { ! m/^>/ } read_file($path));
+  my @lines = grep { ! m/^>/ } read_file($path);
+  chomp @lines;
+  my $letters = join '', @lines;
   my $dbtype = mol_type($letters);
+  msg("Removing old BLAST indices for $path");
+  unlink <$path.[np]??>;
   msg("Making $dbtype BLAST index for $path");
   system("makeblastdb -in '$path' -title '$name' -dbtype $dbtype -parse_seqids -logfile /dev/null");
 }
