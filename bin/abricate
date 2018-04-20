@@ -14,7 +14,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8.1";
+my $VERSION = "0.8.2";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $EMAIL = 'torsten.seemann@gmail.com';
@@ -25,7 +25,7 @@ my $URL = 'https://github.com/tseemann/abricate';
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
              $datadir, $db, $minid, $mincov, $threads,
-             $noheader, $csv, $nopath, $protein);
+             $noheader, $csv, $nopath);
 setOptions();
 
 #..............................................................................
@@ -409,7 +409,6 @@ sub setOptions {
     {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
     {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
     {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
-    {OPT=>"protein!",  VAR=>\$protein, DEFAULT=>0, DESC=>"DEV_ONLY! Treat database as protein"},
   );
 
   @ARGV or usage(1);
