@@ -28,6 +28,7 @@ my %DATABASE = (
   'ncbi'              => \&get_ncbi,
   'vfdb'              => \&get_vfdb,
   'ecoh'              => \&get_ecoh,
+  'bacmet2'           => \&get_bacmet2,
 #  'serotypefinder'    => \&get_serotypefinder,
 );
 my $DATABASES = join(' ', sort keys %DATABASE);
@@ -305,9 +306,31 @@ sub get_argannot {
 }
 
 #..............................................................................
+sub get_bacmet2 {
+  my $fasta = 'bacmet2.fa';
+  download(
+    'http://bacmet.biomedicine.gu.se/download/BacMet2_EXP_database.fasta',
+    $fasta
+  );
+  
+  # This is a PROTEIN file 
+  my $seqs = load_fasta($fasta);
+
+  #  0       1    2  3      4         ^ 
+  # >BAC0098|ctpC|sp|P0A502|CTPC_MYCTU Probable manganese/zinc-exporting
+  for my $s (@$seqs) {
+    my @x = split m/\|/, $s->{ID};
+    $s->{ID} = $x[1].'-'.$x[0];
+    $s->{ACC} = $x[2].':'.$x[3];
+  }
+
+  return $seqs;
+}
+
+#..............................................................................
 sub get_card {
   download(
-    'https://card.mcmaster.ca/download/0/broadstreet-v2.0.0.tar.gz',
+    'https://card.mcmaster.ca/download/0/broadstreet-v2.0.1.tar.gz',
     "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
   );
 #  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
@@ -484,6 +507,7 @@ sub load_fasta {
   my($fasta) = @_;
   my %seen;
   my $list;
+  my $dbtype = 'unknown';
   msg("load_fasta: $fasta");
   my $in = Bio::SeqIO->new(-file=>$fasta, -format=>'fasta');
   while (my $seq = $in->next_seq) {
@@ -493,16 +517,18 @@ sub load_fasta {
       $id = $id.'_dupe';
     }
     $seen{$id}++;
-    my $dna = uc($seq->seq);
-    $dna =~ s/[^AGTC]/N/g;
+    my $s = uc($seq->seq);
+    $dbtype = $seq->alphabet eq 'dna' ? 'nucl' : 'prot';
+    $dbtype eq 'nucl' ? $s =~ s/[^AGTC]/N/g : $s =~ s/[^A-Z]/X/g ;
     push @$list, {
       ID   => $id,
       ACC  => '',
       DESC => $seq->desc,
-      SEQ  => $dna,
+      SEQ  => $s,
+      TYPE => $dbtype,
     }
   }
-  msg("load_fasta: read", scalar(@$list), "sequences");
+  msg("load_fasta: read", scalar(@$list), "$dbtype sequences");
   return $list;
 }
 
