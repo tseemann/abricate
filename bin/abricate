@@ -391,30 +391,35 @@ sub setOptions {
   use Getopt::Long;
 
   @Options = (
+    "GENERAL",
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
     {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
     {OPT=>"quiet!",  VAR=>\$quiet, DEFAULT=>0, DESC=>"Quiet mode, no stderr output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
+    {OPT=>"check!",  VAR=>\$check, DEFAULT=>0, DESC=>"Check dependencies are installed"},
+    {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
+    "DATABASES",
     {OPT=>"setupdb!",  VAR=>\$setupdb, DEFAULT=>0, DESC=>"Format all the BLAST databases"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
-    {OPT=>"check!",  VAR=>\$check, DEFAULT=>0, DESC=>"Check dependencies are installed"},
-    {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Location of database folders"},
     {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"Database to use"},
+    "OUTPUT",
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
+    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
+    "FILTERING",
     {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA %identity"},
     {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
-    {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
-    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
+    "MODE",
+    {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
   );
 
   @ARGV or usage(1);
 
-  &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage(1);
+  &GetOptions(map {$_->{OPT}, $_->{VAR}} (grep { ref } @Options)) || usage(1);
 
   # Now setup default values.
-  foreach (@Options) {
+  foreach (grep { ref } @Options) {
     if (defined($_->{DEFAULT}) && !defined(${$_->{VAR}})) {
       ${$_->{VAR}} = $_->{DEFAULT};
     }
@@ -427,23 +432,25 @@ sub usage {
   $exitcode ||= 0;
   select STDERR if $exitcode; # write to STDERR if exitcode is error
 
-  print "Synopsis:\n\tFind and collate amplicons in assembled contigs\n";
-  print "Author:\n\t$AUTHOR ($TWITTER)\n";
-  print "Usage:\n";
-  print "\t% $EXE --list\n";
-  print "\t% $EXE [options] <contigs.{fasta,gbk,embl}[.gz]> > out.tab\n";
-  print "\t% $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
-  print "Options:\n";
+  print "SYNOPSIS\n  Find and collate amplicons in assembled contigs\n";
+  print "AUTHOR\n  $AUTHOR ($TWITTER)\n";
+  print "USAGE\n";
+  print "  % $EXE --list\n";
+  print "  % $EXE [options] <contigs.{fasta,gbk,embl}[.gz]> > out.tab\n";
+  print "  % $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
+
   foreach (@Options) {
+    if (!ref $_) { print $_,"\n"; next }  # print text lines
     my $opt = $_->{OPT};
     $opt =~ s/!$//;
     $opt =~ s/=s$/ [X]/;
     $opt =~ s/=i$/ [N]/;
     $opt =~ s/=f$/ [n.n]/;
-    printf "\t--%-13s %s%s.\n",$opt,$_->{DESC},
+    printf "  --%-13s %s%s.\n",$opt,$_->{DESC},
            defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
   }
-  print "Documentation:\n\t$URL\n";
+
+  print "DOCUMENTATION\n  $URL\n";
   exit($exitcode);
 }
  
