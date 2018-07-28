@@ -4,7 +4,7 @@
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 It comes bundled with multiple databases: 
-Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI, EcOH, PlasmidFinder and
+Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI, EcOH, PlasmidFinder, Ecoli_VF and
 VFDB.
 
 ## Is this the right tool for me?
@@ -130,6 +130,7 @@ ABRicate comes with some pre-downloaded databases:
 * [EcOH](https://github.com/katholt/srst2/tree/master/data)
 * [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
+* [Ecoli_VF](https://github.com/phac-nml/ecoli_vf)
 
 You can check what you have installed with the `--list` command.
 This lists the available databases in TSV (or CSV with `--csv`) and three
@@ -137,15 +138,16 @@ columns:
 ```
 % abricate --list
 
-DATABASE       SEQUENCES  DATE
-abricate       4981       2018-Mar-18
-argannot       1749       2017-Aug-6
-card           2158       2017-Oct-23
-ecoh           597        2017-Sep-16
-ncbi           4179       2017-Oct-23
-plasmidfinder  263        2017-Aug-6
-resfinder      2247       2017-Oct-23
-vfdb           2597       2017-Aug-6
+DATABASE       SEQUENCES  DBTYPE  DATE
+abricate       4981       nucl    2018-Jul-28
+argannot       1749       nucl    2018-Jul-28
+card           2241       nucl    2018-Jul-28
+ecoh           597        nucl    2018-Jul-28
+ecoli_vf       2701       nucl    2018-Jul-28
+ncbi           4324       nucl    2018-Jul-28
+plasmidfinder  263        nucl    2018-Jul-28
+resfinder      2434       nucl    2018-Jul-28
+vfdb           2597       nucl    2018-Jul-28
 ```
 
 The default database is currently `resfinder`.
