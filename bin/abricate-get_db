@@ -27,6 +27,7 @@ my %DATABASE = (
 #  'ncbibetalactamase' => \&get_ncbibetalactamase,
   'ncbi'              => \&get_ncbi,
   'vfdb'              => \&get_vfdb,
+  'ecoli_vf'          => \&get_ecoli_vf,  # https://github.com/phac-nml/ecoli_vf
   'ecoh'              => \&get_ecoh,
   'bacmet2'           => \&get_bacmet2,
 #  'serotypefinder'    => \&get_serotypefinder,
@@ -330,7 +331,7 @@ sub get_bacmet2 {
 #..............................................................................
 sub get_card {
   download(
-    'https://card.mcmaster.ca/download/0/broadstreet-v2.0.1.tar.gz',
+    'https://card.mcmaster.ca/download/0/broadstreet-v2.0.2.tar.gz',
     "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
   );
 #  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
@@ -446,6 +447,33 @@ sub get_ecoh {
     $s->{ID} = $id[2];
     $s->{ACC} = shift(@desc);
     $s->{DESC} = join(' ', @desc);
+  }
+#  print Dumper($seqs);
+  return $seqs;
+}
+
+#..............................................................................
+sub get_ecoli_vf {
+  my $fasta = "ecoli_vf.ffn";
+  download('https://github.com/phac-nml/ecoli_vf/raw/master/data/repaired_ecoli_vfs_shortnames.ffn', $fasta);
+  my $seqs = load_fasta($fasta);
+
+  # >VFG000748(gi:2865308) (espF) EspF [EspF (VF0182)] [Escherichia coli O127:H6 str. E2348/69]
+  # >VFG000749(gi:6009379) (bfpA) Bundlin [BFP (VF0174)] [Escherichia coli B171]
+  # >SPG000142 (cvac) Escherichia coli cvi cvaC operon. [X57525 434-745]
+  # >SPG000143 (iss2) Escherichia coli Iss (iss) gene, complete cds. [AF042279 292-600]
+
+  for my $s (@$seqs) {
+    #print STDERR Dumper("IN", $s);
+    $s->{ID} =~ m/ ^ (\w+) (?: \( (.*?) \) )? $ /x or die "Can't parse $fasta at ".Dumper($s);
+    $s->{ID}  = $1 if $1;
+    $s->{ACC} = $2 || $1;
+    $s->{DESC} =~ s/\s\[.*?\]$//g; # remove strain name
+    $s->{DESC} =~ m/^(?:\((.*?)\)\s+)?(.*?)$/;
+    $s->{ID}  = $1 if $1;
+    $s->{DESC} = $2;
+    #print STDERR Dumper("OUT", $s);
+    #print STDERR "="x60, "\n";
   }
 #  print Dumper($seqs);
   return $seqs;
