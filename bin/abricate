@@ -1,20 +1,18 @@
 #!/usr/bin/env perl
 
-use warnings;
 use strict;
-use File::Spec;
-use Data::Dumper;
 use FindBin;
+use lib "$FindBin::RealBin/../perl5";
 use File::Spec;
-use File::Slurp;
+use Path::Tiny;
+use Data::Dumper;
 use List::MoreUtils qw(zip);
 use Cwd qw(abs_path);
-#use lib "$FindBin::RealBin/../perl5";
 
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8.3";
+my $VERSION = "0.8.4";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -278,11 +276,12 @@ sub blast_database_info {
 
 sub list_databases {
   my($from, $setup_too) = @_;
-  my @dir = grep { -d "$from/$_" } read_dir($from);
+  my @dir = grep { $_->is_dir } path($from)->realpath->children; # all subfolders
   my $count=0;
   my @list;
   
-  for my $name (sort @dir) {
+  for my $d (@dir) {
+    my $name = $d->basename; # gives the 'file' part of the pathname
     my $dbname = "$from/$name/sequences";
     if (-r $dbname) {
       $setup_too and make_blast_database($dbname, $name);
@@ -307,7 +306,8 @@ sub list_databases {
 sub make_blast_database {
   my($path, $name) = @_;
   -r $path or err("Can't read FASTA file: $path");
-  my @lines = grep { ! m/^>/ } read_file($path);
+  # guess if nucl or prot
+  my @lines = grep { ! m/^>/ } path($path)->lines( { chomp=>1 } );
   chomp @lines;
   my $letters = join '', @lines;
   my $dbtype = mol_type($letters);

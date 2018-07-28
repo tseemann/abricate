@@ -1,19 +1,18 @@
 #!/usr/bin/env perl
+
 use strict;
-use Bio::Seq;
+use FindBin;
+use lib "$FindBin::RealBin/../perl5";
 use Bio::SeqIO;
+use Path::Tiny;
 use File::Spec;
 use File::Path qw(make_path remove_tree);
-use File::Slurp qw(edit_file read_file);
 use List::Util qw(first);
 use Cwd qw(abs_path);
 use Data::Dumper;
 use LWP::Simple;
 use Text::CSV;
 use JSON;
-use FindBin;
-#use lib "$FindBin::RealBin/../perl5";
-#use Abricate::Headers qw(hash_encode hash_decode);
 
 #..............................................................................
 # Globals
@@ -290,7 +289,7 @@ sub get_argannot {
   );
   
   # fix syntax errors in the FASTA file...
-  edit_file { s/\\//g } $fasta;
+  path($fasta)->edit( sub { s/\\//g; $_ } );
 
   my $seqs = load_fasta($fasta);
 
@@ -339,12 +338,8 @@ sub get_card {
   system("tar xf card.tar.bz2 $jsonfile");
 
   # JSON
-#  my $json = read_file($json, binmode => ':utf8');
-  my $json = read_file($jsonfile);
-  my $card = from_json( $json, { latin1=>1 });
-#  my $card = decode_json( read_file($json) );
-#  my $card = from_json( read_file($json, binmode => ':utf8'), { utf8=>1 } );
-#  print Dumper($meta);
+  my $json = path($jsonfile)->slurp_utf8;
+  my $card = from_json( $json, { latin1=>1 } );
   my @seq;
   for my $g (values %$card) {
     next unless ref($g) eq 'HASH';
@@ -403,11 +398,9 @@ sub get_ncbibetalactamase {
   
   # ACC-1 ACD12694.1 EU650653.1 blaACC-1 1 1173 + cephalosporin-hydrolyzing class C beta-lactamase ACC-1
   my %anno;
-  my @anno = read_file($tab);
+  my @anno = grep { ! m/^#/ } path($tab)->lines({chomp=>1});
   msg("Read", 0+@anno, "annotations");
   foreach (@anno) {
-    next if m/^#/;
-    chomp;
     my($name,$id,$acc,$gene,$begin,$end,undef,$product) = split m/\t/;
     $anno{$id} = {
       ID => $gene,
