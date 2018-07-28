@@ -14,10 +14,10 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8.2";
+my $VERSION = "0.8.3";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
-my $EMAIL = 'torsten.seemann@gmail.com';
+my $TWITTER = '@torstenseemann';
 my $URL = 'https://github.com/tseemann/abricate';
 
 #..............................................................................
@@ -428,7 +428,7 @@ sub usage {
   select STDERR if $exitcode; # write to STDERR if exitcode is error
 
   print "Synopsis:\n\tFind and collate amplicons in assembled contigs\n";
-  print "Author:\n\t$AUTHOR <$EMAIL>\n";
+  print "Author:\n\t$AUTHOR ($TWITTER)\n";
   print "Usage:\n";
   print "\t% $EXE --list\n";
   print "\t% $EXE [options] <contigs.{fasta,gbk,embl}[.gz]> > out.tab\n";
