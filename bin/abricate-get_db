@@ -119,6 +119,10 @@ sub get_resfinder {
 
   my @seq;
   for my $fasta (<$name/*.fsa>) {
+    # Issue #62 - repair broken fasta files like this:
+    # GCTTTAAATTGGAAAAAAGATAGTCAAACTCTTTAA>cmr_1_U43535
+    # inline replacement
+    system('sed', '-i.bak', 's/\([A-Z]\)>/\1\n>/gi', $fasta);
     push @seq, @{ load_fasta($fasta) };
   }
 
