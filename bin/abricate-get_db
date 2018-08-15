@@ -4,6 +4,7 @@ use strict;
 use FindBin;
 use lib "$FindBin::RealBin/../perl5";
 use Bio::SeqIO;
+use Bio::Seq;
 use Path::Tiny;
 use File::Spec;
 use File::Path qw(make_path remove_tree);
@@ -333,14 +334,17 @@ sub get_bacmet2 {
 
 #..............................................................................
 sub get_card {
+  # https://github.com/tseemann/abricate/issues/25
+  my $tarball = 'card.tar.bz2';
   download(
-    'https://card.mcmaster.ca/download/0/broadstreet-v2.0.2.tar.gz',
-    "card.tar.bz2"   # yes, it's really BZ2 not GZ ...
+    #'https://card.mcmaster.ca/download/0/broadstreet-v2.0.2.tar.gz',
+    'https://card.mcmaster.ca/latest/data',
+    $tarball # yes, it's really BZ2 not GZ ...
   );
 #  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
   my $jsonfile = "./card.json";
-  system("tar xf card.tar.bz2 $jsonfile");
-
+  system("tar", "xf", $tarball, $jsonfile)==0 or err("Problem with tar xf $tarball $jsonfile");
+  -r $jsonfile or err("Could not extract $jsonfile from $tarball");
   # JSON
   my $json = path($jsonfile)->slurp_utf8;
   my $card = from_json( $json, { latin1=>1 } );
