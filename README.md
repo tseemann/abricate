@@ -40,7 +40,7 @@ Found 3 genes in 6159.fna
 ### Brew
 If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
 ```
-brew install brewsci/science/abricate
+brew install brewsci/bio/abricate
 abricate --check
 abricate --list
 ```
