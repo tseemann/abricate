@@ -383,8 +383,9 @@ sub get_vfdb {
 
   # >VFG000676(gb|AAD32411) (lef) anthrax toxin lethal factor precursor [Anthrax toxin (VF0142)] [Bacillus anthracis str. Sterne]
   for my $s (@$seqs) {
-#    print STDERR Dumper($s);
-    $s->{ID} =~ m/^(\w+)\(\w+\|(\w+)\)$/;
+    # https://github.com/tseemann/abricate/issues/64#issuecomment-421895159 by @VGalata
+    $s->{ID} =~ m/^(\w+)\(\w+\|(\w+)(\.\d+)?\)$/; #
+    #$s->{ID} =~ m/^(\w+)\(\w+\|(\w+)\)$/;
     $s->{ACC} = $2 if $2;
     $s->{DESC} =~ m/^\((.*?)\)/;
     $s->{ID}  = $1 if $1;
