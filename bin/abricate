@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8.10";
+my $VERSION = "0.8.11";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -114,7 +114,7 @@ for my $file (@ARGV) {
   my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
           . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
           . " -evalue 1E-20 -culling_limit $CULL"
-          . " -max_target_seqs ".$dbinfo->{SEQUENCES}
+#          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
           . ") 2>&1"
           ;
 
