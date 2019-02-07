@@ -286,10 +286,12 @@ sub get_megares {
 
 #..............................................................................
 sub get_argannot {
+  # the website at www.mediterranee-infection.com has been reorganised, file is pulled from a 'mirror' backup site. Updated to May '18 release
   my $fasta = 'arg-annot.fa';
   download(
 #    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/1425/argannot-aa-v3-march2017_doc.fasta',
-    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
+#    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
+     'http://backup.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/2042/arg-annot-v4-nt-may2018_doc.fasta',
     $fasta
   );
   
