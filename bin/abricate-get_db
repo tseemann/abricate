@@ -30,6 +30,7 @@ my %DATABASE = (
   'ecoli_vf'          => \&get_ecoli_vf,  # https://github.com/phac-nml/ecoli_vf
   'ecoh'              => \&get_ecoh,
   'bacmet2'           => \&get_bacmet2,
+  'victors'           => \&get_victors,
 #  'serotypefinder'    => \&get_serotypefinder,
 );
 my $DATABASES = join(' ', sort keys %DATABASE);
@@ -64,7 +65,7 @@ save_fasta("$dir/sequences", $seq);
 
 msg("Formatting BLASTN database: $dir/sequences");
 my $logfile = "$tmpdir/makeblastdb.log";
-my $ec = system("makeblastdb -in '$dir/sequences' -title '$db' -dbtype nucl -parse_seqids -hash_index -logfile $logfile");
+my $ec = system("makeblastdb -in '$dir/sequences' -title '$db' -dbtype nucl -hash_index -logfile $logfile");
 if ($ec != 0) {
   system("tail '$logfile'");
   err("Error with makign BLAST database. See $logfile");
@@ -79,7 +80,7 @@ sub download {
   my($url, $dest) = @_;
   if (-r $dest and not $force) {
      msg("Won't re-download existing $dest (use --force)");
-     exit(1);
+     #exit(1);
   }
   else {
     msg("Downloading: $url");
@@ -373,6 +374,39 @@ sub get_card {
   }
 
   return \@seq;
+}
+
+#..............................................................................
+sub get_victors {
+  # the CDS data is in .ffn and has source GI and coords
+  # the PROT data is in .faa and has the protein ref and /product
+
+  #>gi|115534241:2616-3152 Campylobacter jejuni plasmid pCJ01, complete sequence
+  download('http://www.phidias.us/victors/downloads/gen_downloads.php', 'victors.ffn');
+
+  #>gi|115534244|ref|YP_783826.1| hypothetical protein pCJ01p4 [Campylobacter jejuni]
+  download('http://www.phidias.us/victors/downloads/gen_downloads_protein.php', 'victors.faa');
+
+  my %gi;
+  open my $FAA, '<', 'victors.faa';
+  while (<$FAA>) {
+    #>gi|115534244|ref|YP_783826.1| hypothetical protein pCJ01p4 [Campylobacter jejuni]
+    next unless m"^>gi.(\d+).ref.([^|]+). ([^[]+)";
+    $gi{$1}{ACC} = $2;
+    $gi{$1}{DESC} = $3;
+  }
+
+  my $seqs = load_fasta("victors.ffn");
+
+  for my $s (@$seqs) {
+    #>gi|115534241:2616-3152 Campylobacter jejuni plasmid pCJ01, complete sequence
+    $s->{ID} =~ m/gi.(\d+):(\d+)-(\d+)/;
+    $s->{ACC} = $gi{$1}{ACC} || "gi|$1:$2-$3";
+    $s->{DESC} =~ $gi{$1}{DESC} || 'hypothetical protein';
+  }
+#  print Dumper($seqs); exit;
+
+  return $seqs;
 }
 
 #..............................................................................
