@@ -314,7 +314,7 @@ sub make_blast_database {
   msg("Removing old BLAST indices for $path");
   unlink <$path.[np]??>;
   msg("Making $dbtype BLAST index for $path");
-  system("makeblastdb -in '$path' -title '$name' -dbtype $dbtype -parse_seqids -logfile /dev/null");
+  system("makeblastdb -in '$path' -title '$name' -dbtype $dbtype -logfile /dev/null");
 }
 
 #----------------------------------------------------------------------
