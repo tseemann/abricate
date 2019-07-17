@@ -265,7 +265,7 @@ sub get_plasmidfinder {
 
 #..............................................................................
 sub get_megares {
-  err("MEGARES is currently not supported due issues with its confused metadata.");
+  err("MEGARES is not supported due to issues with its inconsistent metadata.");
   my $zip = "megares.zip";
   download('https://megares.meglab.org/download/megares_v1.01.zip', $zip);
   system("unzip -j -u $zip");
