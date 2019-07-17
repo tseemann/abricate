@@ -290,7 +290,8 @@ sub get_argannot {
   my $fasta = 'arg-annot.fa';
   download(
 #    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/1425/argannot-aa-v3-march2017_doc.fasta',
-    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
+#    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
+    'https://www.mediterranee-infection.com/wp-content/uploads/2019/06/ARG_ANNOT_V5_Nt_JUNE2019.txt',
     $fasta
   );
   
