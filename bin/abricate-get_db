@@ -340,6 +340,7 @@ sub get_card {
   download(
     #'https://card.mcmaster.ca/download/0/broadstreet-v2.0.2.tar.gz',
     'https://card.mcmaster.ca/latest/data',
+    #'https://card.mcmaster.ca/latest/data/card-data.tar.bz2',
     $tarball # yes, it's really BZ2 not GZ ...
   );
 #  my $fasta = "./nucleotide_fasta_protein_homolog_model.fasta";
