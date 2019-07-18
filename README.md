@@ -20,6 +20,7 @@ Otherwise consider using
 [Resfinder](https://cge.cbs.dtu.dk/services/ResFinder/),
 [RGI](https://card.mcmaster.ca/analyze/rgi),
 [SRST2](https://github.com/katholt/srst2),
+[AMRFinder](https://www.ncbi.nlm.nih.gov/pathogens/antimicrobial-resistance/AMRFinder/),
 *etc.*
 
 ## Quick Start
