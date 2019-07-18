@@ -49,7 +49,7 @@ abricate --list
 If you use [Conda](https://conda.io/docs/install/quick.html) 
 follow the instructions to add the [Bioconda channel](https://bioconda.github.io/):
 ```
-conda install abricate
+conda install -c conda-forge -c bioconda -c defaults abricate
 abricate --check
 abricate --list
 ```
