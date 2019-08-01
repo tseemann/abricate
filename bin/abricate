@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.8.13";
+my $VERSION = "0.9.0";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -402,7 +402,7 @@ sub setOptions {
     {OPT=>"setupdb!",  VAR=>\$setupdb, DEFAULT=>0, DESC=>"Format all the BLAST databases"},
     {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Location of database folders"},
-    {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"resfinder", DESC=>"Database to use"},
+    {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"ncbi", DESC=>"Database to use"},
     "OUTPUT",
     {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
