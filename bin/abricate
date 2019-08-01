@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.9.0";
+my $VERSION = "0.9.1";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -49,7 +49,7 @@ my @COLUMNS = qw(
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
-my @REQUIRE = qw(blastn tblastn makeblastdb blastdbcmd seqret gzip unzip);
+my @REQUIRE = qw(blastn tblastn makeblastdb blastdbcmd any2fasta gzip unzip);
 
 #..............................................................................
 # Option parsing
@@ -111,7 +111,7 @@ for my $file (@ARGV) {
                : "blastx -task blastx-fast -seg no"
                ;
 
-  my $cmd = "(gzip -d -c -f \Q$file\E | seqret -auto -filter -osformat2 fasta |"
+  my $cmd = "(any2fasta -q -u \Q$file\E |"
           . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
           . " -evalue 1E-20 -culling_limit $CULL"
 #          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
