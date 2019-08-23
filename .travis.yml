@@ -17,7 +17,6 @@ install:
     - "cpanm --quiet --notest JSON LWP::Simple Text::CSV File::Slurp Bio::Perl"
     - "wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1/ncbi-blast-2.7.1+-x64-linux.tar.gz"
     - "tar zxvf ncbi-blast-2.7.1+-x64-linux.tar.gz"
-    - "mkdir bin"
     - "curl https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta > bin/any2fasta"
     - "chmod +x bin/any2fasta"
     - "export PATH=$PWD/bin:$PWD/ncbi-blast-2.7.1+/bin:$PATH"
