@@ -57,15 +57,16 @@ abricate --list
 
 ### Source
 If you install from source, Abricate has the following package dependencies:
-* EMBOSS for `seqret`
+* `any2fasta` for sequence file format conversion
 * BLAST+ >2.3.0 for `blastn`, `makeblastdb`, `blastdbcmd`
 * Decompression tools `gzip` and `unzip`
-* Perl modules: `LWP::Simple`, `Text::CSV`, `Bio::Perl`, `JSON`, `File::Slurp`
+* Perl modules: `LWP::Simple`, `Text::CSV`, `Bio::Perl`, `JSON`, `Path::Tiny`
+* EntrezUtils: often called `edirect` or `eutils`, only needed for downloading NCBI DB
 
-These are easy to install on an Ubuntu-based system:
+Most of these are easy to install on an Ubuntu-based system:
 ```
 sudo apt-get install emboss bioperl ncbi-blast+ gzip unzip \
-  libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl libwww-perl
+  libjson-perl libtext-csv-perl libfile-path-tiny liblwp-protocol-https-perl libwww-perl
 git clone https://github.com/tseemann/abricate.git
 ./abricate/bin/abricate --check
 ./abricate/bin/abricate --setupdb
@@ -74,13 +75,13 @@ git clone https://github.com/tseemann/abricate.git
 
 ## Input
 
-Abricate takes any sequence file that EMBOSS `seqret` can convert to FASTA files (eg. Genbank,
-EMBL), and they can be optionally `gzip` compressed.
+Abricate takes any sequence file that `any2fasta` can convert to FASTA files (eg. Genbank,
+EMBL), and they can be optionally `gzip` or `bzip2` compressed.
 ```
 abricate assembly.fa 
 abricate assembly.fa.gz
 abricate assembly.gbk 
-abricate assembly.gbk.gz
+abricate assembly.gbk.bz2
 ```
 
 It can take multiple files at once too:
