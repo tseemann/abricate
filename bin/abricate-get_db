@@ -128,8 +128,12 @@ sub get_resfinder {
     push @seq, @{ load_fasta($fasta) };
   }
 
+  # https://github.com/tseemann/abricate/issues/92
+  # mcr-9_1_NZ_NAAN01000063.1
+  # resfinder~~~_~~~
+  
   for my $seq (@seq) {
-    my($id,$copy,$acc) = $seq->{ID} =~ m/^(.*)_(\d+)_(\w+)$/;
+    my($id,$copy,$acc) = $seq->{ID} =~ m/^(.*?)_(\d+)_(\S+)$/;
     #msg("resfinder: $1 $2 $3", $anno{$1});
     $seq->{ID}   = "${id}_${copy}";
     $seq->{ACC}  = $acc;
