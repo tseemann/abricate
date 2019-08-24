@@ -197,7 +197,7 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 
 Let's say you want to make your own database called `tinyamr`. 
 All you need is a FASTA file of nucleotide sequences, say `tinyamr.fa`.
-Idealy the sequence IDs would have the format `>DB~~~ID~~~ACC DESC`
+Ideally the sequence IDs would have the format `>DB~~~ID~~~ACC DESC`
 where `DB` is `tinyamr`, `ID` is the gene name, and `ACC` is an accession
 number of the sequence source. The `DESC` can be any textual description.
 
@@ -205,6 +205,8 @@ number of the sequence source. The `DESC` can be any textual description.
 % cd /path/to/abricate/db     # this is the --datadir default option
 % mkdir tinyamr
 % cp /path/to/tinyamr.fa sequences
+% head -n 1 sequences
+>tinyamr~~~GENE_ID~~~GENE_ACC some description here
 % abricate --setupdb
 % # or just do this: makeblastdb -in sequences -title tinyamr -dbtype nucl -parse_seqids -hash_index
 
