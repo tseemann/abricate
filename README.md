@@ -60,7 +60,7 @@ If you install from source, Abricate has the following package dependencies:
 * `any2fasta` for sequence file format conversion
 * BLAST+ >2.3.0 for `blastn`, `makeblastdb`, `blastdbcmd`
 * Decompression tools `gzip` and `unzip`
-* Perl modules: `LWP::Simple`, `Text::CSV`, `Bio::Perl`, `JSON`, `Path::Tiny`
+* Perl modules: `LWP::Simple`, `Bio::Perl`, `JSON`, `Path::Tiny`
 * EntrezUtils: often called `edirect` or `eutils`, only needed for downloading NCBI DB
 
 Most of these are easy to install on an Ubuntu-based system:

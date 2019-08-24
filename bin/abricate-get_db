@@ -12,7 +12,6 @@ use List::Util qw(first);
 use Cwd qw(abs_path);
 use Data::Dumper;
 use LWP::Simple;
-use Text::CSV;
 use JSON;
 
 #..............................................................................
