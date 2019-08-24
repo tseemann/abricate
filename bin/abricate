@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.9.4";
+my $VERSION = "0.9.5";
 my $EXE = just_filename( $FindBin::RealScript );
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -147,6 +147,9 @@ for my $file (@ARGV) {
 
     my $product = $hit{'stitle'} || "n/a";
     $product =~ s/[,\t]//g;  # remove output separators
+
+    # https://github.com/tseemann/abricate/issues/95
+    $product =~ s/^\S+\s+// if $product =~ m/$IDSEP/;
 
     my $minimap = minimap( @hit{qw(sstart send slen gapopen)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
