@@ -220,7 +220,7 @@ tinyamr            173        2017-Aug-28
 ## Etymology
 
 The name "ABRicate" was chosen as the first 3 letters are a common acronym
-for "Anti-Biotic Resistance". It laso has the form of an English _verb_, 
+for "Anti-Biotic Resistance". It also has the form of an English _verb_, 
 which suggests the tool actual taking "action" against the problem of antibiotic resistance.
 It is also relatively unique in [Google](https://www.google.com.au/search?q=abricate),
 and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/2014/12/1/time-for-a-new-jabba-award-for-just-another-bogus-bioinformatics-acronym).
