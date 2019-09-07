@@ -2,7 +2,6 @@
 
 use strict;
 use FindBin;
-use lib "$FindBin::RealBin/../perl5";
 use File::Spec;
 use Path::Tiny;
 use Data::Dumper;
