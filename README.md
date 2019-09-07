@@ -32,10 +32,10 @@ Otherwise consider using
 Using database resfinder:  2130 sequences -  Mar 17, 2017
 Processing: 6159.fna
 Found 3 genes in 6159.fna
-#FILE     SEQUENCE     START   END     GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE   ACCESSION  PRODUCT
-6159.fna  NC_017338.1  39177   41186   mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    resfinder  AB505628   n/a
-6159.fna  NC_017338.1  727191  728356  norA_1   1-1166/1167  ===============  0/0   99.91      92.367     resfinder  M97169     n/a
-6159.fna  NC_017339.1  10150   10995   blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832   betalactamase
+#FILE     SEQUENCE     START   END     STRAND GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE   ACCESSION  PRODUCT
+6159.fna  NC_017338.1  39177   41186   +      mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    resfinder  AB505628   n/a
+6159.fna  NC_017338.1  727191  728356  -      norA_1   1-1166/1167  ===============  0/0   99.91      92.367     resfinder  M97169     n/a
+6159.fna  NC_017339.1  10150   10995   +      blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832   betalactamase
 ```
 
 ## Installation
@@ -105,6 +105,7 @@ FILE | Ecoli.fna | The filename this hit came from
 SEQUENCE | contig000324 | The sequence in the filename
 START | 23423 | Start coordinate in the sequence
 END | 24117 | End coordinate
+STRAND | + | Strand + or -
 GENE | tet(M) | AMR gene name
 COVERAGE | 1-1920/1920 | What proportion of the gene is in our sequence
 COVERAGE_MAP | =============== | A visual represenation

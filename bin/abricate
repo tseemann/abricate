@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.9.7";
+my $VERSION = "0.9.8";
 my $EXE = basename($0);
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -45,7 +45,8 @@ my @BLAST_FIELDS = qw(
 );
 
 my @COLUMNS = qw(
- FILE SEQUENCE START END GENE COVERAGE COVERAGE_MAP GAPS %COVERAGE %IDENTITY DATABASE ACCESSION PRODUCT
+ FILE SEQUENCE START END STRAND GENE COVERAGE COVERAGE_MAP GAPS
+ %COVERAGE %IDENTITY DATABASE ACCESSION PRODUCT
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
@@ -158,6 +159,7 @@ for my $file (@ARGV) {
       $hit{qseqid}, 
       $hit{qstart}, 
       $hit{qend},
+      ($hit{sstrand} eq 'minus' ? '-' : '+'),
       $gene,  #$hit{sseqid},
       $hit{sstart}.'-'.$hit{send}.'/'.$hit{slen}, 
       $minimap, 
