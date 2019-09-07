@@ -5,6 +5,7 @@ use FindBin;
 use Bio::SeqIO;
 use Bio::Seq;
 use Path::Tiny;
+use File::Basename;
 use File::Spec;
 use File::Path qw(make_path remove_tree);
 use List::Util qw(first);
@@ -15,6 +16,8 @@ use JSON;
 
 #..............................................................................
 # Globals
+
+my $EXE = basename($0);
 
 my %DATABASE = (
   'resfinder'         => \&get_resfinder,
@@ -652,12 +655,10 @@ sub setOptions {
   @Options = (
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
     {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
-    {OPT=>"dbdir=s", VAR=>\$outdir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Parent folder"},
-    {OPT=>"db=s",    VAR=>\$db, DEFAULT=>"",  DESC=>"Options: $DATABASES" },
+    {OPT=>"dbdir=s", VAR=>\$outdir, DEFAULT=>abs_path("$FindBin::RealBin/../db"), DESC=>"Parent folder"},
+    {OPT=>"db=s",    VAR=>\$db, DEFAULT=>"",  DESC=>"Choices: $DATABASES" },
     {OPT=>"force!",  VAR=>\$force, DEFAULT=>0, DESC=>"Force download even if exists"},
   );
-
-#  @ARGV or usage();
 
   &GetOptions(map {$_->{OPT}, $_->{VAR}} @Options) || usage(1);
 
@@ -675,7 +676,9 @@ sub usage {
   $exitcode ||= 0;
   select STDERR if $exitcode; # write to STDERR if exitcode is error
   
-  print "Usage: $0 [options]\n";
+  print "SYNOPIS\n  Download databases for abricate to use\n";
+  print "USAGE\n  $EXE [options] --db DATABASE\n";
+  print "OPTIONS\n";
   foreach (@Options) {
     printf "  --%-13s %s%s.\n",$_->{OPT},$_->{DESC},
            defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";

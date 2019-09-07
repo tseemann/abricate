@@ -1,7 +1,8 @@
 #!/usr/bin/env perl
-
 use strict;
 use FindBin;
+use File::Basename;
+use Cwd qw(abs_path);
 use File::Spec;
 use Path::Tiny;
 use Data::Dumper;
@@ -11,8 +12,8 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.9.5";
-my $EXE = just_filename( $FindBin::RealScript );
+my $VERSION = "0.9.6";
+my $EXE = basename($0);
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
 my $URL = 'https://github.com/tseemann/abricate';
@@ -395,25 +396,25 @@ sub setOptions {
   @Options = (
     "GENERAL",
     {OPT=>"help",    VAR=>\&usage,             DESC=>"This help"},
-    {OPT=>"debug!",  VAR=>\$debug, DEFAULT=>0, DESC=>"Verbose debug output"},
-    {OPT=>"quiet!",  VAR=>\$quiet, DEFAULT=>0, DESC=>"Quiet mode, no stderr output"},
+    {OPT=>"debug!",  VAR=>\$debug, DESC=>"Verbose debug output"},
+    {OPT=>"quiet!",  VAR=>\$quiet, DESC=>"Quiet mode, no stderr output"},
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
-    {OPT=>"check!",  VAR=>\$check, DEFAULT=>0, DESC=>"Check dependencies are installed"},
+    {OPT=>"check!",  VAR=>\$check, DESC=>"Check dependencies are installed"},
     {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
     "DATABASES",
-    {OPT=>"setupdb!",  VAR=>\$setupdb, DEFAULT=>0, DESC=>"Format all the BLAST databases"},
-    {OPT=>"list!",  VAR=>\$list, DEFAULT=>0, DESC=>"List included databases"},
-    {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>"$FindBin::RealBin/../db", DESC=>"Location of database folders"},
+    {OPT=>"setupdb!",  VAR=>\$setupdb, DESC=>"Format all the BLAST databases"},
+    {OPT=>"list!",  VAR=>\$list, DESC=>"List included databases"},
+    {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>abs_path("$FindBin::RealBin/../db"), DESC=>"Databases folder"},
     {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"ncbi", DESC=>"Database to use"},
     "OUTPUT",
-    {OPT=>"noheader!",  VAR=>\$noheader, DEFAULT=>0, DESC=>"Suppress column header row"},
-    {OPT=>"csv!",  VAR=>\$csv, DEFAULT=>0, DESC=>"Output CSV instead of TSV"},
-    {OPT=>"nopath!",  VAR=>\$nopath, DEFAULT=>0, DESC=>"Strip filename paths from FILE column"},
+    {OPT=>"noheader!",  VAR=>\$noheader, DESC=>"Suppress column header row"},
+    {OPT=>"csv!",  VAR=>\$csv, DESC=>"Output CSV instead of TSV"},
+    {OPT=>"nopath!",  VAR=>\$nopath, DESC=>"Strip filename paths from FILE column"},
     "FILTERING",
     {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA %identity"},
     {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
     "MODE",
-    {OPT=>"summary!",  VAR=>\$summary, DEFAULT=>0, DESC=>"Summarize multiple reports into a table"},
+    {OPT=>"summary!",  VAR=>\$summary, DESC=>"Summarize multiple reports into a table"},
   );
 
   @ARGV or usage(1);
@@ -449,7 +450,7 @@ sub usage {
     $opt =~ s/=i$/ [N]/;
     $opt =~ s/=f$/ [n.n]/;
     printf "  --%-13s %s%s.\n",$opt,$_->{DESC},
-           defined($_->{DEFAULT}) ? " (default '$_->{DEFAULT}')" : "";
+           defined($_->{DEFAULT}) ? " [$_->{DEFAULT}]" : "";
   }
 
   print "DOCUMENTATION\n  $URL\n";
