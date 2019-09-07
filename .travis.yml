@@ -18,7 +18,7 @@ env:
 
 install:
     - "cpanm --quiet --notest JSON LWP::Simple Bio::Perl"
-    - "wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLASTVER}/ncbi-blast-${BLASTVER}+-x64-linux.tar.gz"
+    - "wget http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLASTVER}/ncbi-blast-${BLASTVER}+-x64-linux.tar.gz"
     - "tar zxvf ncbi-blast-${BLASTVER}+-x64-linux.tar.gz"
     - "curl https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta > bin/any2fasta"
     - "chmod +x bin/any2fasta"
