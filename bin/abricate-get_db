@@ -109,14 +109,21 @@ sub get_resfinder {
   }
 
   my %anno;
-  open NOTES, '<', "$name/notes.txt";
-  while (<NOTES>) {
+  open my $NOTES, '<', "$name/notes.txt";
+  while (<$NOTES>) {
     chomp;
     chop; # remove the DOS CR ending
     next if m/^#/;
     my @x = split m/:/;
-    $anno{$x[0]} = join(':', @x[2..$#x]);
+    $anno{$x[0]}{DESC} = join(':', @x[2..$#x]);
+    $x[1] =~ s/\s+resistance.*$//;
+    $x[1] =~ s/ acid/_acid/;
+    $x[1] =~ s/\s+([AB])\b/_$1/g;
+    $x[1] =~ s/\s+and//g;
+    $x[1] =~ s/[^\w\s]+//g;
+    $anno{$x[0]}{ABX} = join('/', (split ' ',$x[1]));
   }
+  close $NOTES;
   msg("get_resfinder: notes.txt has", scalar(keys %anno), "genes");
   #print Dumper(\%anno);
 
@@ -138,7 +145,8 @@ sub get_resfinder {
     #msg("resfinder: $1 $2 $3", $anno{$1});
     $seq->{ID}   = "${id}_${copy}";
     $seq->{ACC}  = $acc;
-    $seq->{DESC} = $anno{$id} || '';
+    $seq->{DESC} = $anno{$id}{DESC} || '';
+    $seq->{ABX}  = $anno{$id}{ABX} || '';
   }
   
   return \@seq;
@@ -250,7 +258,7 @@ sub get_ncbi {
     err("$pi: gene is empty") unless $gene;
     err("$pi: product is empty") unless $prod;
     my $s = { ID=>$gene, ACC=>$t->{refseq_nucleotide_accession}, 
-              DESC=>$prod, SEQ=>$rec->seq };
+              DESC=>$prod, SEQ=>$rec->seq, ABX=>$t->{subclass} };
     push @seq, $s;
     msg("[$name]", 0+@seq, "|", $s->{ID}, "|", $s->{ACC}, "|", $s->{DESC});
     #msg(Dumper($s));
@@ -385,12 +393,30 @@ sub get_card {
     $dna = $dna->{$key} or err("$id: invalid key '$key'"); 
     $dna = $dna->{dna_sequence} or err("$id: no dna_sequence");
 #    msg(Dumper($dna)) if $id eq 'OXA-25';
+
+    # ARO_category => { 
+    #	'category_aro_name' => 'cephalosporin',
+    #	'category_aro_class_name' => 'Drug Class',
+    my @abx;
+    for my $key (keys $g->{ARO_category}->%*) {
+      my $c = $g->{ARO_category}{$key};
+      if ($c->{category_aro_class_name} eq 'Drug Class') {
+        my $abx = $c->{category_aro_name};
+        $abx =~ s/ antibiotic//;
+        $abx =~ s/\s/_/g;
+        push @abx, $abx;
+      }
+    } 
+    #msg("CARD | $id | ", Dumper($g->{ARO_category}) );
+    #msg("ABX=$_") for @abx;
+
     $id =~ s/\s+/_/g;
     push @seq, {
       ID   => $id,
       ACC  => $dna->{accession}.':'.($dna->{fmin}+1).'-'.($dna->{fmax}+1),
       DESC => ($g->{ARO_description} || $g->{ARO_accession}),
       SEQ  => $dna->{sequence},
+      ABX  => join('/', @abx),
     };
 #    msg(Dumper($seq[-1]));
   }
@@ -662,7 +688,7 @@ sub save_fasta {
     whine("seen $s->{ID} now $freq times") if $freq > 1;
 #    print Dumper($s);
     my $obj = Bio::Seq->new(
-      -id   => join('~~~', $db, $s->{ID}, $s->{ACC}),
+      -id   => join('~~~', $db, $s->{ID}, $s->{ACC}, $s->{ABX}),
       -desc => ($s->{DESC} || $s->{ID}),
       -seq  => $s->{SEQ},
     );

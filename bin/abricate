@@ -46,7 +46,7 @@ my @BLAST_FIELDS = qw(
 
 my @COLUMNS = qw(
  FILE SEQUENCE START END STRAND GENE COVERAGE COVERAGE_MAP GAPS
- %COVERAGE %IDENTITY DATABASE ACCESSION PRODUCT
+ %COVERAGE %IDENTITY DATABASE ACCESSION PRODUCT RESISTANCE
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
@@ -137,7 +137,7 @@ for my $file (@ARGV) {
     next unless $pccov >= $mincov;
 
 #    $hit{sseqid} =~ s/_.*$//;
-    my($database, $gene, $acc) = split m/$IDSEP/, $hit{sseqid};
+    my($database, $gene, $acc, $abx) = split m/$IDSEP/, $hit{sseqid};
     # if it wasn't in the format we expected, try and be sensible
     if (!defined $gene and !defined $acc) {
       $acc = '';
@@ -169,6 +169,7 @@ for my $file (@ARGV) {
       $database,
       $acc,
       $product,
+      $abx,
     ];
   }
   close BLAST;

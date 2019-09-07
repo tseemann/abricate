@@ -6,15 +6,15 @@
 
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 It comes bundled with multiple databases: 
-Resfinder, CARD, ARG-ANNOT, NCBI BARRGD, NCBI, EcOH, PlasmidFinder, Ecoli_VF and
+NCBI, CARD, ARG-ANNOT, Resfinder, NCBI, EcOH, PlasmidFinder, Ecoli_VF and
 VFDB.
 
 ## Is this the right tool for me?
 
 1. It only supports contigs, not FASTQ reads (including Genbank and .gz compressed files)
 2. It only detects acquired resistance genes, **NOT** point mutations
-3. It needs BLAST+ >= 2.2.30 and EMBOSS to be installed
-4. It's written in Perl
+3. It needs BLAST+ >= 2.2.30 and `any2fasta` to be installed
+4. It's written in Perl :camel:
 
 If you are happy with the above, then please continue!
 Otherwise consider using
@@ -32,10 +32,10 @@ Otherwise consider using
 Using database resfinder:  2130 sequences -  Mar 17, 2017
 Processing: 6159.fna
 Found 3 genes in 6159.fna
-#FILE     SEQUENCE     START   END     STRAND GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE   ACCESSION  PRODUCT
-6159.fna  NC_017338.1  39177   41186   +      mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    resfinder  AB505628   n/a
-6159.fna  NC_017338.1  727191  728356  -      norA_1   1-1166/1167  ===============  0/0   99.91      92.367     resfinder  M97169     n/a
-6159.fna  NC_017339.1  10150   10995   +      blaZ_32  1-846/846    ===============  0/0   100.00     100.000    resfinder  AP004832   betalactamase
+#FILE     SEQUENCE     START   END     STRAND GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE  ACCESSION  PRODUCT        RESISTANCE
+6159.fna  NC_017338.1  39177   41186   +      mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    ncbi      AB505628   n/a	     FUSIDIC ACID
+6159.fna  NC_017338.1  727191  728356  -      norA_1   1-1166/1167  ===============  0/0   99.91      92.367     ncbi      M97169     n/a            FOSFOMYCIN
+6159.fna  NC_017339.1  10150   10995   +      blaZ_32  1-846/846    ===============  0/0   100.00     100.000    ncbi      AP004832   betalactamase  BETA-LACTAM
 ```
 
 ## Installation
@@ -115,6 +115,7 @@ GAPS | 1/4 | Openings / gaps in subject and query - possible psuedogene?
 DATABASE | card | The database this sequence comes from
 ACCESSION | NC_009632:49744-50476 | The genomic source of the sequence
 PRODUCT | aminoglycoside O-phosphotransferase APH(3')-IIIa | Gene product (if available)
+RESISTANCE | putative antibiotic resistance phenotype (`--db card,ncbi,resfinder` only)
 
 ## Caveats
 
