@@ -155,7 +155,7 @@ for my $file (@ARGV) {
     my $minimap = minimap( @hit{qw(sstart send slen gapopen)} );
 #    $minimap .= '!-'.$hit{gaps} if $hit{gaps} > 0;
     push @hit, [ 
-      $nopath ? just_filename($file) : $file ,
+      $nopath ? basename($file) : $file ,
       $hit{qseqid}, 
       $hit{qstart}, 
       $hit{qend},
@@ -229,7 +229,7 @@ sub summary_table {
       print STDERR "### [$.] @col\n" if $debug;
       @hdr = @col if ! @hdr;  # first row we see will be header
       next if $col[0] =~ m/^#/;
-      $col[0] = just_filename($col[0]) if $nopath;
+      $col[0] = basename($col[0]) if $nopath;
       $id_of{$fname} ||= $col[0];  # keep alternate "original filename"
       my $row = { zip @hdr, @col };
       print STDERR Dumper($row) if $debug;
@@ -358,14 +358,6 @@ sub msg {
 sub err {
   print STDERR "ERROR: @_\n";
   exit(1);
-}
-
-#----------------------------------------------------------------------
-
-sub just_filename {
-  my($path) = @_;
-  my(undef,undef,$fname) = File::Spec->splitpath( $path );
-  return $fname;
 }
 
 #----------------------------------------------------------------------
