@@ -127,7 +127,7 @@ for my $file (@ARGV) {
     chomp;
     my @x = split m/\t/;
 
-    @x == @BLAST_FIELDS or err("WARNING: can not find sequence data in '$file'");
+    @x == @BLAST_FIELDS or err("can not find sequence data in '$file'");
 
     my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
