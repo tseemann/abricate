@@ -61,6 +61,7 @@ $threads >= 1 or err("Invalid --threads option, must be 1 or higher");
 $OUTSEP = ',' if $csv;  # default is tab
 
 if ($summary) {
+  @ARGV >= 2 or err("--summary needs 2 or more abricate output files");
   summary_table( @ARGV );
   exit;
 }
