@@ -219,11 +219,14 @@ sub summary_table {
   my %id_of;
 
   for my $fname (@fname) {
-    err("Already summarized file '$fname'") if exists $data{$fname};
+    if (exists $data{$fname}) {
+      wrn("Skipping duplicate file: $fname");
+      next;
+    }
     # initialise to empty so it appears in report even if 0 genes found
     $data{$fname} = {};
     msg("Parsing: $fname") if $debug;
-    open my $fh, '<', $fname or msg("WARNING: Can not open '$fname' to summarize.");
+    open my $fh, '<', $fname or err("Can't open '$fname' to summarize.");
     while (<$fh>) {
       chomp;
       my @col = split m/$OUTSEP/;
@@ -247,7 +250,8 @@ sub summary_table {
                         ? join( $FIELDSEP, map { $_->{$FIELD} } @{$data{$fname}{$_}} ) 
                         : $ABSENT 
                       } @gene;
-    print line( $fname || $fname, scalar( keys %{$data{$fname}} ), @present );
+    my $label = $nopath ?  basename($fname) : $fname;;
+    print line( $label, scalar( keys %{$data{$fname}} ), @present );
     # print line( $id_of{$fname} || $fname, scalar( keys %{$data{$fname}} ), @present );
   }
 }
@@ -352,6 +356,12 @@ sub version {
 
 sub msg {
   print STDERR "@_\n" unless $quiet;
+}
+
+#----------------------------------------------------------------------
+
+sub wrn {
+  msg("WARNING:", @_);
 }
 
 #----------------------------------------------------------------------
