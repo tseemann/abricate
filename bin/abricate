@@ -61,7 +61,7 @@ $threads >= 1 or err("Invalid --threads option, must be 1 or higher");
 $OUTSEP = ',' if $csv;  # default is tab
 
 if ($summary) {
-  @ARGV >= 2 or err("--summary needs 2 or more abricate output files");
+  @ARGV >= 1 or err("--summary needs >=1 abricate output files");
   summary_table( @ARGV );
   exit;
 }
@@ -212,11 +212,14 @@ sub minimap {
 sub summary_table {
   my(@fname) = @_;
   
+  # https://github.com/tseemann/abricate/issues/32
+  # if we have 1 file, we use the '#FILE' column as the key: "dutch mode"
+  # if we have >1 files, we use the $fname[] name
+  my $dutch_mode = (@fname == 1);
+
   my %gene;  # genes observed
-#  my %data = ( map { $_ => {} } @fname); 
   my %data;
   my @hdr;
-  my %id_of;
 
   for my $fname (@fname) {
     if (exists $data{$fname}) {
@@ -224,22 +227,23 @@ sub summary_table {
       next;
     }
     # initialise to empty so it appears in report even if 0 genes found
-    $data{$fname} = {};
+    $data{$fname} = {} unless $dutch_mode;;
     msg("Parsing: $fname") if $debug;
     open my $fh, '<', $fname or err("Can't open '$fname' to summarize.");
     while (<$fh>) {
       chomp;
       my @col = split m/$OUTSEP/;
-      print STDERR "### [$.] @col\n" if $debug;
+      msg("### [$.] @col") if $debug;
       @hdr = @col if ! @hdr;  # first row we see will be header
       next if $col[0] =~ m/^#/;
       $col[0] = basename($col[0]) if $nopath;
-      $id_of{$fname} ||= $col[0];  # keep alternate "original filename"
+      my $file = $dutch_mode ? $col[0] : $fname;
       my $row = { zip @hdr, @col };
-      print STDERR Dumper($row) if $debug;
+      #print STDERR Dumper($row)) if $debug;
       $gene{ $row->{'GENE'} }++;
-      push @{ $data{ $fname }{ $row->{'GENE'} } } , $row;
+      push @{ $data{ $file }{ $row->{'GENE'} } } , $row;
     }
+    #wrn(Dumper(\%data));
   }
 
   my @gene = sort { $a cmp $b } keys %gene;
@@ -252,7 +256,6 @@ sub summary_table {
                       } @gene;
     my $label = $nopath ?  basename($fname) : $fname;;
     print line( $label, scalar( keys %{$data{$fname}} ), @present );
-    # print line( $id_of{$fname} || $fname, scalar( keys %{$data{$fname}} ), @present );
   }
 }
 

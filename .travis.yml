@@ -40,6 +40,7 @@ script:
     - "abricate --nopath test/assembly.gbk.gz | grep '^assembly.gbk.gz'"
     - "abricate --summary {1,2,3,4}.tab > summary.tab"
     - "abricate --summary 1.tab 2.tab 1.tab |& grep 'duplicate'"
+    - "abricate --summary <(cat 1.tab 2.tab 3.tab) | wc -l | grep -w 4"
     - "abricate test/assembly.txt |& grep ERROR"
     - "abricate not_exist.embl |& grep ERROR"
     - "abricate --threads `nproc` test/assembly.fa.bz2 | grep -i FOSFOMYCIN"
