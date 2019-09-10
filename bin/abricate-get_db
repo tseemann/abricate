@@ -94,8 +94,17 @@ sub download {
 }
 
 #..............................................................................
+sub trim_spaces {
+  my($s) = @_;
+  $s =~ s/^\s+//;
+  $s =~ s/\s+$//;
+  return $s;
+}
+
+#..............................................................................
 sub get_resfinder {
   my $name = "resfinder_db";
+  # FIXME - can we just get HEAD.zip like in plasmidfinder?
   my $url = "https://bitbucket.org/genomicepidemiology/$name.git";
 
   if (-r $name and not $force) {
@@ -109,23 +118,52 @@ sub get_resfinder {
     system("git clone --quiet $url $name");
   }
 
+  #<*.fsa>
+  #>aac(6')-Ib_2_M23634
+  #>blaNDM-19_1_MF370080
+  #>mcr-1.1_1_KP347127
+  #>fosB1_1_CP001903
+  #>fusB_1_AY373761
+  #>VanHAX_1_FJ866609
+  #>ere(A)_6_DQ157752
+  #>nimA_1_X71444
+  #>cfr_1_AM408573
+  #>catB3_2_U13880
+  #>qnrA1_1_AY070235
+  #>ARR-2_1_HQ141279
+  #>sul1_2_U12338
+  #>tet_1_M74049
+  #>dfrA19_1_EU855687
+  
+  #<notes.txt>
+  #aac(6')-Iv:Aminoglycoside resistance:
+  #aac(6')-Iw:Aminoglycoside resistance:Alternate name; aac(6')-Ix
+  #sul3:Sulphonamide resistance:
+  ##Tetracycline: 
+  #ort(B):Tetracycline resistance:
+  #blaCMY-59:Beta-lactam resistance:
+  
+  #<phenotypes.txt>
+  #Gene_accession no.      Class   Phenotype       PMID    Mechanism of resistance Notes Required_gene
+  #ant(2'')-Ia_1_X04555    Aminoglycoside  Gentamicin, Tobramycin  3024112 Enzymatic modification  Alternative name aadB
+  #ant(2'')-Ia_2_JF826500  Aminoglycoside  Gentamicin, Tobramycin  22271862        Enzymat
+
+  my $metafn = "$name/phenotypes.txt";
+  my @meta = path($metafn)->lines({chomp=>1});
   my %anno;
-  open my $NOTES, '<', "$name/notes.txt";
-  while (<$NOTES>) {
-    chomp;
-    chop; # remove the DOS CR ending
+  foreach (@meta) {
     next if m/^#/;
-    my @x = split m/:/;
-    $anno{$x[0]}{DESC} = join(':', @x[2..$#x]);
-    $x[1] =~ s/\s+resistance.*$//;
-    $x[1] =~ s/ acid/_acid/;
-    $x[1] =~ s/\s+([AB])\b/_$1/g;
-    $x[1] =~ s/\s+and//g;
-    $x[1] =~ s/[^\w\s]+//g;
-    $anno{$x[0]}{ABX} = [ split ' ',$x[1] ];
+    my @x = split m/\t/;
+    #msg("$metafn: @x");
+    my($gene) = ($x[0] =~ m/^(.*?)_\w+$/);
+    $anno{$gene}{ABX} = [ 
+      map { trim_spaces($_) }
+        grep { !m/(unknown|notes|^none)/i } 
+          split m/,\s*/, $x[2] 
+    ];
+    #msg("$metafn: $gene |", $anno{$gene}{ABX}->@*);
   }
-  close $NOTES;
-  msg("get_resfinder: notes.txt has", scalar(keys %anno), "genes");
+  msg("get_resfinder: $metafn", scalar(keys %anno), "genes");
   #print Dumper(\%anno);
 
   my @seq;
@@ -134,20 +172,26 @@ sub get_resfinder {
     # GCTTTAAATTGGAAAAAAGATAGTCAAACTCTTTAA>cmr_1_U43535
     # inline replacement
     system('sed', '-i.bak', 's/\([A-Z]\)>/\1\n>/gi', $fasta);
-    push @seq, @{ load_fasta($fasta) };
+    my $args = load_fasta($fasta);
+    # use name of fasta file as antibiotic name
+    #my $abx = basename($fasta, '.fsa');
+    #msg("$fasta: Assigning '$abx' to all genes");
+    #push @{$_->{ABX}}, $abx for (@$args);
+    push @seq, @$args;
   }
 
   # https://github.com/tseemann/abricate/issues/92
   # mcr-9_1_NZ_NAAN01000063.1
-  # resfinder~~~_~~~
+  #>mcr-9_1_NZ_NAAN01000063.1
+  # mcr-9.1:Colistin resistance:
   
   for my $seq (@seq) {
     my($id,$copy,$acc) = $seq->{ID} =~ m/^(.*?)_(\d+)_(\S+)$/;
     #msg("resfinder: $1 $2 $3", $anno{$1});
     $seq->{ID}   = "${id}_${copy}";
     $seq->{ACC}  = $acc;
-    $seq->{DESC} = $anno{$id}{DESC} || '';
-    $seq->{ABX}  = $anno{$id}{ABX};
+    $seq->{DESC} = $anno{$id}{DESC} || $id;;
+    push @{$seq->{ABX}},  @{$anno{$id}{ABX}} if $anno{$id}{ABX};;
   }
   
   return \@seq;
