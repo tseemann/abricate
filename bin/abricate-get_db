@@ -18,6 +18,7 @@ use JSON;
 # Globals
 
 my $EXE = basename($0);
+my $ABX_SEP = ';';
 
 my %DATABASE = (
   'resfinder'         => \&get_resfinder,
@@ -121,7 +122,7 @@ sub get_resfinder {
     $x[1] =~ s/\s+([AB])\b/_$1/g;
     $x[1] =~ s/\s+and//g;
     $x[1] =~ s/[^\w\s]+//g;
-    $anno{$x[0]}{ABX} = join('/', (split ' ',$x[1]));
+    $anno{$x[0]}{ABX} = [ split ' ',$x[1] ];
   }
   close $NOTES;
   msg("get_resfinder: notes.txt has", scalar(keys %anno), "genes");
@@ -146,7 +147,7 @@ sub get_resfinder {
     $seq->{ID}   = "${id}_${copy}";
     $seq->{ACC}  = $acc;
     $seq->{DESC} = $anno{$id}{DESC} || '';
-    $seq->{ABX}  = $anno{$id}{ABX} || '';
+    $seq->{ABX}  = $anno{$id}{ABX};
   }
   
   return \@seq;
@@ -249,7 +250,7 @@ sub get_ncbi {
     next unless $fp==1 and $fn==1;
     # only keep true ARGs
     $acc .= ".1" unless $acc =~ m/\.\d+$/;
-    my $t = $tsv->{$acc} or next; # do { whine("ACC $pi|$acc not in $name2 table"); next };
+    my $t = $tsv->{$acc} or next;
     next unless $t->{scope} eq 'core';
     next unless $t->{type} eq 'AMR';
     next unless $t->{subtype} eq 'AMR';    
@@ -258,7 +259,9 @@ sub get_ncbi {
     err("$pi: gene is empty") unless $gene;
     err("$pi: product is empty") unless $prod;
     my $s = { ID=>$gene, ACC=>$t->{refseq_nucleotide_accession}, 
-              DESC=>$prod, SEQ=>$rec->seq, ABX=>$t->{subclass} };
+              DESC=>$prod, SEQ=>$rec->seq,
+              ABX=>[ split m'/', $t->{subclass} ]
+            };
     push @seq, $s;
     msg("[$name]", 0+@seq, "|", $s->{ID}, "|", $s->{ACC}, "|", $s->{DESC});
     #msg(Dumper($s));
@@ -285,7 +288,8 @@ sub get_plasmidfinder {
     $id =~ s/_+$//g;
     $seq->{ID}   = $id || $seq->{ID};
     $seq->{ACC}  = $acc || '';
-    whine("Parsed empty ID:", $seq->{DESC}, "=> id='$id' acc='$acc' seq=".substr($seq->{SEQ},0,10)) if not $id;
+    wrn("Parsed empty ID:", $seq->{DESC}, 
+        "=> id='$id' acc='$acc' seq=".substr($seq->{SEQ},0,10)) if not $id;
   }
   
   return \@seq;
@@ -416,7 +420,7 @@ sub get_card {
       ACC  => $dna->{accession}.':'.($dna->{fmin}+1).'-'.($dna->{fmax}+1),
       DESC => ($g->{ARO_description} || $g->{ARO_accession}),
       SEQ  => $dna->{sequence},
-      ABX  => join('/', @abx),
+      ABX  => [ @abx ],
     };
 #    msg(Dumper($seq[-1]));
   }
@@ -571,11 +575,11 @@ sub is_full_gene {
   my $id = $s->{ID};
   my $L = length($s->{SEQ});
   if ($L % 3 != 0) {
-    whine("$id - length $L bp is not multiple of 3");
+    wrn("$id - length $L bp is not multiple of 3");
     return;
   }
   if ($s->{SEQ} !~  m/^[AGCT]+$/) {
-    whine("$id - has non-AGTC bases");
+    wrn("$id - has non-AGTC bases");
     return;
   }
 
@@ -584,10 +588,10 @@ sub is_full_gene {
   my $aa = $seq->translate->seq;
 
   if ($aa =~ m/\*./) {
-    whine("$id - has internal stop codons, trying revcom");
+    wrn("$id - has internal stop codons, trying revcom");
     $aa = $seq->revcom->translate->seq;
     if ($aa =~ m/\*./) {
-      whine("$id - revcom has internal stop codons too");
+      wrn("$id - revcom has internal stop codons too");
       return;
     }
     else {
@@ -606,7 +610,7 @@ sub dedupe_seq {
   my $good = [];
   for my $s (@$seq) {
     if ($seen{ $s->{SEQ} }) {
-      whine("duplicate", length($s->{SEQ}), "bp sequence:", 
+      wrn("duplicate", length($s->{SEQ}), "bp sequence:", 
         $s->{ID}, '~', $seen{$s->{SEQ}} );
     }
     else {
@@ -633,7 +637,7 @@ sub load_tabular {
     $row++;
     if (@hdr) {
       @hdr==@col or err("Header and row $row differ in column count");
-      #my $key = $col[$keycol] or whine("Empty key column $keycol: $_");
+      #my $key = $col[$keycol] or wrn("Empty key column $keycol: $_");
       #exists{$hash->{$col[$key}} and wrn("WARNING: dupe key $key at row: $_");
       my $key = $col[$keycol];
       $hash->{ $key } ||= { map { ($hdr[$_] => $col[$_]) } (0..$#hdr) };
@@ -657,7 +661,7 @@ sub load_fasta {
   while (my $seq = $in->next_seq) {
     my $id = $seq->id or err("Empty ID in $fasta");
     if ($seen{$id}) {
-      whine("Duplicate ID '$id' in $fasta");
+      wrn("Duplicate ID '$id' in $fasta");
       $id = $id.'_dupe';
     }
     $seen{$id}++;
@@ -685,10 +689,12 @@ sub save_fasta {
   for my $s (@$seq) {
     $seen{$s->{ID}}++;
     my $freq = $seen{$s->{ID}};
-    whine("seen $s->{ID} now $freq times") if $freq > 1;
+    #wrn("seen $s->{ID} now $freq times") if $freq > 1;
 #    print Dumper($s);
+    my $ABX = defined($s->{ABX}) ? join($ABX_SEP, @{$s->{ABX}}) : '';
+    $ABX =~ s/\s+/_/g; # remove spaces!
     my $obj = Bio::Seq->new(
-      -id   => join('~~~', $db, $s->{ID}, $s->{ACC}, $s->{ABX}),
+      -id   => join('~~~', $db, $s->{ID}, $s->{ACC}, $ABX),
       -desc => ($s->{DESC} || $s->{ID}),
       -seq  => $s->{SEQ},
     );
@@ -705,8 +711,8 @@ sub msg {
 }
 
 #----------------------------------------------------------------------
-sub whine {
-  print STDERR "WARNING: @_\n";
+sub wrn {
+  msg("WARNING:", @_) if $debug;
 }
 
 #----------------------------------------------------------------------

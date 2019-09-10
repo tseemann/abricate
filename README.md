@@ -33,9 +33,9 @@ Using database resfinder:  2130 sequences -  Mar 17, 2017
 Processing: 6159.fna
 Found 3 genes in 6159.fna
 #FILE     SEQUENCE     START   END     STRAND GENE     COVERAGE     COVERAGE_MAP     GAPS  %COVERAGE  %IDENTITY  DATABASE  ACCESSION  PRODUCT        RESISTANCE
-6159.fna  NC_017338.1  39177   41186   +      mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    ncbi      AB505628   n/a	     FUSIDIC ACID
+6159.fna  NC_017338.1  39177   41186   +      mecA_15  1-2010/2010  ===============  0/0   100.00     100.000    ncbi      AB505628   n/a	     FUSIDIC_ACID
 6159.fna  NC_017338.1  727191  728356  -      norA_1   1-1166/1167  ===============  0/0   99.91      92.367     ncbi      M97169     n/a            FOSFOMYCIN
-6159.fna  NC_017339.1  10150   10995   +      blaZ_32  1-846/846    ===============  0/0   100.00     100.000    ncbi      AP004832   betalactamase  BETA-LACTAM
+6159.fna  NC_017339.1  10150   10995   +      blaZ_32  1-846/846    ===============  0/0   100.00     100.000    ncbi      AP004832   betalactamase  BETA-LACTAM;PENICILLIN
 ```
 
 ## Installation
@@ -115,7 +115,7 @@ GAPS | `1/4` | Openings / gaps in subject and query - possible psuedogene?
 DATABASE | `ncbi` | The database this sequence comes from
 ACCESSION | `NC_009632:49744-50476` | The genomic source of the sequence
 PRODUCT | `aminoglycoside O-phosphotransferase APH(3')-IIIa` | Gene product (if available)
-RESISTANCE | `TETRACYCLINE` | putative antibiotic resistance phenotype (`--db card,ncbi,resfinder` only)
+RESISTANCE | `TETRACYCLINE;FUSIDIC_ACID` | putative antibiotic resistance phenotype, `;`-separated
 
 ## Caveats
 
@@ -155,7 +155,7 @@ resfinder      2434       nucl    2018-Jul-28
 vfdb           2597       nucl    2018-Jul-28
 ```
 
-The default database is currently `resfinder`.
+The default database is `ncbi`.
 You can choose a different database using the `--db` option:
 ```
 % abricate --db vfdb --quiet 6159.fa
