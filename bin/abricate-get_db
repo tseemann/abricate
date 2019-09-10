@@ -446,6 +446,7 @@ sub get_card {
     # ARO_category => { 
     #	'category_aro_name' => 'cephalosporin',
     #	'category_aro_class_name' => 'Drug Class',
+    my $is_amr_gene = 0;
     my @abx;
     for my $key (keys $g->{ARO_category}->%*) {
       my $c = $g->{ARO_category}{$key};
@@ -455,8 +456,11 @@ sub get_card {
         $abx =~ s/\s/_/g;
         push @abx, $abx;
       }
+      if ($c->{category_aro_class_name} eq 'AMR Gene Family') {
+        $is_amr_gene++;
+      }
     } 
-    #msg("CARD | $id | ", Dumper($g->{ARO_category}) );
+    #err("CARD | $id | ", Dumper($g->{ARO_category}) ) unless $is_amr_gene;
     #msg("ABX=$_") for @abx;
 
     $id =~ s/\s+/_/g;
