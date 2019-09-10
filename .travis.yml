@@ -45,7 +45,7 @@ script:
     - "abricate not_exist.embl |& grep ERROR"
     - "abricate --threads `nproc` test/assembly.fa.bz2 | grep -i FOSFOMYCIN"
     - "abricate --threads `nproc` test/assembly.fa.bz2 | grep -i lactam"
-    - "for DB in `abricate --list | cut -f1`; do abricate --db $DB test/assembly.fa > /dev/null ; done"
+    - "for DB in `abricate --list | cut -f1 | tail -n +2`; do abricate --db $DB test/assembly.fa > /dev/null ; done"
     - "abricate-get_db --help"
     - "abricate-get_db --db ncbi --dbdir ."
     - "! grep 'FUSIDIC ACID' ncbi/sequences"
