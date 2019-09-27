@@ -228,6 +228,19 @@ which suggests the tool actual taking "action" against the problem of antibiotic
 It is also relatively unique in [Google](https://www.google.com.au/search?q=abricate),
 and is unlikely to receive an infamous [JABBA Award](http://www.acgt.me/blog/2014/12/1/time-for-a-new-jabba-award-for-just-another-bogus-bioinformatics-acronym).
 
+## Citation
+
+If you publish the results of Abricate please cite both the software _and_
+the appropriate database you used with `--db`
+
+* Seemann T, *Abricate*, **Github** `https://github.com/tseemann/abricate`
+* [CARD doi:10.1093/nar/gkw1004](https://www.ncbi.nlm.nih.gov/pubmed/27789705)
+* [Resfinder doi:10.1093/jac/dks261](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
+* [NCBI dot:0.1101/550707](https://www.biorxiv.org/content/10.1101/550707v1)
+* [ARG-ANNOT doi:10.1128/AAC.01310-13](https://www.ncbi.nlm.nih.gov/pubmed/24145532))
+* [VFDB doi:10.1093/nar/gkv1239](https://www.ncbi.nlm.nih.gov/pubmed/26578559)
+* [PlasmidFinder doi:10.1128/AAC.02412-14](https://www.ncbi.nlm.nih.gov/pubmed/24777092)
+
 ## Issues
 
 Please report problems to the [Issues Page](https://github.com/tseemann/abricate/issues).
