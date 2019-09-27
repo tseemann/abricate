@@ -41,7 +41,7 @@ Found 3 genes in 6159.fna
 ## Installation
 
 ### Brew
-If you are using the [OSX Brew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
+If you are using the [MacOS Homebrew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
 ```
 brew install brewsci/bio/abricate
 abricate --check
