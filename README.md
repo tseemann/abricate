@@ -11,10 +11,11 @@ VFDB.
 
 ## Is this the right tool for me?
 
-1. It only supports contigs, not FASTQ reads (including Genbank and .gz compressed files)
+1. It only supports contigs, not FASTQ reads
 2. It only detects acquired resistance genes, **NOT** point mutations
-3. It needs BLAST+ >= 2.2.30 and `any2fasta` to be installed
-4. It's written in Perl :camel:
+3. It uses a DNA sequence database, not protein
+4. It needs BLAST+ >= 2.7 and `any2fasta` to be installed
+5. It's written in Perl :camel:
 
 If you are happy with the above, then please continue!
 Otherwise consider using
@@ -200,9 +201,10 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 
 Let's say you want to make your own database called `tinyamr`. 
 All you need is a FASTA file of nucleotide sequences, say `tinyamr.fa`.
-Ideally the sequence IDs would have the format `>DB~~~ID~~~ACC DESC`
-where `DB` is `tinyamr`, `ID` is the gene name, and `ACC` is an accession
-number of the sequence source. The `DESC` can be any textual description.
+Ideally the sequence IDs would have the format `>DB~~~ID~~~ACC~~~RESISTANCE DESC`
+where `DB` is `tinyamr`, `ID` is the gene name, `ACC` is an accession
+number of the sequence source, `RESISTANCE` is the phenotype to report,
+and `DESC` can be any textual description.
 
 ```
 % cd /path/to/abricate/db     # this is the --datadir default option
