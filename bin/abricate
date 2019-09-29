@@ -50,7 +50,7 @@ my @COLUMNS = qw(
 );
 $COLUMNS[0] = '#'.$COLUMNS[0];
 
-my @REQUIRE = qw(blastn tblastn makeblastdb blastdbcmd any2fasta gzip unzip);
+my @REQUIRE = qw(blastn blastx makeblastdb blastdbcmd any2fasta gzip unzip);
 
 #..............................................................................
 # Option parsing
