@@ -463,10 +463,16 @@ sub get_card {
     #err("CARD | $id | ", Dumper($g->{ARO_category}) ) unless $is_amr_gene;
     #msg("ABX=$_") for @abx;
 
+    # put coordinates into normal form
+    my($start,$stop) = $dna->{strand} eq '-'
+                     ? ($dna->{fmax}, $dna->{fmin})
+                     : ($dna->{fmin}, $dna->{fmax})
+                     ;
+
     $id =~ s/\s+/_/g;
     push @seq, {
       ID   => $id,
-      ACC  => $dna->{accession}.':'.($dna->{fmin}+1).'-'.($dna->{fmax}+1),
+      ACC  => $dna->{accession}.":$start-$stop",
       DESC => ($g->{ARO_description} || $g->{ARO_accession}),
       SEQ  => $dna->{sequence},
       ABX  => [ @abx ],
