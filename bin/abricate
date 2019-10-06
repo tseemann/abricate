@@ -117,7 +117,7 @@ for my $file (@ARGV) {
           . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
           . " -evalue 1E-20 -culling_limit $CULL"
 #          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
-          . ") 2>&1"
+          . ")"
           ;
 
   msg("Running: $cmd") if $debug;
