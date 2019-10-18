@@ -746,7 +746,7 @@ sub save_fasta {
     my $freq = $seen{$s->{ID}};
     #wrn("seen $s->{ID} now $freq times") if $freq > 1;
 #    print Dumper($s);
-    my $ABX = defined($s->{ABX}) ? join($ABX_SEP, @{$s->{ABX}}) : '';
+    my $ABX = defined($s->{ABX}) ? join($ABX_SEP, sort @{$s->{ABX}}) : '';
     $ABX =~ s/\s+/_/g; # remove spaces!
     my $obj = Bio::Seq->new(
       -id   => join('~~~', $db, $s->{ID}, $s->{ACC}, $ABX),
