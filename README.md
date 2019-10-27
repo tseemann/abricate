@@ -242,12 +242,13 @@ If you publish the results of Abricate please cite both the software _and_
 the appropriate database you used with `--db`
 
 * Seemann T, *Abricate*, **Github** `https://github.com/tseemann/abricate`
-* [CARD doi:10.1093/nar/gkw1004](https://www.ncbi.nlm.nih.gov/pubmed/27789705)
-* [Resfinder doi:10.1093/jac/dks261](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
-* [NCBI dot:0.1101/550707](https://www.biorxiv.org/content/10.1101/550707v1)
-* [ARG-ANNOT doi:10.1128/AAC.01310-13](https://www.ncbi.nlm.nih.gov/pubmed/24145532))
-* [VFDB doi:10.1093/nar/gkv1239](https://www.ncbi.nlm.nih.gov/pubmed/26578559)
-* [PlasmidFinder doi:10.1128/AAC.02412-14](https://www.ncbi.nlm.nih.gov/pubmed/24777092)
+* CARD - [doi:10.1093/nar/gkw1004](https://www.ncbi.nlm.nih.gov/pubmed/27789705)
+* Resfinder - [doi:10.1093/jac/dks261](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
+* NCBI - [doi:0.1101/550707](https://www.biorxiv.org/content/10.1101/550707v1)
+* ARG-ANNOT - [doi:10.1128/AAC.01310-13](https://www.ncbi.nlm.nih.gov/pubmed/24145532)
+* VFDB - [doi:10.1093/nar/gkv1239](https://www.ncbi.nlm.nih.gov/pubmed/26578559)
+* PlasmidFinder - [doi:10.1128/AAC.02412-14](https://www.ncbi.nlm.nih.gov/pubmed/24777092)
+* EcOH - [doi:10.1099/mgen.0.000064](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5343136/)
 
 ## Issues
 
