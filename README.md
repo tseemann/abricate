@@ -173,6 +173,7 @@ You can choose a different database using the `--db` option:
 ## Combining reports across samples
 
 ABRicate can combine results into a simple matrix of gene presence/absence.
+This can be individual abricate reports, or a combined one.
 
 ```
 # Run abricate on each .fa file
@@ -185,6 +186,11 @@ ABRicate can combine results into a simple matrix of gene presence/absence.
 #FILE     NUM_FOUND  aac(6')-aph(2'')_1  aadD_1  blaZ_32  blaZ_36  erm(A)_1  mecA_15  norA_1  spc_1  tet(M)_7
 1.tab     8          100.00              100.00  .        100.00   100.00    100.00   99.91   100.00  100.00
 2.tab     3          .                   .       100.00   .        .         100.00   99.91   .       .
+```
+Or if you ran everything in a single report, it will work too.
+```
+% abricate *.fna > results.tab
+% abricate --summary results.tab > summary.tab
 ```
 
 ## Updating the databases
