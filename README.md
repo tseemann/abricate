@@ -145,15 +145,15 @@ columns:
 % abricate --list
 
 DATABASE       SEQUENCES  DBTYPE  DATE
-abricate       4981       nucl    2018-Jul-28
-argannot       1749       nucl    2018-Jul-28
-card           2241       nucl    2018-Jul-28
-ecoh           597        nucl    2018-Jul-28
-ecoli_vf       2701       nucl    2018-Jul-28
-ncbi           4324       nucl    2018-Jul-28
-plasmidfinder  263        nucl    2018-Jul-28
-resfinder      2434       nucl    2018-Jul-28
-vfdb           2597       nucl    2018-Jul-28
+abricate       4981       nucl    2019-Jul-28
+argannot       1749       nucl    2019-Jul-28
+card           2241       nucl    2019-Jul-28
+ecoh           597        nucl    2019-Jul-28
+ecoli_vf       2701       nucl    2019-Jul-28
+ncbi           4324       nucl    2019-Jul-28
+plasmidfinder  263        nucl    2019-Jul-28
+resfinder      2434       nucl    2019-Jul-28
+vfdb           2597       nucl    2019-Jul-28
 ```
 
 The default database is `ncbi`.
@@ -197,19 +197,19 @@ Or if you ran everything in a single report, it will work too.
 
 ```
 # force download of latest version
-% abricate-get_db --db resfinder --force
+% abricate-get_db --db ncbi --force
 
 # re-use existing download and just regenerate the database
-% abricate-get_db --db resfinder
+% abricate-get_db --db ncbi
 ```
 
 ## Making your own database
 
 Let's say you want to make your own database called `tinyamr`. 
 All you need is a FASTA file of nucleotide sequences, say `tinyamr.fa`.
-Ideally the sequence IDs would have the format `>DB~~~ID~~~ACC~~~RESISTANCE DESC`
+Ideally the sequence IDs would have the format `>DB~~~ID~~~ACC~~~RESISTANCES DESC`
 where `DB` is `tinyamr`, `ID` is the gene name, `ACC` is an accession
-number of the sequence source, `RESISTANCE` is the phenotype to report,
+number of the sequence source, `RESISTANCES` is the phenotype(s) to report,
 and `DESC` can be any textual description.
 
 ```
@@ -217,13 +217,13 @@ and `DESC` can be any textual description.
 % mkdir tinyamr
 % cp /path/to/tinyamr.fa sequences
 % head -n 1 sequences
->tinyamr~~~GENE_ID~~~GENE_ACC some description here
+>tinyamr~~~GENE_ID~~~GENE_ACC~~RESISTANCES some description here
 % abricate --setupdb
-% # or just do this: makeblastdb -in sequences -title tinyamr -dbtype nucl -parse_seqids -hash_index
+% # or just do this: makeblastdb -in sequences -title tinyamr -dbtype nucl -hash_index
 
 % abricate --list
-DATABASE           SEQUENCES  DATE
-tinyamr            173        2017-Aug-28
+DATABASE  SEQUENCES  DBTYPE  DATE
+tinyamr   173        nucl    2019-Aug-28
 
 % abricate --db tinyamr screen_this.fasta
 ```
