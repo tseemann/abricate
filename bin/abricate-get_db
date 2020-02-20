@@ -23,7 +23,7 @@ my $ABX_SEP = ';';
 my %DATABASE = (
   'resfinder'         => \&get_resfinder,
   'plasmidfinder'     => \&get_plasmidfinder,
-#  'megares'           => \&get_megares,
+  'megares'           => \&get_megares,
   'argannot'          => \&get_argannot,
   'card'              => \&get_card,
 #  'ncbibetalactamase' => \&get_ncbibetalactamase,
@@ -345,24 +345,32 @@ sub get_plasmidfinder {
 
 #..............................................................................
 sub get_megares {
-  err("MEGARES is not supported due to issues with its inconsistent metadata.");
   my $zip = "megares.zip";
-  download('https://megares.meglab.org/download/megares_v1.01.zip', $zip);
+  download('https://megares.meglab.org/download/megares_v2.00.zip', $zip);
   system("unzip -j -u $zip");
-  my $seqs = load_fasta( glob("megares_database_*.fasta") );
-  
-  # >Bla|OXA-223|JN248564|1-825|825|betalactams|Class_D_betalactamases|OXA
-  # >gi|558607393|gb|KF513179.1|betalactams|Class_A_betalactamases|TEM
-  # >CARD|phgb|AM408573|10027-11077|ARO:3003441|cfrA|Phenicol|Florfenicol_methyltransferases|CFRA
+  my $seqs = load_fasta( glob("megares_drugs_*.fasta") );
+  my @okseq;
+  # >MEG_372|Multi-compound|Drug_and_biocide_resistance|Drug_and_biocide_MATE_efflux_pumps|ABEM
+  # >MEG_411|Multi-compound|Drug_and_biocide_resistance|Drug_and_biocide_RND_efflux_regulator|ACRR|RequiresSNPConfirmation
+  # >MEG_7860|Drugs|betalactams|Class_B_betalactamases|ZOG
+  # >MEG_7439|Drugs|Glycopeptides|VanI-type_resistance_protein|VANI
+  # >MEG_7245|Drugs|Tetracyclines|Tetracycline_resistance_MFS_efflux_pumps|TETY
+  # >MEG_9|Drugs|Aminoglycosides|Aminoglycoside-resistant_16S_ribosomal_subunit_protein|A16S|RequiresSNPConfirmation
+
   for my $s (@$seqs) {
-    # they use | for field sep AND within some fields, arrg
-    $s->{ID} =~ s/\|?(gi|gb)\|(\S+)\|/$2/;
-    my($source,$gene,$acc,$loc,undef,$class,$desc,$family) = split m/\|/, $s->{ID};
-    $s->{ID} = $source eq 'CARD' ? $class : $gene;
-    $s->{ACC} = "$acc:$loc";
-    $s->{DESC} = join(' ', $desc, $class, $family);
+    my($id,$type,$class,$mech,$group,$note) = split m/\|/, $s->{ID};
+    if ($note) {
+      # "RequiresSNPConfirmation" is the common one; we can't do that
+      msg("Skipping $id due to: $note");
+      next;
+    }
+    $s->{ID} = $group;
+    $s->{ACC} = $id;
+    $s->{DESC} = join(':', $type, $class, $mech, $group);
+    push @okseq, $s;
   }
-  return $seqs;
+  return [ @okseq ];
+  #return $seqs;
 }
 
 #..............................................................................
