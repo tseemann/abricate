@@ -129,10 +129,11 @@ RESISTANCE | `TETRACYCLINE;FUSIDIC_ACID` | putative antibiotic resistance phenot
 
 ABRicate comes with some pre-downloaded databases:
 
+* [NCBI AMRFinderPlus](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA313047)
+* [CARD](https://card.mcmaster.ca/)
 * [Resfinder](https://cge.cbs.dtu.dk/services/ResFinder/)
 * [ARG-ANNOT](http://en.mediterranee-infection.com/article.php?laref=283%26titre=arg-annot)
-* [CARD](https://card.mcmaster.ca/)
-* [NCBI Bacterial Antimicrobial Resistance Reference Gene Database](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA313047)
+* [MEGARES](https://megares.meglab.org/)
 * [EcOH](https://github.com/katholt/srst2/tree/master/data)
 * [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
@@ -145,11 +146,11 @@ columns:
 % abricate --list
 
 DATABASE       SEQUENCES  DBTYPE  DATE
-abricate       4981       nucl    2019-Jul-28
 argannot       1749       nucl    2019-Jul-28
 card           2241       nucl    2019-Jul-28
 ecoh           597        nucl    2019-Jul-28
 ecoli_vf       2701       nucl    2019-Jul-28
+megares        6635       nucl    2020-Feb-20
 ncbi           4324       nucl    2019-Jul-28
 plasmidfinder  263        nucl    2019-Jul-28
 resfinder      2434       nucl    2019-Jul-28
