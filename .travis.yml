@@ -12,6 +12,7 @@ addons:
             - gzip
             - git
             - curl
+            - libdb-dev
 
 env:
   - BLASTVER=2.9.0
