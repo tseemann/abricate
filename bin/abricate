@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "0.9.8";
+my $VERSION = "0.9.9";
 my $EXE = basename($0);
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
