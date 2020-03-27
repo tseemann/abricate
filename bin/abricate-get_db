@@ -87,7 +87,8 @@ sub download {
   else {
     msg("Downloading: $url");
     my $ec = mirror($url, $dest);
-    msg("Result: $ec");
+    msg("HTTP Result: $ec");
+    ($ec==200 or $ec=304) or err("HTTP $ec | failed to download $url");  # is HTTP OK ?
   }
   msg("Destination: $dest");
   msg("Filesize:", (-s $dest), "bytes");
