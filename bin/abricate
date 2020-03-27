@@ -429,8 +429,8 @@ sub setOptions {
     {OPT=>"csv!",  VAR=>\$csv, DESC=>"Output CSV instead of TSV"},
     {OPT=>"nopath!",  VAR=>\$nopath, DESC=>"Strip filename paths from FILE column"},
     "FILTERING",
-    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>75, DESC=>"Minimum DNA %identity"},
-    {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>0, DESC=>"Minimum DNA %coverage"},
+    {OPT=>"minid=f",  VAR=>\$minid, DEFAULT=>80, DESC=>"Minimum DNA %identity"},
+    {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>80, DESC=>"Minimum DNA %coverage"},
     "MODE",
     {OPT=>"summary!",  VAR=>\$summary, DESC=>"Summarize multiple reports into a table"},
   );
