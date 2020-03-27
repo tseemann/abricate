@@ -191,8 +191,33 @@ for my $file (@ARGV) {
 #  @hit = sort { $a->[4] cmp $b->[4] || $b->[8] <=> $a->[8] } @hit;
   @hit = sort { $a->[1] cmp $b->[1] || $a->[2] <=> $b->[2] } @hit;
 
-  print line(@$_) for @hit;  
+  # results to stdout
+  print line(@$_) for @hit;
+
+  # Inspiration
+  msg( "Tip:", motd() ); # 'message of the day'
+  msg("Done.");
 }
+
+
+#----------------------------------------------------------------------
+
+sub motd {
+  my @motd = (
+    "it's important to realise $EXE uses DNA matching, not AA.",
+    "$EXE can also find virulence factors; use --list to see all supported databases.",
+    "remember that abricate is unable to find AMR-mediated SNPs.",
+    "the --fofn option allows you to feed in a big list of files to run on.",
+    "you can use the --summary option to combine reports in a presence/absence matrix.",
+    "found a bug in $EXE? Post it at $URL/issues.",
+    "have a suggestion for $EXE? Tell me at $URL/issues",
+    "the $EXE manual is at $URL/blob/master/README.md",
+    "did you know? $EXE was named after 'A'nti 'B'acterial 'R'esistiance",
+  );
+  srand( (localtime)[0] ); # seed
+  return $motd[ int(rand(scalar(@motd))) ] ;
+}
+
 
 #----------------------------------------------------------------------
 
