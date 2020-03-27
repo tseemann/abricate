@@ -1,0 +1,5 @@
+test/assembly.fa
+test/assembly.fa.bz2
+test/assembly.fa.gz
+test/assembly.gbk
+test/assembly.gbk.gz
