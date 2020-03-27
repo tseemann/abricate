@@ -50,3 +50,4 @@ script:
     - "abricate-get_db --help"
     - "abricate-get_db --db ncbi --dbdir ."
     - "! grep 'FUSIDIC ACID' ncbi/sequences"
+    - "abricate --threads `nproc` --fofn test/fofn.txt"

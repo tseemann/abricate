@@ -92,6 +92,18 @@ abricate assembly.*
 abricate /mnt/ncbi/bacteria/*.gbk.gz 
 ```
 
+Or you can provide it a "file of file names" (a "FOFN"):
+```
+% cat test/fofn.txt
+
+assembly.fa
+assembly.fa.gz
+assembly.gbk
+assembly.gbk.bz2
+
+% abricate --fofn test/fofn.txt
+```
+
 It does not accept raw FASTQ reads; please use
 [Ariba](https://github.com/sanger-pathogens/ariba) or
 [SRTS2](https://github.com/katholt/srst2) for that.

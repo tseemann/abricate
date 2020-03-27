@@ -23,7 +23,7 @@ my $URL = 'https://github.com/tseemann/abricate';
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
              $datadir, $db, $minid, $mincov, $threads,
-             $noheader, $csv, $nopath);
+             $noheader, $csv, $nopath, $fofn);
 setOptions();
 
 #..............................................................................
@@ -59,6 +59,14 @@ $threads >= 1 or err("Invalid --threads option, must be 1 or higher");
 ($minid > 0 and $minid <= 100) or err("--minid must be between 1 and 100");
 ($mincov >= 0 and $mincov <= 100) or err("--mincov must be between 0 and 100");
 $OUTSEP = ',' if $csv;  # default is tab
+
+if ($fofn) {
+  -r $fofn or err("Could not open --fofn '$fofn'");
+  my @filenames = path($fofn)->lines( { chomp => 1 } );
+  @filenames or err("No files found in --fofn '$fofn'");
+  msg("Using files from --fofn and ignoring any provided on the command line.");
+  @ARGV = @filenames;
+}
 
 if ($summary) {
   @ARGV >= 1 or err("--summary needs >=1 abricate output files");
@@ -410,6 +418,7 @@ sub setOptions {
     {OPT=>"version!",  VAR=>\&version, DESC=>"Print version and exit"},
     {OPT=>"check!",  VAR=>\$check, DESC=>"Check dependencies are installed"},
     {OPT=>"threads=i",  VAR=>\$threads, DEFAULT=>1, DESC=>"Use this many BLAST+ threads"},
+    {OPT=>"fofn=s",  VAR=>\$fofn, DEFAULT=>'', DESC=>"Run on files listed in this file"},
     "DATABASES",
     {OPT=>"setupdb!",  VAR=>\$setupdb, DESC=>"Format all the BLAST databases"},
     {OPT=>"list!",  VAR=>\$list, DESC=>"List included databases"},
@@ -448,7 +457,8 @@ sub usage {
   print "AUTHOR\n  $AUTHOR ($TWITTER)\n";
   print "USAGE\n";
   print "  % $EXE --list\n";
-  print "  % $EXE [options] <contigs.{fasta,gbk,embl}[.gz]> > out.tab\n";
+  print "  % $EXE [options] <contigs.{fasta,gbk,embl}[.gz] ...> > out.tab\n";
+  print "  % $EXE [options] --fofn fileOfFilenames.txt > out.tab\n";
   print "  % $EXE --summary <out1.tab> <out2.tab> <out3.tab> ... > summary.tab\n";
 
   foreach (@Options) {
