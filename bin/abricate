@@ -12,7 +12,7 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "1.0.0";
+my $VERSION = "1.0.1";
 my $EXE = basename($0);
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
@@ -124,6 +124,7 @@ for my $file (@ARGV) {
   my $cmd = "(any2fasta -q -u \Q$file\E |"
           . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
           . " -evalue 1E-20 -culling_limit $CULL"
+          . " -max_target_seqs 10000"  # https://github.com/tseemann/abricate/issues/135
 #          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
           . ")"
           ;
