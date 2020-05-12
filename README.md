@@ -186,6 +186,7 @@ You can choose a different database using the `--db` option:
 ## Combining reports across samples
 
 ABRicate can combine results into a simple matrix of gene presence/absence.
+An absent gene is denoted `.` and a present gene is represented by its '%COVERAGE`.
 This can be individual abricate reports, or a combined one.
 
 ```
