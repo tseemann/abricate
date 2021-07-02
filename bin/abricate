@@ -21,7 +21,7 @@ my $URL = 'https://github.com/tseemann/abricate';
 #..............................................................................
 # Command line options
 
-my(@Options, $debug, $quiet, $setupdb, $list, $summary, $check,
+my(@Options, $debug, $quiet, $setupdb, $list, $summary, $identity, $check,
              $datadir, $db, $minid, $mincov, $threads,
              $noheader, $csv, $nopath, $fofn);
 setOptions();
@@ -66,6 +66,11 @@ if ($fofn) {
   @filenames or err("No files found in --fofn '$fofn'");
   msg("Using files from --fofn and ignoring any provided on the command line.");
   @ARGV = @filenames;
+}
+
+if ($identity) {
+  $FIELD = '%IDENTITY';
+  msg("Using %IDENTITY for the summary table instead of %COVERAGE");
 }
 
 if ($summary) {
@@ -459,6 +464,7 @@ sub setOptions {
     {OPT=>"mincov=f",  VAR=>\$mincov, DEFAULT=>80, DESC=>"Minimum DNA %coverage"},
     "MODE",
     {OPT=>"summary!",  VAR=>\$summary, DESC=>"Summarize multiple reports into a table"},
+    {OPT=>"identity!",  VAR=>\$identity, DESC=>"Use %IDENTITY instead of %COVERAGE in summary table"},
   );
 
   @ARGV or usage(1);
