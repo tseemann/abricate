@@ -347,7 +347,7 @@ sub get_plasmidfinder {
 #..............................................................................
 sub get_megares {
   my $zip = "megares.zip";
-  download('https://megares.meglab.org/download/megares_v2.00.zip', $zip);
+  download('https://www.meglab.org/downloads/megares_v3.00.zip', $zip);
   system("unzip -j -u $zip");
   my $seqs = load_fasta( glob("megares_drugs_*.fasta") );
   my @okseq;
