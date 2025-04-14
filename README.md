@@ -157,16 +157,19 @@ columns:
 ```
 % abricate --list
 
-DATABASE       SEQUENCES  DBTYPE  DATE
-argannot       1749       nucl    2019-Jul-28
-card           2241       nucl    2019-Jul-28
-ecoh           597        nucl    2019-Jul-28
-ecoli_vf       2701       nucl    2019-Jul-28
-megares        6635       nucl    2020-Feb-20
-ncbi           4324       nucl    2019-Jul-28
-plasmidfinder  263        nucl    2019-Jul-28
-resfinder      2434       nucl    2019-Jul-28
-vfdb           2597       nucl    2019-Jul-28
+DATABASE	SEQUENCES	DBTYPE	DATE
+ecoh	597	nucl	2025-Apr-14
+bacmet2	746	nucl	2025-Apr-14
+ncbi	7456	nucl	2025-Apr-14
+victors	4545	nucl	2025-Apr-14
+vfdb	4394	nucl	2025-Apr-14
+megares	7424	nucl	2025-Apr-14
+card	6048	nucl	2025-Apr-14
+plasmidfinder	488	nucl	2025-Apr-14
+resfinder	3174	nucl	2025-Apr-14
+argannot	2224	nucl	2025-Apr-14
+ecoli_vf	2701	nucl	2025-Apr-14
+
 ```
 
 The default database is `ncbi`.
