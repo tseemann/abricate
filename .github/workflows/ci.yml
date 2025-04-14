@@ -16,21 +16,23 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - with:
-          perl-version: "5.40"
+      - uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: "5.38"
 
       - name: Install
         run: |
           apt-get install -y zip gzip git curl lidb-dev
           cpanm --quiet --notest JSON Path::Tiny LWP::Simple Bio::Perl
           wget http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.16.0/ncbi-blast-2.16.0+-x64-linux.tar.gz
-          tar zxvf ncbi-blast-${BLASTVER}+-x64-linux.tar.gz
+          tar zxvf ncbi-blast-2.16.0+-x64-linux.tar.gz
           curl https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta > bin/any2fasta
           chmod +x bin/any2fasta
-          export PATH=$PWD/bin:$PWD/ncbi-blast-${BLASTVER}+/bin:$PATH
+          export PATH=$PWD/bin:$PWD/ncbi-blast-2.16.0+/bin:$PATH
 
       - name: Test
         run: |
+          export PATH=$PWD/bin:$PWD/ncbi-blast-2.16.0+/bin:$PATH
           abricate --setupdb
           abricate --version
           abricate --help
