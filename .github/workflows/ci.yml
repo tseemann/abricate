@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+      - with:
+          perl-version: "5.40"
+
+      - name: Install
+        run: |
+          apt-get install -y zip gzip git curl lidb-dev
+          cpanm --quiet --notest JSON Path::Tiny LWP::Simple Bio::Perl
+          wget http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.16.0/ncbi-blast-2.16.0+-x64-linux.tar.gz
+          tar zxvf ncbi-blast-${BLASTVER}+-x64-linux.tar.gz
+          curl https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta > bin/any2fasta
+          chmod +x bin/any2fasta
+          export PATH=$PWD/bin:$PWD/ncbi-blast-${BLASTVER}+/bin:$PATH
+
+      - name: Test
+        run: |
+          abricate --setupdb
+          abricate --version
+          abricate --help
+          abricate --check
+          abricate --list
+          ! abricate --doesnotexist || echo "fail expected"
+          ! abricate --threads 0
+          ! (abricate test/assembly.fa | grep '~~~')
+          abricate test/assembly.fa > 1.tab
+          abricate test/assembly.fa.gz > 2.tab
+          abricate test/assembly.gbk > 3.tab
+          abricate test/assembly.gbk.gz > 4.tab
+          abricate --nopath test/assembly.gbk.gz | grep '^assembly.gbk.gz'
+          abricate --summary {1,2,3,4}.tab > summary.tab
+          abricate --summary 1.tab 2.tab 1.tab |& grep 'duplicate'
+          abricate --summary <(cat 1.tab 2.tab 3.tab) | wc -l | grep -w 4
+          abricate test/assembly.txt |& grep ERROR
+          abricate not_exist.embl |& grep ERROR
+          abricate --threads `nproc` test/assembly.fa.bz2 | grep -i FOSFOMYCIN
+          abricate --threads `nproc` test/assembly.fa.bz2 | grep -i lactam
+          for DB in `abricate --list | cut -f1 | tail -n +2`; do abricate --db $DB test/assembly.fa > /dev/null ; done
+          abricate-get_db --help
+          abricate-get_db --db ncbi --dbdir .
+          ! grep 'FUSIDIC ACID' ncbi/sequences
+          abricate --threads `nproc` --fofn test/fofn.txt
