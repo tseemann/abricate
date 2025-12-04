@@ -246,7 +246,7 @@ sub get_tag {
 sub get_ncbi {
   my $AFP = "https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest";
   #my $src = "https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/data/latest/AMR_CDS";
-  my $src = "$AFP/AMR_CDS";
+  my $src = "$AFP/AMR_CDS.fa";
   my $name = "amr_cds.ffn";
   #my $src2 = "https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/data/latest/ReferenceGeneCatalog.txt";
   my $src2 = "$AFP/ReferenceGeneCatalog.txt";
@@ -347,7 +347,7 @@ sub get_plasmidfinder {
 #..............................................................................
 sub get_megares {
   my $zip = "megares.zip";
-  download('https://megares.meglab.org/download/megares_v2.00.zip', $zip);
+  download('https://www.meglab.org/downloads/megares_v3.00.zip', $zip);
   system("unzip -j -u $zip");
   my $seqs = load_fasta( glob("megares_drugs_*.fasta") );
   my @okseq;
@@ -380,7 +380,7 @@ sub get_argannot {
   download(
 #    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/1425/argannot-aa-v3-march2017_doc.fasta',
 #    'http://www.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta',
-    'https://www.mediterranee-infection.com/wp-content/uploads/2019/06/ARG_ANNOT_V5_Nt_JUNE2019.txt',
+    'https://www.mediterranee-infection.com/wp-content/uploads/2019/09/ARG-ANNOT_NT_V6_July2019.txt',
     $fasta
   );
   
@@ -501,10 +501,10 @@ sub get_victors {
   # the PROT data is in .faa and has the protein ref and /product
 
   #>gi|115534241:2616-3152 Campylobacter jejuni plasmid pCJ01, complete sequence
-  download('http://www.phidias.us/victors/downloads/gen_downloads.php', 'victors.ffn');
+  download('http://phidias.us/victors/downloads/gen_downloads.php', 'victors.ffn');
 
   #>gi|115534244|ref|YP_783826.1| hypothetical protein pCJ01p4 [Campylobacter jejuni]
-  download('http://www.phidias.us/victors/downloads/gen_downloads_protein.php', 'victors.faa');
+  download('http://phidias.us/victors/downloads/gen_downloads_protein.php', 'victors.faa');
 
   my %gi;
   open my $FAA, '<', 'victors.faa';

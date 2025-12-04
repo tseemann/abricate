@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/tseemann/abricate.svg?branch=master)](https://travis-ci.org/tseemann/abricate) 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![European Galaxy server](https://img.shields.io/badge/usegalaxy-.eu-brightgreen?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAYAAABB7B6eAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAACC2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDx0aWZmOkNvbXByZXNzaW9uPjE8L3RpZmY6Q29tcHJlc3Npb24+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgICAgIDx0aWZmOlBob3RvbWV0cmljSW50ZXJwcmV0YXRpb24+MjwvdGlmZjpQaG90b21ldHJpY0ludGVycHJldGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KD0UqkwAAAn9JREFUOBGlVEuLE0EQruqZiftwDz4QYT1IYM8eFkHFw/4HYX+GB3/B4l/YP+CP8OBNTwpCwFMQXAQPKtnsg5nJZpKdni6/6kzHvAYDFtRUT71f3UwAEbkLch9ogQxcBwRKMfAnM1/CBwgrbxkgPAYqlBOy1jfovlaPsEiWPROZmqmZKKzOYCJb/AbdYLso9/9B6GppBRqCrjSYYaquZq20EUKAzVpjo1FzWRDVrNay6C/HDxT92wXrAVCH3ASqq5VqEtv1WZ13Mdwf8LFyyKECNbgHHAObWhScf4Wnj9CbQpPzWYU3UFoX3qkhlG8AY2BTQt5/EA7qaEPQsgGLWied0A8VKrHAsCC1eJ6EFoUd1v6GoPOaRAtDPViUr/wPzkIFV9AaAZGtYB568VyJfijV+ZBzlVZJ3W7XHB2RESGe4opXIGzRTdjcAupOK09RA6kzr1NTrTj7V1ugM4VgPGWEw+e39CxO6JUw5XhhKihmaDacU2GiR0Ohcc4cZ+Kq3AjlEnEeRSazLs6/9b/kh4eTC+hngE3QQD7Yyclxsrf3cpxsPXn+cFdenF9aqlBXMXaDiEyfyfawBz2RqC/O9WF1ysacOpytlUSoqNrtfbS642+4D4CS9V3xb4u8P/ACI4O810efRu6KsC0QnjHJGaq4IOGUjWTo/YDZDB3xSIxcGyNlWcTucb4T3in/3IaueNrZyX0lGOrWndstOr+w21UlVFokILjJLFhPukbVY8OmwNQ3nZgNJNmKDccusSb4UIe+gtkI+9/bSLJDjqn763f5CQ5TLApmICkqwR0QnUPKZFIUnoozWcQuRbC0Km02knj0tPYx63furGs3x/iPnz83zJDVNtdP3QAAAABJRU5ErkJggg==)](https://usegalaxy.eu/root?tool_id=abricate)
 ![Don't judge me](https://img.shields.io/badge/Language-Perl_5-steelblue.svg)
@@ -158,16 +157,19 @@ columns:
 ```
 % abricate --list
 
-DATABASE       SEQUENCES  DBTYPE  DATE
-argannot       1749       nucl    2019-Jul-28
-card           2241       nucl    2019-Jul-28
-ecoh           597        nucl    2019-Jul-28
-ecoli_vf       2701       nucl    2019-Jul-28
-megares        6635       nucl    2020-Feb-20
-ncbi           4324       nucl    2019-Jul-28
-plasmidfinder  263        nucl    2019-Jul-28
-resfinder      2434       nucl    2019-Jul-28
-vfdb           2597       nucl    2019-Jul-28
+DATABASE	SEQUENCES	DBTYPE	DATE
+ecoh	597	nucl	2025-Apr-14
+bacmet2	746	nucl	2025-Apr-14
+ncbi	7456	nucl	2025-Apr-14
+victors	4545	nucl	2025-Apr-14
+vfdb	4394	nucl	2025-Apr-14
+megares	7424	nucl	2025-Apr-14
+card	6048	nucl	2025-Apr-14
+plasmidfinder	488	nucl	2025-Apr-14
+resfinder	3174	nucl	2025-Apr-14
+argannot	2224	nucl	2025-Apr-14
+ecoli_vf	2701	nucl	2025-Apr-14
+
 ```
 
 The default database is `ncbi`.
@@ -257,14 +259,14 @@ If you publish the results of Abricate please cite both the software _and_
 the appropriate database you used with `--db`
 
 * Seemann T, *Abricate*, **Github** `https://github.com/tseemann/abricate`
-* NCBI AMRFinderPlus - [doi: 10.1128/AAC.00483-19](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410)
-* CARD - [doi:10.1093/nar/gkw1004](https://www.ncbi.nlm.nih.gov/pubmed/27789705)
-* Resfinder - [doi:10.1093/jac/dks261](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
+* NCBI AMRFinderPlus - [doi:10.1038/s41598-021-91456-0](https://pubmed.ncbi.nlm.nih.gov/34135355/)
+* CARD - [doi:10.1093/nar/gkac920](https://pubmed.ncbi.nlm.nih.gov/36263822/)
+* Resfinder - [doi:10.1093/jac/dkaa345](https://pubmed.ncbi.nlm.nih.gov/32780112/)
 * ARG-ANNOT - [doi:10.1128/AAC.01310-13](https://www.ncbi.nlm.nih.gov/pubmed/24145532)
 * VFDB - [doi:10.1093/nar/gkv1239](https://www.ncbi.nlm.nih.gov/pubmed/26578559)
 * PlasmidFinder - [doi:10.1128/AAC.02412-14](https://www.ncbi.nlm.nih.gov/pubmed/24777092)
 * EcOH - [doi:10.1099/mgen.0.000064](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5343136/)
-* MEGARES 2.00 - [doi:10.1093/nar/gkz1010](https://academic.oup.com/nar/article/48/D1/D561/5624973)
+* MEGARES 3.00 - [doi:10.1093/nar/gkac1047](https://pubmed.ncbi.nlm.nih.gov/36382407/)
 ## Issues
 
 Please report problems to the [Issues Page](https://github.com/tseemann/abricate/issues).
