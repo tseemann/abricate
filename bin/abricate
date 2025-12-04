@@ -121,12 +121,13 @@ for my $file (@ARGV) {
                : "blastx -task blastx-fast -seg no"
                ;
 
-  my $cmd = "(any2fasta -q -u \Q$file\E |"
-          . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
+  my $cmd = "bash -c 'set -euo pipefail;"
+          . " any2fasta -q -u \Q$file\E |"
+          . " $blastcmd -db \Q$db_path\E -outfmt \"$format\" -num_threads $threads"
           . " -evalue 1E-20 -culling_limit $CULL"
           . " -max_target_seqs 10000"  # https://github.com/tseemann/abricate/issues/135
 #          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
-          . ")"
+          . "'"
           ;
 
   msg("Running: $cmd") if $debug;
@@ -183,6 +184,12 @@ for my $file (@ARGV) {
     ];
   }
   close BLAST;
+  # Check the exit status of BLAST handle and abort
+  my $exitcode = $? >> 8;
+  if ($exitcode != 0) {
+      msg("Command exited with non-zero exit code $exitcode. Aborting Abricate.");
+      exit($exitcode);
+  }
 
   msg("Found", scalar(@hit), "genes in $file");
 
