@@ -22,7 +22,7 @@ jobs:
 
       - name: Install
         run: |
-          sudo apt-get install -y zip gzip git curl libdb-dev perl-lwp-protocol-https
+          sudo apt-get install -y zip gzip git curl libdb-dev
           cpanm --quiet --notest JSON Path::Tiny LWP::Simple Bio::Perl
           wget http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.17.0/ncbi-blast-2.17.0+-x64-linux.tar.gz
           tar zxvf ncbi-blast-2.17.0+-x64-linux.tar.gz
