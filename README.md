@@ -211,6 +211,9 @@ Or if you ran everything in a single report, it will work too.
 % abricate *.fna > results.tab
 % abricate --summary results.tab > summary.tab
 ```
+If you want to use `%IDENITY` instead of 
+`%COVERAGE` you can invoke the `--identity` flag.
+
 
 ## Updating the databases
 
