@@ -335,7 +335,7 @@ sub get_plasmidfinder {
   my $zip = "$name.zip";
 #  download("https://cge.cbs.dtu.dk/cge/download_data.php?folder=$name&filename=$zip&submit=$zip", $zip);
   download("https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/HEAD.zip", $zip);
-  system("unzip -j -u $zip");
+  system("unzip -o -j -u $zip");
 
   my @seq;
   for my $fasta (<*.fsa>) {
