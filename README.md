@@ -116,7 +116,7 @@ COVERAGE | `1-1920/1920` | What proportion of the gene is in our sequence
 COVERAGE_MAP | `===============` | A visual represenation of the hit. `=`=aligned, `.`=unaligned, `/`=has_gaps
 GAPS | `1/4` | Openings / gaps in subject and query - possible psuedogene?
 %COVERAGE | `100.00%` | Proportion of gene covered
-%IDENTITY | `99.95%` | Proportion of exact nucleotide matches
+%IDENTITY | `99.95%` | Proportion of exact nucleotide matches in the covered part
 DATABASE | `ncbi` | The database this sequence comes from
 ACCESSION | `NC_009632:49744-50476` | The genomic source of the sequence
 PRODUCT | `aminoglycoside O-phosphotransferase APH(3')-IIIa` | Gene product (if available)
