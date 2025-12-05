@@ -41,19 +41,11 @@ Found 3 genes in 6159.fna
 
 ## Installation
 
-### Brew
-If you are using the [MacOS Homebrew](http://brew.sh/) or [LinuxBrew](http://brew.sh/linuxbrew/) packaging system:
-```
-brew install brewsci/bio/abricate
-abricate --check
-abricate --list
-```
-
 ### Bioconda
 If you use [Conda](https://conda.io/docs/install/quick.html) 
 follow the instructions to add the [Bioconda channel](https://bioconda.github.io/):
 ```
-conda install -c conda-forge -c bioconda -c defaults abricate
+conda install -c conda-forge -c bioconda abricate
 abricate --check
 abricate --list
 ```
