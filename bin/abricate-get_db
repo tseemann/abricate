@@ -11,7 +11,8 @@ use File::Path qw(make_path remove_tree);
 use List::Util qw(first);
 use Cwd qw(abs_path);
 use Data::Dumper;
-use LWP::Simple;
+#use LWP::Simple;
+use File::Fetch;
 use JSON;
 
 #..............................................................................
@@ -86,12 +87,18 @@ sub download {
   }
   else {
     msg("Downloading: $url");
-    my $ec = mirror($url, $dest);
-    msg("HTTP Result: $ec");
-    ($ec==200 or $ec=304) or err("HTTP $ec | failed to download $url");  # is HTTP OK ?
+    my $ff = File::Fetch->new(uri=>$url);
+    #msg("Saving to: $dest");
+    my $fname = $ff->fetch(to=>$tmpdir) or err($ff->error);
+    rename($fname, $dest);
+    ##my $ec = mirror($url, $dest);
+    #my $ec = getstore($url, $dest);
+    #msg("HTTP Result: $ec");
+    ##($ec==200 or $ec=304) or err("HTTP $ec | failed to download $url");  # is HTTP OK ?
+    #is_success($ec) or err("HTTP $ec | failed to download $url");  # is HTTP OK ?
   }
   msg("Destination: $dest");
-  msg("Filesize:", (-s $dest), "bytes");
+  msg("Filesize:", -s $dest, "bytes");
 }
 
 #..............................................................................
@@ -289,11 +296,15 @@ sub get_ncbi {
   # https://github.com/ncbi/amr/wiki/AMRFinderPlus-database#amrprot
   #  0          1              2         3 4 5          6      7
   # >1000909371|WP_061158039.1|NG_050200|1|1|blaTEM-156|blaTEM|class_A_beta-lactamase_TEM-156 NG_050200:101-961
+  # NEW! 5 DEC 2025
+  # >WP_061158039.1|NG_050200.1|1|1|blaTEM-156|blaTEM|class_A_beta-lactamase_TEM-156 NG_050200.1:101-961
   my @seq;
   my $in = Bio::SeqIO->new(-file=>$name, -format=>"fasta");
   while (my $rec = $in->next_seq) {
     # parse ID
     my($gi,$pi,$acc,$fp,$fn,$gene,$fam,$prod) = split m/\|/, $rec->id;
+    # https://github.com/ncbi/amr/issues/173
+    my($pi,$acc,$fp,$fn,$gene,$fam,$prod) = split m/\|/, $rec->id;
     # skip fusion genes
     next unless $fp==1 and $fn==1;
     # only keep true ARGs
