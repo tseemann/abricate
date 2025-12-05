@@ -7,7 +7,7 @@
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 It comes bundled with multiple databases: 
 NCBI, CARD, ARG-ANNOT, Resfinder, MEGARES, EcOH, PlasmidFinder, Ecoli_VF and
-VFDB.
+VFDB, VICTORS.
 
 ## Is this the right tool for me?
 
@@ -150,6 +150,7 @@ ABRicate comes with some pre-downloaded databases:
 * [PlasmidFinder](https://cge.cbs.dtu.dk/services/PlasmidFinder/)
 * [VFDB](http://www.mgc.ac.cn/VFs/)
 * [Ecoli_VF](https://github.com/phac-nml/ecoli_vf)
+* [VICTORS](http://phidias.us/victors/)
 
 You can check what you have installed with the `--list` command.
 This lists the available databases in TSV (or CSV with `--csv`) and three
