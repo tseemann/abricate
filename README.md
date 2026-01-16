@@ -117,7 +117,7 @@ STRAND | `+` | Strand + or -
 GENE | `tet(M)` | AMR gene name
 COVERAGE | `1-1920/1920` | What proportion of the gene is in our sequence
 COVERAGE_MAP | `===============` | A visual represenation of the hit. `=`=aligned, `.`=unaligned, `/`=has_gaps
-GAPS | `1/4` | Openings / gaps in subject and query - possible psuedogene?
+GAPS | `1/4` | Openings / gaps in subject and query - possible pseudogene?
 %COVERAGE | `100.00%` | Proportion of gene covered
 %IDENTITY | `99.95%` | Proportion of exact nucleotide matches in the covered part
 DATABASE | `ncbi` | The database this sequence comes from
