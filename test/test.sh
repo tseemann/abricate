@@ -30,6 +30,9 @@ setup () {
   run ! $exe --semmelweiss
   [[ "$output" =~ "Unknown" ]]
 }
+@test "Set up  databases" {
+  run $exe --setupdb
+}
 @test "List databases" {
   run $exe --list
   [[ "$output" =~ "ncbi" ]]
