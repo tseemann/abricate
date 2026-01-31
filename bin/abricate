@@ -12,18 +12,21 @@ use Cwd qw(abs_path);
 #..............................................................................
 # Globals needed before --help etc
 
-my $VERSION = "1.2.0";
+my $VERSION = "1.3.1";
 my $EXE = basename($0);
 my $AUTHOR = 'Torsten Seemann';
 my $TWITTER = '@torstenseemann';
 my $URL = 'https://github.com/tseemann/abricate';
+
+my @OUTFMT = qw(tsv csv bed gff json);
+my %OUTFMT = (map { $_=>1 } @OUTFMT);
 
 #..............................................................................
 # Command line options
 
 my(@Options, $debug, $quiet, $setupdb, $list, $summary, $identity, $check,
              $datadir, $db, $minid, $mincov, $threads,
-             $noheader, $csv, $nopath, $fofn);
+             $noheader, $csv, $nopath, $fofn, $outfmt);
 setOptions();
 
 #..............................................................................
@@ -59,6 +62,8 @@ $threads >= 1 or err("Invalid --threads option, must be 1 or higher");
 ($minid > 0 and $minid <= 100) or err("--minid must be between 1 and 100");
 ($mincov >= 0 and $mincov <= 100) or err("--mincov must be between 0 and 100");
 $OUTSEP = ',' if $csv;  # default is tab
+
+$OUTFMT{$outfmt} or err("Invalid --outfmt '$outfmt' (need: @OUTFMT");
 
 if ($fofn) {
   -r $fofn or err("Could not open --fofn '$fofn'");
@@ -463,6 +468,8 @@ sub setOptions {
     {OPT=>"datadir=s",  VAR=>\$datadir, DEFAULT=>abs_path("$FindBin::RealBin/../db"), DESC=>"Databases folder"},
     {OPT=>"db=s",  VAR=>\$db, DEFAULT=>"ncbi", DESC=>"Database to use"},
     "OUTPUT",
+    # not implemented yet
+    {OPT=>"outfmt=s",  VAR=>\$outfmt, DEFAULT=>$OUTFMT[0], DESC=>"Output format: @OUTFMT"},
     {OPT=>"noheader!",  VAR=>\$noheader, DESC=>"Suppress column header row"},
     {OPT=>"csv!",  VAR=>\$csv, DESC=>"Output CSV instead of TSV"},
     {OPT=>"nopath!",  VAR=>\$nopath, DESC=>"Strip filename paths from FILE column"},
@@ -476,7 +483,8 @@ sub setOptions {
 
   @ARGV or usage(1);
 
-  &GetOptions(map {$_->{OPT}, $_->{VAR}} (grep { ref } @Options)) || usage(1);
+  &GetOptions(map {$_->{OPT}, $_->{VAR}} (grep { ref } @Options)) 
+    or exit(5);
 
   # Now setup default values.
   foreach (grep { ref } @Options) {

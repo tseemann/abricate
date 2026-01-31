@@ -1,34 +1,46 @@
 name: CI
 
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - 'README.md'
   pull_request:
-    branches: [ "master" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - 'README.md'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      - uses: shogo82148/actions-setup-perl@v1
-        with:
-          perl-version: "5.38"
+      - uses: actions/checkout@v5
 
-      - name: Install
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: abricate
+          environment-file: environment.yml
+          miniforge-version: latest
+          channels: conda-forge,bioconda
+          conda-remove-defaults: true
+          channel-priority: strict
+          auto-update-conda: true
+
+      - name: Check tools
         run: |
-          sudo apt-get install -y zip gzip git curl libdb-dev
-          cpanm --quiet --notest JSON Path::Tiny LWP::Simple Bio::Perl
-          wget http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.17.0/ncbi-blast-2.17.0+-x64-linux.tar.gz
-          tar zxvf ncbi-blast-2.17.0+-x64-linux.tar.gz
-          curl https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta > bin/any2fasta
-          chmod +x bin/any2fasta
-          export PATH=$PWD/bin:$PWD/ncbi-blast-2.17.0+/bin:$PATH
+          set +x
+          bats -v
+          make --version | head -n 1
+
+      - name: Run BATS test suite
+        run: bats -T --abort test/test.sh
 
       - name: Test
         run: |
