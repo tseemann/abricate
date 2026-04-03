@@ -21,6 +21,7 @@ nytprof.out
 *~
 /db/*/src/
 /db/*/sequences.n*
+/db/*/sequences.p*
 /db/*/make*
 /db/abricate/
 /test-local
