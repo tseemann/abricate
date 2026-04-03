@@ -31,6 +31,7 @@ my %DATABASE = (
   'ncbi'              => \&get_ncbi,
   'vfdb'              => \&get_vfdb,
   'ecoli_vf'          => \&get_ecoli_vf,  # https://github.com/phac-nml/ecoli_vf
+  'upec_expec_vf'     => \&get_upec_expec_vf,  # https://raw.githubusercontent.com/FordeGenomics/ST167_Code/refs/heads/main/UPEC-ExPEC_VF/
   'ecoh'              => \&get_ecoh,
   'bacmet2'           => \&get_bacmet2,
   'victors'           => \&get_victors,
@@ -615,6 +616,34 @@ sub get_ecoh {
     $s->{DESC} = join(' ', @desc);
   }
 #  print Dumper($seqs);
+  return $seqs;
+}
+
+#..............................................................................
+sub get_upec_expec_vf {
+  my $tsv = "upec_expec_vf.tsv";
+  download('https://raw.githubusercontent.com/FordeGenomics/ST167_Code/refs/heads/main/UPEC-ExPEC_VF/UPEC_ExPEC_VF.tsv', $tsv);
+
+  my $t = load_tabular($tsv, 'Gene name');
+  #print Dumper($t);
+  # >tinyamr~~~GENE_ID~~~GENE_ACC~~RESISTANCES description
+
+  my $seqs = [];
+  for my $gene (keys %$t) {
+    my $row = $t->{$gene};
+    push @$seqs, {
+      ID   => $row->{'Gene name'},
+      ACC  => $row->{'Accession/Source'}
+             .':'.$row->{'Begin'}
+             .'-'.$row->{'End'},
+      DESC => $row->{'Description'},
+      ABX  => [ $row->{'Class'} ],
+      SEQ  => $row->{'Sequence'},
+    };
+    #print Dumper($seqs->[-1]);
+  }
+  print Dumper($seqs);
+  #exit;
   return $seqs;
 }
 

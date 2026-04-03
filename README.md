@@ -10,7 +10,7 @@
 Mass screening of contigs for antimicrobial resistance or virulence genes.
 It comes bundled with multiple databases: 
 NCBI, CARD, ARG-ANNOT, Resfinder, MEGARES, EcOH, PlasmidFinder, Ecoli_VF and
-VFDB, VICTORS, BacMet.
+VFDB, VICTORS, BacMet, UPEC/ExPEC VF.
 
 ## Is this the right tool for me?
 
@@ -147,6 +147,7 @@ ABRicate comes with some pre-downloaded databases:
 * [Ecoli_VF](https://github.com/phac-nml/ecoli_vf)
 * [VICTORS](http://phidias.us/victors/)
 * [BacMet](http://bacmet.biomedicine.gu.se)
+* [UPEC/ExPEC VF DB](https://github.com/FordeGenomics/ST167_Code/blob/main/UPEC-ExPEC_VF/UPEC_ExPEC_VF.tsv)
 
 You can check what you have installed with the `--list` command.
 This lists the available databases in TSV (or CSV with `--csv`) and three
@@ -263,10 +264,12 @@ the appropriate database you used with `--db`
 * CARD - [doi:10.1093/nar/gkac920](https://pubmed.ncbi.nlm.nih.gov/36263822/)
 * Resfinder - [doi:10.1093/jac/dkaa345](https://pubmed.ncbi.nlm.nih.gov/32780112/)
 * ARG-ANNOT - [doi:10.1128/AAC.01310-13](https://www.ncbi.nlm.nih.gov/pubmed/24145532)
-* VFDB - [doi:10.1093/nar/gkv1239](https://www.ncbi.nlm.nih.gov/pubmed/26578559)
+* VFDBu - [doi:10.1093/nar/gkv1239](https://www.ncbi.nlm.nih.gov/pubmed/26578559)
 * PlasmidFinder - [doi:10.1128/AAC.02412-14](https://www.ncbi.nlm.nih.gov/pubmed/24777092)
 * EcOH - [doi:10.1099/mgen.0.000064](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5343136/)
 * MEGARES 3.00 - [doi:10.1093/nar/gkac1047](https://pubmed.ncbi.nlm.nih.gov/36382407/)
+* UPEC/ExPEC VF DB -[Forde Lab github](https://github.com/FordeGenomics/ST167_Code/blob/main/UPEC-ExPEC_VF/UPEC_ExPEC_VF.tsv)
+
 ## Issues
 
 Please report problems to the [Issues Page](https://github.com/tseemann/abricate/issues).
