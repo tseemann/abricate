@@ -6,6 +6,7 @@ setup () {
   dir=$(dirname "$BATS_TEST_FILENAME")
   cd "$dir"
   exe="$dir/../bin/$name"
+  cpus=$(nproc)
 }
 
 @test "Script syntax check" {
@@ -34,7 +35,62 @@ setup () {
   run $exe --setupdb
 }
 @test "List databases" {
-  run $exe --list
+  run -0 $exe --list
   [[ "$output" =~ "ncbi" ]]
-  [[ "$output" =~ "nucl" ]]
+  [[ "$output" =~ "card" ]]
+}
+
+@test "FASTA input" {
+  run -0 $exe -q assembly.fa
+  [[ "${lines[0]}" =~ "SEQUENCE" ]]
+  [[ "$output" =~ "blaZ" ]]
+  [[ "$output" =~ "FOSFOMYCIN" ]]
+}
+@test "GENBANK input" {
+  run -0 $exe -q assembly.gbk
+  [[ "${lines[0]}" =~ "SEQUENCE" ]]
+  [[ "$output" =~ "blaZ" ]]
+  [[ "$output" =~ "FOSFOMYCIN" ]]
+}
+@test "GZIP compressed" {
+  run -0 $exe -q assembly.fa.gz
+  [[ "${lines[0]}" =~ "SEQUENCE" ]]
+  [[ "$output" =~ "blaZ" ]]
+  [[ "$output" =~ "FOSFOMYCIN" ]]
+}
+@test "BZIP2 compressed" {
+  run -0 $exe -q assembly.fa.gz
+  [[ "${lines[0]}" =~ "SEQUENCE" ]]
+  [[ "$output" =~ "blaZ" ]]
+  [[ "$output" =~ "FOSFOMYCIN" ]]
+}
+@test "Option --quiet" {
+  run -0 $exe --quiet assembly.fa
+  [[ ! "$output" =~ "Processing:" ]]
+}
+@test "Option --csv" {
+  run -0 $exe -q --csv assembly.fa
+  [[ "${lines[0]}" =~ "SEQUENCE,START,END" ]]
+}
+@test "Option --identity" {
+  run -0 $exe -q --identity assembly.fa
+  [[ "${lines[0]}" =~ "%IDENTITY" ]]
+}
+@test "Option --noheader" {
+  run -0 $exe -q --noheader assembly.fa
+  [[ ! "${lines[0]}" =~ "SEQUENCE" ]]
+}
+@test "Option --threads" {
+  run -0 $exe -q --threads $cpus assembly.gbk.gz
+  [[ "$output" =~ "START" ]]
+}
+
+@test "Bad --minid" {
+  run ! $exe --minid BADNUMBER assembly.fa
+}
+@test "Bad --mincov" {
+  run ! $exe --mincov BADNUMBER assembly.fa
+}
+@test "Bad --threads" {
+  run ! $exe --threads -666 assembly.fa
 }
