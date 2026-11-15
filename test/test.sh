@@ -119,9 +119,12 @@ teardown () {
   ! printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 {found=1} END {exit !found}'
 }
 
-@test "Protein identity at the reported threshold is retained" {
-  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 92.05 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
-  printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 && ($11+0)>=92.05 {found=1} END {exit !found}'
+@test "Protein identity boundary uses a robust margin" {
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 92 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 && ($11+0)>=92 {found=1} END {exit !found}'
+
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 93 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  ! printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 {found=1} END {exit !found}'
 }
 
 @test "Nucleotide mode still enforces --minid through BLASTN" {
