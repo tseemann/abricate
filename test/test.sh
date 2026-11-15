@@ -7,6 +7,15 @@ setup () {
   cd "$dir"
   exe="$dir/../bin/$name"
   cpus=$(nproc)
+  issue229_fixture="$dir/fixtures/issue229"
+  issue229_scratch=$(mktemp -d)
+  mkdir -p "$issue229_scratch/databases/tinyprot"
+  cp "$issue229_fixture/synthetic_protein.fa" "$issue229_scratch/databases/tinyprot/sequences"
+  makeblastdb -in "$issue229_scratch/databases/tinyprot/sequences" -title tinyprot -dbtype prot -out "$issue229_scratch/databases/tinyprot/sequences" >/dev/null
+}
+
+teardown () {
+  [[ -n "$issue229_scratch" && -d "$issue229_scratch" ]] && rm -rf "$issue229_scratch"
 }
 
 @test "Script syntax check" {
@@ -93,4 +102,35 @@ setup () {
 }
 @test "Bad --threads" {
   run ! $exe --threads -666 assembly.fa
+}
+
+@test "Protein --minid 80 filters below-threshold BLASTX hits" {
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 80 --mincov 0 "$issue229_fixture/low_identity_dna.fa"
+  ! printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 && ($11+0)<80 {found=1} END {exit !found}'
+}
+
+@test "Protein --minid 80 retains above-threshold BLASTX hits" {
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 80 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 && ($11+0)>=80 {found=1} END {exit !found}'
+}
+
+@test "Protein alternate cutoff filters the 92 percent hit" {
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 95 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  ! printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 {found=1} END {exit !found}'
+}
+
+@test "Protein identity boundary uses a robust margin" {
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 92 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 && ($11+0)>=92 {found=1} END {exit !found}'
+
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinyprot --minid 93 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  ! printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 {found=1} END {exit !found}'
+}
+
+@test "Nucleotide mode still enforces --minid through BLASTN" {
+  mkdir -p "$issue229_scratch/databases/tinynucl"
+  cp "$issue229_fixture/high_identity_dna.fa" "$issue229_scratch/databases/tinynucl/sequences"
+  makeblastdb -in "$issue229_scratch/databases/tinynucl/sequences" -title tinynucl -dbtype nucl -out "$issue229_scratch/databases/tinynucl/sequences" >/dev/null
+  run -0 "$exe" --quiet --datadir "$issue229_scratch/databases" --db tinynucl --minid 100 --mincov 0 "$issue229_fixture/high_identity_dna.fa"
+  printf '%s\n' "$output" | awk -F '\t' 'NR>1 && NF>=11 && ($11+0)>=100 {found=1} END {exit !found}'
 }
