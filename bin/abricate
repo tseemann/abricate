@@ -156,6 +156,7 @@ for my $file (@ARGV) {
     
     my $pccov = 100 * ($hit{length}-$hit{gaps}) / $hit{slen};
     next unless $pccov >= $mincov;
+    next if $dbinfo->{DBTYPE} eq 'prot' and $hit{pident} < $minid;
 
 #    $hit{sseqid} =~ s/_.*$//;
     my($database, $gene, $acc, $abx) = split m/$IDSEP/, $hit{sseqid};
